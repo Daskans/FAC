@@ -35,6 +35,7 @@ rectangle_t* createArrayofRectangles(int size) {
 
 int free_rectangle(rectangle_t* t) {
     if (t==NULL) {
+        fprintf(stderr,"argument is not valid");
         return EXIT_FAILURE;
     }
     free(t);

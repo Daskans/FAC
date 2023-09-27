@@ -2,12 +2,5 @@
 *.o
 *.out
 
-# Ignore log files
-*.log
-
-# Ignore build directories
-/build/
-/dist/
-
 # Ignore past years
 L1 Info/

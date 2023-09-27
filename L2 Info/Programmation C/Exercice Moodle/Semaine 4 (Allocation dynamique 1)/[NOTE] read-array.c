@@ -27,6 +27,7 @@ int main(int argc, char*argv[]) {
     if (argc<2) {
         usage(argv[0]);
     }
+    
     int* tab;
     int size=argc-1;
     tab = (int*) malloc(size * sizeof(int*));
@@ -34,13 +35,16 @@ int main(int argc, char*argv[]) {
         fprintf(stderr,"not enough memory");
         return EXIT_FAILURE;
     }
+
     for (int i=size; i>0; i--) {
         tab[size-i]=atoi(argv[i]);
     }
+
     printf("tab = [ %d",tab[0]);
     for (int i=1; i<size; i++) {
         printf(", %d",tab[i]);
     }
+
     printf(" ]");
     free(tab);
     tab=NULL;
