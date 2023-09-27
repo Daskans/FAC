@@ -7,7 +7,7 @@
 //	    unsigned int height;
 // } 
 
-// -Votre fonction devra retourner la l'adresse de la première case allouée.
+// -Votre fonction devra retourner l'adresse de la première case allouée.
 // -Ecrire une fonction permettant de libérer ce tableau. 
 //  Votre fonction, comme la fonction free, 
 //  ne devra pas planter même si le tableau n'a pas pu être créé correctement
@@ -16,13 +16,33 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct rectangle{
-    unsigned int width;
-    unsigned int height;
-} rectangle_t;
-
 typedef unsigned int uint;
 
-int* createArrayofRectangles(rectangle_t r, int size) {
-    
+typedef struct rectangle{
+    uint width;
+    uint height;
+} rectangle_t;
+
+rectangle_t* createArrayofRectangles(int size) {
+    rectangle_t* tab;
+    tab = (rectangle_t*) malloc(size*sizeof(rectangle_t*));
+    if (tab==NULL) {
+        fprintf(stderr,"not enough memory");
+        exit(EXIT_FAILURE);
+    }
+    return tab;
+}
+
+int free_rectangle(rectangle_t* t) {
+    if (t==NULL) {
+        return EXIT_FAILURE;
+    }
+    free(t);
+    return EXIT_SUCCESS;
+}
+
+int main(int argc, char* argv[]) {
+    rectangle_t *tab = createArrayofRectangles(10);
+    free_rectangle(tab);
+    return EXIT_SUCCESS;
 }
