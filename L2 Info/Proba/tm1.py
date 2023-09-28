@@ -81,12 +81,13 @@ def Comptages(k,m):
     for l in range(1,m+1):
         n = NbSansKConsecutifs(L,l)
         print("Longueur %d, il y a %d mots qui n'ont pas %d 1 consecutifs"%(k,n,l))
+    return
     
 
 # Plus petit m, entre 0 et k, tel que moins de la moitié des séquences
 # de longueur k ait m 1 consécutifs
 def MinConsecutifs(k):
-    return None
+    
 
 # Version récursive de ToutesSequencesBinaires
 def ToutesSequencesBinairesRec(k):

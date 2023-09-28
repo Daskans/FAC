@@ -1,6 +1,5 @@
-# Ignore compiled binary files
+# Ignore object files
 *.o
-*.out
 
 # Ignore past years
 L1 Info/

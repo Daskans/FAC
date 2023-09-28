@@ -8,10 +8,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
-
 #ifndef M_PI
- #define M_PI 3.1415926535897932
-#endif
+#define M_PI   3.14159265358979323846   /* pi */
+#endif /*M_PI*/
+
 
 struct complex {
   double imaginary;
@@ -40,7 +40,8 @@ double get_real(complex_t * p_c){
 }
 
 //Returns the imaginary part of the complex pointed by p_c
-double get_imaginary(complex_t *p_c) {
+//TO DO
+double get_imaginary(complex_t *p_c){
     if(p_c==NULL){
         exit(EXIT_FAILURE);
     }
@@ -48,25 +49,26 @@ double get_imaginary(complex_t *p_c) {
 }
 
 //Returns the modulus of the complex pointed by p_c
-double get_modulo(complex_t *p_c) {
+//TO DO
+double get_modulo(complex_t *p_c){
     if(p_c==NULL){
         exit(EXIT_FAILURE);
     }
-    double mod = sqrt(pow(get_real(p_c),2)+pow(get_imaginary(p_c),2));
+    double mod = sqrt(pow(p_c->real,2)+pow(p_c->imaginary,2));
     return mod;
 }
 
 //Returns the argument of the complex pointed by p_c
 //TO DO
-double get_argument(complex_t *p_c) {
+double get_argument(complex_t *p_c){
     if(p_c==NULL){
         exit(EXIT_FAILURE);
     }
-    
-    return -M_PI+atan2(get_imaginary(p_c),get_real(p_c));
+    return -M_PI+atan2(p_c->imaginary,p_c->real);
 }
 
 //Sets the real part of the complex number referenced by p_c without changing it's imaginary part
+//TO DO
 void set_real(complex_t * p_c, double value) {
     if (p_c==NULL) {
         exit(EXIT_FAILURE);
@@ -75,14 +77,13 @@ void set_real(complex_t * p_c, double value) {
 }
 
 //Sets the imaginary part of the complex number referenced by p_c without changing it's real part
-void set_imaginary(complex_t * p_c, double value) {
-    if (p_c==NULL) {
-        exit(EXIT_FAILURE);
-    }
+//TO DO
+void set_imaginary(complex_t * p_c, double value){
     p_c->imaginary = value;
 }
 
 //Sets the modulo part of the complex number referenced by p_c without changing it's argument part
+//TO DO
 void set_modulo(complex_t * p_c, double value) {
     if (p_c==NULL) {
         exit(EXIT_FAILURE);
@@ -92,65 +93,76 @@ void set_modulo(complex_t * p_c, double value) {
     set_imaginary(p_c, get_imaginary(p_c)*value/mod);
 }
 
+
+
 //Sets the argument part of the complex number referenced by p_c without changing it's modulo part
-void set_argument(complex_t * p_c, double value) {
-    if (p_c==NULL) {
+//TO DO
+void set_argument(complex_t * p_c, double value){
+    if(p_c==NULL){
         exit(EXIT_FAILURE);
     }
-    double mod = get_modulo(p_c);
-    set_real(p_c, mod*cos(value));
-    set_imaginary(p_c, mod*sin(value));
+    double modulo=get_modulo(p_c);
+    set_real(p_c,modulo*cos(value));
+    set_imaginary(p_c,modulo*sin(value));
 }
 
 //Display the complex pointed by p_c in the following format real +img i
 //Examples:
 //2.00 + 6.00i
 //TO DO
-void display_complex(complex_t *p_c) {
-    if (p_c==NULL) {
-        exit(EXIT_FAILURE);
+void display_complex(complex_t *p_c){
+    if(p_c==NULL){
+        printf("complex donnée incorrect\n");
     }
-    printf("%.2lf + %.2lfi", p_c->real, p_c->imaginary);
+    else{
+        printf("%2lf+%2lfi\n",get_real(p_c),get_imaginary(p_c));
+    }
 }
+
+
 
 //Returns True if the complex pointed by p_c1 and the complex pointed by p_c2 are equal, False otherwise
 //TO DO
-bool equal_complex(complex_t *p_c1, complex_t *p_c2) {
-    if (p_c1==NULL || p_c2==NULL) {
-        exit(EXIT_FAILURE);
+bool equal_complex(complex_t *p_c1, complex_t *p_c2){
+    if(p_c1==NULL || p_c2==NULL){
+        return false;
     }
-    if (p_c1->real == p_c2->real && p_c1->imaginary == p_c2->imaginary) return true;
-    return false;
+    else if(get_real(p_c1)==get_real(p_c2) && get_imaginary(p_c1)==get_imaginary(p_c2)){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 //Computes the complex pointed by conjugate  as the conjugate of the complex pointed by p_c
 //TO DO
-void conjugate_complex(complex_t *p_c, complex_t *conjugate) {
-    if (p_c==NULL) {
+void conjugate_complex(complex_t *p_c, complex_t *conjugate){
+    if(p_c==NULL){
         exit(EXIT_FAILURE);
     }
-    conjugate->real=p_c->real;
-    conjugate->imaginary=-(p_c->imaginary);
+    conjugate->real=get_real(p_c);
+    conjugate->imaginary=-(get_imaginary(p_c));
 }
 
 //Computes the complex pointed by res as the sum of the complex pointed by p_c1 and the complex pointed by p_c2
 //TO DO
-void addition_complex(complex_t *p_c1, complex_t *p_c2, complex_t *res) {
-    if (p_c1==NULL || p_c2==NULL) {
+void addition_complex(complex_t *p_c1, complex_t *p_c2, complex_t *res){
+    if(p_c1==NULL || p_c2==NULL){
         exit(EXIT_FAILURE);
     }
-    res->real = p_c1->real + p_c2->real;
-    res->imaginary = p_c1->imaginary + p_c2->imaginary;
+    res->real=get_real(p_c1)+get_real(p_c2);
+    res->imaginary=get_imaginary(p_c1)+get_imaginary(p_c2);
 }
 
 //Computes the complex pointed by res as the multiplication of the complex pointed by p_c1 and the complex pointed by p_c2
 //TO DO
-void multiplication_complex(complex_t *p_c1, complex_t *p_c2, complex_t *res) {
-    if (p_c1==NULL || p_c2==NULL) {
+void multiplication_complex(complex_t *p_c1, complex_t *p_c2, complex_t *res){
+    if(p_c1==NULL || p_c2==NULL){
         exit(EXIT_FAILURE);
     }
-    res->real = p_c1->real * p_c2->real;
-    res->imaginary = p_c1->imaginary * p_c2->imaginary;
+    res->real=(get_real(p_c1)*get_real(p_c2)-get_imaginary(p_c1)*get_imaginary(p_c2));
+    res->imaginary=(get_real(p_c1)*get_imaginary(p_c2)+get_imaginary(p_c1)*get_real(p_c2));
 }
 
 
@@ -161,7 +173,7 @@ int main() {
     printf("p_c1 : %lf + i %lf\n", get_real(p_c1),get_imaginary(p_c1));
     printf("p_c1 : (%lf, %lf)\n", get_modulo(p_c1),get_argument(p_c1));
     
-    complex_t * p_c2 = new_complex(1, 2);
+    complex_t * p_c2 = new_complex(5, 4);
     set_modulo(p_c2,2.4);
     set_argument(p_c2,3.1);
     printf("p_c2 : %lf + i %lf\n", get_real(p_c2),get_imaginary(p_c2));
@@ -178,3 +190,4 @@ int main() {
     
     return EXIT_SUCCESS;
 }
+
