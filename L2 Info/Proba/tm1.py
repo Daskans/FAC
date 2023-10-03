@@ -87,6 +87,7 @@ def Comptages(k,m):
 # Plus petit m, entre 0 et k, tel que moins de la moitié des séquences
 # de longueur k ait m 1 consécutifs
 def MinConsecutifs(k):
+    pass # gné ?
     
 
 # Version récursive de ToutesSequencesBinaires
