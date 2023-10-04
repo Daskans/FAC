@@ -3,3 +3,6 @@
 
 # Ignore past years
 L1 Info/
+
+# Ignore random things
+exo gitlab/

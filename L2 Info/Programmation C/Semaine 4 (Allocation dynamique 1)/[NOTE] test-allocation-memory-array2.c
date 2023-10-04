@@ -1,4 +1,5 @@
-//Modifier le programme de façon à créer un deuxième tableau nommé tab2 dans lequel on copiera les valeurs du tableau tab.
+//Modifier le programme de façon à créer un deuxième tableau nommé tab2 
+//dans lequel on copiera les valeurs du tableau tab.
 
 #include <stdlib.h>
 #include <stdio.h>
