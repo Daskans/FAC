@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 # Ignore object files
 *.o
 
 # Ignore past years
 L1 Info/
+=======
+# Ignore object files
+*.o
+
+# Ignore past years
+L1 Info/
+
+# Ignore random things
+exo gitlab/
+>>>>>>> 1c5e79349bfea1b044f65945e887b3b78d57ab0b
