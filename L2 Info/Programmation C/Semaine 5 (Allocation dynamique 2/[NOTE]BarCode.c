@@ -9,12 +9,12 @@ typedef struct barCode barCode_t;
 
 barCode_t generateBarCode(uint s) {
     if (s<3) {
-        fprintf(stderr, "size is too small");
+        fprintf(stderr, "size is too small\n");
         exit(EXIT_FAILURE);
     }
     uint *tab = malloc(s*sizeof(uint));
     if (tab==NULL) {
-        fprintf(stderr, "Not enough memory");
+        fprintf(stderr, "Not enough memory\n");
         exit(EXIT_FAILURE);
     }
     barCode_t codebar;
@@ -37,14 +37,18 @@ void printLine(barCode_t codebar) {
     } else exit(EXIT_FAILURE);
 }
 
+void printBarCode(barCode_t codebar, uint height) {
+    if (height==0) exit(EXIT_FAILURE);
+    for (uint i=0; i<height; i++) printLine(codebar);
+}
+
 int main(int argc, char*argv[]) {
-    struct barCode b;
     int seed = time(NULL);
-    srand(seed); //initialize the pseudo random generator seed
-    unsigned int randSize= rand()%10; // generate a random number between 0 and 9;
-    printf("Generating a bar code of size %u\n",randSize+1);
-    b=generateBarCode(randSize+1); // function to be defined
-    printBarCode(b,10); // given function
-    freeBarCode(b); // given function
+    srand(seed);
+    uint randSize = (rand()%10)+1;
+    printf("Generating a bar code of size %u\n",randSize);
+    barCode_t codebar = generateBarCode(randSize);
+    printBarCode(codebar, 5);
+    freeBarCode(codebar);
     return EXIT_SUCCESS;
 }

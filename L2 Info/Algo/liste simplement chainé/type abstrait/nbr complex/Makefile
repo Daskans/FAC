@@ -1,4 +1,3 @@
-
 CFLAGS = -Wall -Wextra -g -std=c99
 LDFLAGS = -lm
 
