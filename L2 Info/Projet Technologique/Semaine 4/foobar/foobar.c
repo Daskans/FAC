@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "foo.h"
 #include "bar.h"
+#include "foo.h"
 
 int main(void)
 {

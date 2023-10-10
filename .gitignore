@@ -6,3 +6,8 @@ L1 Info/
 
 # Ignore random things
 exo gitlab/
+
+# ignore CMake product
+CMakeCache.txt
+cmake_install.cmake
+CmakeFiles

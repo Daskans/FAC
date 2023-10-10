@@ -1,37 +1,24 @@
-CC = gcc
-AR = ar
 CFLAGS = -Wall -std=c99
-LDFLAGS = -L.
 LDLIBS = -lm
 
-ALL: solve convert
+ALL: foobar
 
-libtsp.a: matrice2d.o memoire.o tsp.o
+libfb.a: foo.o bar.o
 	$(AR) rcs $@ $^
 
-solve: solve.o libtsp.a
+foobar: foobar.o libfb.a
 	$(CC) $^ $(LDLIBS) -o $@ 
 
-convert: convert.o libtsp.a
-	$(CC) $^ $(LDLIBS) -o $@
+foobar.o: foobar.c libfb.a
+	$(CC) $< $(LDLIBS) -c
 
-
-solve.o: solve.c tsp.h matrice2d.h
+foo.o: foo.c foo.h
 	$(CC) $< -c 
 
-convert.o: convert.c tsp.h matrice2d.h
-	$(CC) $< -c 
-
-matrice2d.o: matrice2d.c matrice2d.h memoire.h
-	$(CC) $< -c 
-
-memoire.o: memoire.c memoire.h
-	$(CC) $< -c 
-
-tsp.o: tsp.c tsp.h matrice2d.h memoire.h
+bar.o: bar.c bar.h
 	$(CC) $< -c 
 
 clean:
-	rm -f *.a *.o convert solve
+	rm -f *.a *.o foobar
 
 .PHONY: ALL clean

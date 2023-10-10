@@ -1,0 +1,5 @@
+/net/cremi/kbalavoine/Bureau/espaces/travail/FAC/L2 Info/Projet Technologique/Semaine 4/tsp/CMakeFiles/tsp.dir
+/net/cremi/kbalavoine/Bureau/espaces/travail/FAC/L2 Info/Projet Technologique/Semaine 4/tsp/CMakeFiles/solve.dir
+/net/cremi/kbalavoine/Bureau/espaces/travail/FAC/L2 Info/Projet Technologique/Semaine 4/tsp/CMakeFiles/convert.dir
+/net/cremi/kbalavoine/Bureau/espaces/travail/FAC/L2 Info/Projet Technologique/Semaine 4/tsp/CMakeFiles/edit_cache.dir
+/net/cremi/kbalavoine/Bureau/espaces/travail/FAC/L2 Info/Projet Technologique/Semaine 4/tsp/CMakeFiles/rebuild_cache.dir

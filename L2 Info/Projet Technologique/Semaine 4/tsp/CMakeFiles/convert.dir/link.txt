@@ -1,0 +1,1 @@
+/usr/bin/cc -std=c99 -Wall -g -rdynamic CMakeFiles/convert.dir/convert.c.o -o convert  -Wl,-Bstatic -lm libtsp.a -Wl,-Bdynamic -lm 

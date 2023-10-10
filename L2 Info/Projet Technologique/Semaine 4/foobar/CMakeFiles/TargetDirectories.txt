@@ -1,0 +1,3 @@
+/net/cremi/kbalavoine/Bureau/espaces/travail/FAC/L2 Info/Projet Technologique/Semaine 4/foobar/CMakeFiles/foobar.dir
+/net/cremi/kbalavoine/Bureau/espaces/travail/FAC/L2 Info/Projet Technologique/Semaine 4/foobar/CMakeFiles/edit_cache.dir
+/net/cremi/kbalavoine/Bureau/espaces/travail/FAC/L2 Info/Projet Technologique/Semaine 4/foobar/CMakeFiles/rebuild_cache.dir

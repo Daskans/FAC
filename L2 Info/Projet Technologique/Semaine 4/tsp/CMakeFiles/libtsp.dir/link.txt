@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibtsp.a CMakeFiles/libtsp.dir/matrice2d.c.o CMakeFiles/libtsp.dir/memoire.c.o CMakeFiles/libtsp.dir/tsp.c.o
+/usr/bin/ranlib liblibtsp.a

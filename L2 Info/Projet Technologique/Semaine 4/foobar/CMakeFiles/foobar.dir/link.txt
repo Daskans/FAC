@@ -1,0 +1,1 @@
+/usr/bin/cc -std=c99 -g -Wall -rdynamic CMakeFiles/foobar.dir/foobar.c.o CMakeFiles/foobar.dir/foo.c.o CMakeFiles/foobar.dir/bar.c.o -o foobar  -lm 
