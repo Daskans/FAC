@@ -6,6 +6,7 @@ L1 Info/
 
 # Ignore random things
 exo gitlab/
+Game/
 
 # ignore CMake product
 CMakeCache.txt
