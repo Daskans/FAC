@@ -7,4 +7,5 @@ port = 13
 s.connect((host,port))
 data = s.recv(1024)
 print(data)
+print(data.decode("utf-8"), end="")
 s.close()
