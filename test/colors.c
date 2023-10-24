@@ -12,6 +12,8 @@
 #define RESET     "\033[0m"         /* Reset color */
 
 void main(void) {
+    int a = 3;
+    printf("%s%d%s\n", BOLDLIGHTBLUE, a, RESET );
     printf("%s %s\n", BOLDLIGHTBLUE "hello", BOLDGREEN "there");
     printf("%s %s\n", BOLDORANGE "General", BOLDRED "Kenobi");
 }

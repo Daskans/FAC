@@ -112,7 +112,12 @@ dlist_print (dlist_t *list, FILE *fd)
 void
 dlist_delete (dlist_t *list)
 {
-  return;
+  /*while (list) {
+    list->value = NULL;
+    free(list);
+    list = list->next;
+  }*/
+  return NULL;
 }
 
 dlist_t *
@@ -149,18 +154,53 @@ dlist_prepend (dlist_t *list, size_t value)
 dlist_t *
 dlist_copy (dlist_t *list)
 {
-  return NULL;
+  dlist_t *copy_list = malloc(sizeof(dlist_t));
+  if (!list) {
+    copy_list = NULL;
+  } else {
+    copy_list->value = list->value;
+    dlist_t *temp_list = list;
+    while (temp_list->next) {
+      temp_list = temp_list->next;
+      dlist_append(copy_list, temp_list->value);
+    }
+  }
+  return copy_list;
 }
 
 dlist_t *
 dlist_concat (dlist_t *list1, dlist_t *list2)
 {
-  return NULL;
+  if (!list1) return list2;
+  if (!list2) return list1;
+  while (list2) {
+    dlist_append(list1, list2->value);
+    list2 = list2->next;
+  }
+  return list1;
 }
 
 dlist_t *
 dlist_swap (dlist_t *list, size_t index1, size_t index2)
 {
+  /*if (!list) return NULL;
+  dlist_t *temp_list = list;
+  for (size_t i = 0; i < index1; i++) {
+    if (!temp_list) return NULL;
+    temp_list = temp_list->next;
+  }
+  size_t value1 = temp_list->value;
+  for (size_t i = index1; i < index2; i++) {
+    if (!temp_list) return NULL;
+    temp_list = temp_list->next;
+  }
+  size_t value2 = temp_list->value;
+  temp_list->value = value1;
+  for (size_t i = index2; i > index1; i--) {
+    if (!temp_list) return NULL;
+    temp_list = temp_list->previous;
+  }
+  temp_list->value = value2;*/
   return NULL;
 }
 
