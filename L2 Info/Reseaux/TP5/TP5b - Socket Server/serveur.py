@@ -9,27 +9,24 @@ try:
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind(("", 7777))
     s.listen(1)
-    l = []
+    l = [s]
     while True:
-        l+=[s]
-        select.select(l,[], [])
-        connection, adresse = s.accept()
-        print(s)
-        print(l[0])
-        for i in l:
-            print("a")
+        lecture, _, _ = select.select(l,[], [])
+        for i in lecture:
             if i == s:
-                print("connexion open", adresse)
-                l.append(s.accept())
+                connection, adresse = i.accept()
+                print("pending connection", adresse)
+                l.append(connection)
+                print("connection successfull")
             else:
-                data = connection.recv(1500)
+                data = i.recv(1500)
                 if not data:
                     print("connection closed")
+                    l.remove(i)
                     i.close()
-                    l[i].remove()
-                    break
-                connection.sendall(data)
-        s.close()
+                else :
+                    print(data.decode("utf-8"), end="")
+                    i.sendall(data)
 
 except socket.error as e:
     print("socket error !", e)
