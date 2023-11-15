@@ -11,6 +11,4 @@ while True:
     if line == "\n":
         serveur.close()
         break
-    data = serveur.recv(1024)
-    print(data.decode("utf-8"), end="")
 serveur.close()

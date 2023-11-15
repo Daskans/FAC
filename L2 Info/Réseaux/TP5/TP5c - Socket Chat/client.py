@@ -7,9 +7,10 @@ port = int(sys.argv[1])
 serveur.connect((host,port))
 while True:
     line = sys.stdin.readline()
-    serveur.send(line.encode("utf-8"))
+    serveur.sendall(line.encode("utf-8"))
     if line == "\n":
         serveur.close()
         break
-    data = serveur.recv(1024)
+    data = serveur.recv(4096)
     print(data.decode("utf-8"), end="")
+serveur.close()
