@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 {
     "files.associations": {
         "list": "c",
         "ranges": "c",
         "stdlib.h": "c"
     }
+=======
+{
+    "files.associations": {
+        "list": "c"
+    }
+>>>>>>> 9c9ce36e97a28d33a50761b2d7453f1f2a479534
 }
