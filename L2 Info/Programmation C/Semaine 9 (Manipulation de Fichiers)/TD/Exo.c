@@ -39,5 +39,7 @@ void readSequence(File *file, sequence* seq) {
 }
 
 int main(void) {
-    
+    sequence *seq = malloc(sizeof(sequence));
+    seq->number = 5;
+    for (int i = 0; i < seq->number)
 }

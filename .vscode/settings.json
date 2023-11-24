@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "list": "c",
-        "ranges": "c"
+        "ranges": "c",
+        "stdlib.h": "c"
     }
 }

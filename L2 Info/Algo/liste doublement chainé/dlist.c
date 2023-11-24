@@ -200,8 +200,19 @@ dlist_swap (dlist_t *list, size_t index1, size_t index2)
     if (!temp_list) return NULL;
     temp_list = temp_list->previous;
   }
-  temp_list->value = value2;*/
-  return NULL;
+  temp_list->value = value2;
+  return NULL;*/
+  if (list) {
+    dlist_print(list, stdout);
+    if (list->next) {
+      list = list->next;
+      dlist_print(list, stdout);
+    }
+    if (list->previous) {
+      list = list->previous;
+      dlist_print(list, stdout);
+    }
+  }
 }
 
 dlist_t *
