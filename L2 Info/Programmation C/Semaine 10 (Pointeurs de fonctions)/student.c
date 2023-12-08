@@ -46,6 +46,67 @@ void applyOpOnArray(int (*op)(int), int tab[], int size) {
     }
 }
 
+char min2maj(char c) {
+    if (!c) return EXIT_FAILURE;
+    int minMaj = 'a' - 'A';
+    if (c >= 'a' && c <= 'z') {
+        c-=minMaj;
+    } 
+    return c;
+}
+
+char maj2min(char c) {
+    if (!c) return EXIT_FAILURE;
+    int minMaj = 'a' - 'A';
+    if (c >= 'A' && c <= 'Z') {
+        c+=minMaj;
+    } 
+    return c;
+}
+
+char maj2l33t(char c) {
+    if (!c) return EXIT_FAILURE;
+    switch (c) {
+        case 'A':
+            c = '4';
+            break;
+        case 'B':
+            c = '8';
+            break;
+        case 'E':
+            c = '3';
+            break;
+        case 'I':
+            c = '1';
+            break;
+        case 'L':
+            c = '1';
+            break;
+        case 'O':
+            c = '0';
+            break;
+        case 'S':
+            c = '5';
+            break;
+        case 'T':
+            c = '7';
+            break;
+        case 'Z':
+            c = '2';
+            break;
+    }
+    return c;
+}
+
+char *getNewString(char (*op)(char), char *s) {
+    if (!s || !(*op)) return NULL;
+    uint size = strlen(s);
+    char *NewString = malloc(size * sizeof(char*));
+    for (uint i = 0; i < size; i++) {
+        NewString[i] = (*op)(s[i]);
+    }
+    return NewString;
+}
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -74,7 +135,14 @@ int main(int argc, char *argv[]) {
         void f3(char *(*fun)(long, long));
         char *(*(*f4(double *d))(int))(long, long);
         char *(*(*f5(char *(*fun)(long, long)))(int))(long, long);
-        // ChatGPT's functions
+    } else if (strcmp("ex4",argv[1]) == 0) {
+        char c = 'c';
+        char *s = "Le terme grenouille est un nom vernaculaire attribué à certains amphibiens, principalement dans le genre rana";
+        printf("%c\n", min2maj(c));
+        char *s1 = getNewString(&min2maj, s);
+        char *s2 = getNewString(&maj2l33t, s1);
+        char *s3 = getNewString(&maj2min, s2);
+        printf("%s\n%s\n%s\n%s\n", s, s1, s2, s3);
     } else {
         fprintf(stderr, "incorrect arguments\n");
         return EXIT_FAILURE;
