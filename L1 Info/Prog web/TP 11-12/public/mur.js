@@ -1,0 +1,1 @@
+console.log('mur.js a été exécuté');

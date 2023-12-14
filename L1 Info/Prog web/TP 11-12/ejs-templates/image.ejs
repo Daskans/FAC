@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/public/image.css">
+        <title>Image <%=nImage%></title>
+    </head>
+    <body>
+        <h2><%=nom%></h2>
+        <img src=/public/image<%=nImage%>.jpg>
+        <h4><%=photographe%></h4>
+        <form action='like' method="post">
+            <input type="submit" value="👍">
+        </form>
+        <h5>Commentaires</h5>
+        <form action=./<%=nImage%> method="post">
+            <input type="text" name="commentaire">
+            <input type="text" name="pseudo">
+            <input type="submit" value="Envoyer">
+        </form>
+        <div >
+            <span class="commentaires"><%=com%></span>
+        </div>
+    </body>
+</html>
