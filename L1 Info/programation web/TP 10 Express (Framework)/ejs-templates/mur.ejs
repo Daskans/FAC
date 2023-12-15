@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./public/style.css">
+    <title><%= title %></title>
+</head>
+<body>
+    <h1>Mur d\'images
+        <button>Layout</button>
+    </h1>
+    <div id="mur-images">
+        <% for (let i = 0; i < images.length; i++) { %>
+            <%const smallImages = images[i].split('.')[0] + '_small.jpg';%>
+            <span> <a href=image/<%=(i+1)%>> <img src=public/<%=smallImages%> ></a> </span>
+        <% }%>
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Inconnu(e) </title></head><body>
+<h1 id="semaine-9-front">Semaine 9 : Front</h1>
+<p>On souhait continuer l'exercice du TD8 en y ajoutant un script JS qui permet de modifier l'affichage.</p>
+<h2 id="installation">Installation</h2>
+<p>Nous proposons un code qui permet l'affichage du mur d'images en faisant appel à la base de données.
+Il faut donc créer la base de données et la remplir avec les données du fichier <code>photo.sql</code>.</p>
+<p>Dans le <strong>shell psql</strong>, exécuter la commande suivante pour exécuter le fichier <code>photo.sql</code>:</p>
+<pre><code>\i photo.sql
+</code></pre>
+<p>Dans le <strong>shell linux ou windows</strong>, exécuter la commande suivante pour télécharger les bibliothèques JS nécessaires à notre TD:</p>
+<pre><code>npm install
+</code></pre>
+<p>Vous pouvez maintenant exécuter le serveur web avec la commande suivante (<strong>shell linux ou windows</strong>):</p>
+<pre><code>node server.js
+</code></pre>
+<h2 id="js-dans-la-console-du-navigateur">JS dans la console du navigateur</h2>
+<p>Ouvrez la console JS dans les outils du développeur.  </p>
+<p>Q1 : Quel élément du DOM la variable titrePage référence-t-elle quand vous exécutez la commande suivante ?</p>
+<pre><code>titrePage = document.querySelector('h1')
+</code></pre>
+<p>Q2 : Que ce passe-t-il dans la page web quand vous tapez la commande suivante ?</p>
+<pre><code>titrePage.textContent = "Super Mur"
+</code></pre>
+<p>Q3 : Que ce passe-t-il dans la page web quand vous tapez la commande suivante ?</p>
+<pre><code>titrePage.style.color = 'red'
+</code></pre>
+<p>Q4 : Tapez la commande permettant de centrer le titre.</p>
+<p>Q5 : Quels éléments du DOM la variable images référence-t-elle quand vous exécutez la commande suivante ? </p>
+<pre><code>images = document.querySelectorAll('img')
+</code></pre>
+<p>Q6 : Que ce passe-t-il dans la page web quand vous tapez la commande suivante ?</p>
+<pre><code>images[0].style.border = 'solid 2px red'
+</code></pre>
+<p>Q7 : Que ce passe-t-il dans la page web quand vous tapez la commande suivante ?</p>
+<pre><code>images[0].style.border = 'none'
+</code></pre>
+<p>Q8 : Que ce passe-t-il dans la page web quand vous tapez la commande suivante ?</p>
+<pre><code>images.forEach((image) =&gt; image.style.border = 'yellow 2px solid')
+</code></pre>
+<p>Q9 : Tapez la commande permettant de changer le display de toutes les images (soit en <strong>inline</strong> soit en <strong>block</strong>).</p>
+<p>Q10 : Quel élément du DOM la variable bouton référence-t-elle quand vous exécutez la commande suivante ?</p>
+<pre><code>bouton = document.querySelector('button')
+</code></pre>
+<p>Q11 : Que ce passe-t-il quand vous tapez la commande suivante ?</p>
+<pre><code>bouton.addEventListener('click', () =&gt; console.log('click'))
+</code></pre>
+<p>Q12 : Tapez la commande permettant de changer le display de toutes les images (soit en <strong>inline</strong> soit en <strong>block</strong>) quand on clique sur le bouton.</p>
+<p>Q13 : Que ce passe-t-il quand vous tapez la commande suivante ?</p>
+<pre><code>window.addEventListener("scroll",() =&gt; console.log('scroll'))
+</code></pre>
+<p>Q14 : Que ce passe-t-il quand vous tapez les commandes suivantes ?</p>
+<pre><code>murImages = document.getElementById('mur-images')
+nouvelleImage = document.createElement('img')
+nouvelleImage.src = 'public/image16_small.jpg'
+murImages.appendChild(nouvelleImage)
+</code></pre>
+<p>Q15 : Tapez la commande permettant de rajouter une image dans le mur quand on scroll.</p>
+<h2 id="ajout-dun-script-js-dans-la-page-web">Ajout d'un script JS dans la page web</h2>
+<p>Le script <strong>mur.js</strong> qui se trouve dans le dossier <strong>public</strong> est déjà lié à la page web du mur d'images.</p>
+<p>Q16 : Ajoutez dans ce script les commandes permettant de faire en sorte qu'un click sur le boutton change le layout de la page (soit en <strong>inline</strong> soit en <strong>block</strong> pour les photos).</p>
+<p>Q17 : Ajoutez dans ce script les commandes permettant de faire en sorte qu'un scroll ajoute une nouvelle photo.
+Vous pouvez modifiez <strong>server.js</strong> pour que la page n'affiche que 5 photos au départ.</p>
+</body></html>

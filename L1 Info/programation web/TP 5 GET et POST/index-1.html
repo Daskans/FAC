@@ -1,0 +1,36 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Inconnu(e) </title></head><body>
+<h1 id="semaine-5-http-get-et-post">Semaine 5 : HTTP - GET et POST</h1>
+<p>On souhaite continuer l'application web du td4.</p>
+<p>L'objectif est de permettre à l'utilisateur d'ajouter des commentaires sur les images.</p>
+<p>L'objectif optionnel est d'ajouter des likes sur les images.</p>
+<h2 id="exercice-1-formulaire-de-commentaires">Exercice 1 - Formulaire de commentaires</h2>
+<h3 id="question-1">Question 1</h3>
+<p>Créer une nouvelle page web (<strong>image-description.html</strong>) qui soit accessible statiquement et qui contienne un formulaire HTML permettant de saisir un commentaire sur une image.
+Le formulaire doit contenir les champs suivants:</p>
+<ul>
+<li>un champ pour saisir le numéro de l'image à commenter</li>
+<li>un champ de saisie de texte pour le commentaire</li>
+<li>un bouton de validation.</li>
+</ul>
+<p>La soumission du commentaire doit être effectuée en utilisant la méthode HTTP POST.</p>
+<p>L'URL cible du commentaire doit être <strong>/image-description</strong>.</p>
+<p>Faites en sorte que la page web <strong>image-description.html</strong> soit accessible via un lien hypertexte dans le mur d'images (en haut, avant les images).</p>
+<h3 id="question-2">Question 2</h3>
+<p>Ajouter une nouvelle route dans le serveur web pour traiter les requêtes POST sur l'URL <strong>/image-description</strong>. Cette route doit récupérer les valeurs saisies dans le formulaire et les afficher dans la console du serveur web (utiliser la fonction JS <strong>console.log()</strong>).</p>
+<p>Elle doit aussi ajouter le commentaire dans un tableau de commentaires dans le serveur web.</p>
+<p>Enfin, elle doit renvoyer une page dynamique indiquant que le commentaire a bien été ajouté.</p>
+<h3 id="question-3">Question 3</h3>
+<p>La dernière question du TD4 demande la génération dynamique des pages permettant d'afficher les images en grand. Modifiez cette génération dynamique pour que les commentaires soient affichés sous l'image de cette page.</p>
+<h2 id="exercice-2-lien-pour-ajouter-un-like-optionnel">Exercice 2 - Lien pour ajouter un like (Optionnel)</h2>
+<ol>
+<li>
+<p>Modifiez le mur d'images pour qu'il affiche une icône de pouce vers le haut (<em>like</em>) pour chaque image avec un nombre à côté qui indique combien de fois le pouce a été cliqué.</p>
+</li>
+<li>
+<p>Faites en sorte qu'un clic sur le pouce envoie une requête GET vers l'URL http://localhost:8080/j-aime/i (le <em>i</em> à la fin de l'URL doit correspondre au numéro de l'image).</p>
+</li>
+<li>
+<p>Ajoutez une route à votre serveur pour traiter les requêtes <em>/j-aime/i</em>. Votre serveur devra incrémenter le compteur de <em>like</em> pour l'image i et retourner le mur d'images mis à jour.</p>
+</li>
+</ol>
+</body></html>
