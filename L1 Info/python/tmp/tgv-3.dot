@@ -1,0 +1,32 @@
+graph "tgv" {
+
+  "Lille" -- "Paris" [label="1h00"];
+  "Lille" -- "Nantes" [label="4h10"];
+  "Lille" -- "Lyon" [label="2h50"];
+  "Lille" -- "Bordeaux" [label="5h00"];
+  "Lille" -- "Toulouse" [label="8h20"];
+  "Lille" -- "Marseille" [label="4h30"];
+  "Lille" -- "Montpellier" [label="4h40"];
+  "Lille"  [style = filled, peripheries = 1, fillcolor = yellow, fontcolor = black, color = black];
+  "Paris" -- "Nantes" [label="2h00"];
+  "Paris" -- "Lyon" [label="1h55"];
+  "Paris" -- "Bordeaux" [label="2h10"];
+  "Paris" -- "Marseille" [label="2h56"];
+  "Paris" -- "Montpellier" [label="3h15"];
+  "Paris" -- "Toulouse" [label="5h14"];
+  "Paris"  [style = filled, peripheries = 1, fillcolor = yellow, fontcolor = black, color = black];
+  "Nantes" -- "Lyon" [label="4h20"];
+  "Nantes" -- "Marseille" [label="6h20"];
+  "Nantes"  [style = filled, peripheries = 1, fillcolor = white, fontcolor = black, color = black];
+  "Lyon" -- "Toulouse" [label="4h30"];
+  "Lyon" -- "Marseille" [label="1h20"];
+  "Lyon" -- "Montpellier" [label="1h45"];
+  "Lyon"  [style = filled, peripheries = 1, fillcolor = white, fontcolor = black, color = black];
+  "Bordeaux" -- "Toulouse" [label="2h10"];
+  "Bordeaux"  [style = filled, peripheries = 1, fillcolor = white, fontcolor = black, color = black];
+  "Toulouse" -- "Montpellier" [label="2h16"];
+  "Toulouse"  [style = filled, peripheries = 1, fillcolor = yellow, fontcolor = black, color = black];
+  "Marseille"  [style = filled, peripheries = 1, fillcolor = white, fontcolor = black, color = black];
+  "Montpellier"  [style = filled, peripheries = 1, fillcolor = white, fontcolor = black, color = black];
+  "Strasbourg"  [style = filled, peripheries = 1, fillcolor = white, fontcolor = black, color = black];
+}

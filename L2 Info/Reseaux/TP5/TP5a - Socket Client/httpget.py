@@ -3,7 +3,6 @@ import socket
 
 """/!\ penser à écrir dans le terminal 'chmod +x httpget.py' /!\ """
 try:
-    print('###############################')
     s = socket.socket(socket.AF_INET , socket.SOCK_STREAM )
     host = sys.argv[1]
     port = 80
@@ -13,10 +12,8 @@ try:
         "Connection: close\r\n\r\n"
     print(request)
 
-    print('-------------------------------')
     request = request.encode("utf-8")
     print(request)
-    print('-------------------------------')
     s.sendall(request)
     a = 0
     while True:
@@ -32,11 +29,7 @@ try:
                 print(f"Le serveur a rencontré une erreur. Code de statut HTTP : {status_code}")
         else:
             print("Réponse du serveur invalide : ", data)
-        print('-------------------------------')
-        print(data)
-        print('-------------------------------')
         print(data.decode("utf-8"), end="")
-    print('###############################')
 
 except socket.error as e:
     print("socket error !", e)

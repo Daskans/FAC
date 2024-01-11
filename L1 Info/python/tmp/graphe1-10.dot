@@ -1,0 +1,14 @@
+graph "graphe1" {
+
+  "A" -- "B";
+  "A" -- "B";
+  "A" -- "C";
+  "A"  [style = filled, peripheries = 1, fillcolor = white, fontcolor = black, color = black];
+  "B" -- "B";
+  "B"  [style = filled, peripheries = 1, fillcolor = white, fontcolor = black, color = black];
+  "C" -- "D";
+  "C"  [style = filled, peripheries = 1, fillcolor = white, fontcolor = black, color = black];
+  "D" -- "D";
+  "D" -- "D";
+  "D"  [style = filled, peripheries = 1, fillcolor = white, fontcolor = black, color = black];
+}

@@ -34,19 +34,26 @@ def smtp_connect(host, port, secure, verbose):
     Returns:
         - s (socket): The socket connected to the SMTP server.
     """
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if secure:
+            context = ssl.create_default_context();
+            s = context.wrap_socket(s, server_hostname = host)
 
-    if secure:
-        context = ssl.create_default_context();
-        s = context.wrap_socket(s, server_hostname = host)
+        s.connect((host, port))
 
-    s.connect((host, port))
-    if verbose:
-        debug = s.recv(MAXLINE).decode("utf-8")
-        print(f"connect debugging : {debug}")
-    return s
+        if verbose:
+            debug = s.recv(MAXLINE).decode("utf-8")
+            print(f"connect debugging : {debug}")
+            
+        return s
+    
+    except socket.error as e:
+        print(f"Error SMTP connect: {e}")
+        sys.exit(1)
+
 ###############################################
 
 def smtp_hello(s, verbose):
@@ -95,6 +102,7 @@ def smtp_auth(s, login, password, verbose):
     """
     ok = False
     ans = ""
+<<<<<<< HEAD
     
     # s.sendall(f"AU")
     
@@ -103,6 +111,22 @@ def smtp_auth(s, login, password, verbose):
     # if verbose:
     #     print(f"EHLO debugging : {ans}")
     
+=======
+
+    data = f"{login}\x00{password}"
+    
+    s.sendall(f"AUTH PLAIN {data}\r\n".encode("utf-8"))
+    ans = s.recv(MAXLINE).decode("utf-8")
+
+    if ans.startswith("2") or ans.startswith("3"):
+        ok = True
+
+    ans = ans.strip()
+
+    if verbose:
+        print(f"AUTH debugging : {ans}")
+
+>>>>>>> b084d19787e4bf87e3ff423f6f2bede3f77c8533
     return ok, ans
 
 ###############################################
@@ -121,7 +145,18 @@ def smtp_noop(s, verbose):
     """
     ok = False
     ans = ""
-    # ...
+    
+    s.sendall(f"NOOP\r\n".encode("utf-8"))
+    ans = s.recv(MAXLINE).decode("utf-8")
+
+    if ans.startswith("2") or ans.startswith("3"):
+        ok = True
+
+    ans = ans.strip()
+
+    if verbose:
+        print(f"NOOP debugging : {ans}")
+
     return ok, ans
 
 ###############################################
@@ -141,6 +176,7 @@ def smtp_send(s, msg, verbose):
     """
     ok = False
     ans = ""
+<<<<<<< HEAD
     
     s.sendall(f"SEND {msg}\r\n".encode("utf-8"))
     
@@ -150,6 +186,35 @@ def smtp_send(s, msg, verbose):
     if verbose:
         print(f"EHLO debugging : {ans}")
     
+=======
+    s.sendall(f"MAIL FROM: {msg['From']}\r\n".encode("utf-8"))
+    ans = s.recv(MAXLINE).decode("utf-8")
+    if ans.startswith("2") or ans.startswith("3"):
+        ok = True
+    
+    s.sendall(f"RCPT TO: {msg['To']}\r\n".encode("utf-8"))
+    ans = s.recv(MAXLINE).decode("utf-8")
+    if not ans.startswith("2") and not ans.startswith("3"):
+        ok = False
+
+    s.sendall(f"DATA\r\n".encode("utf-8"))
+    ans = s.recv(MAXLINE).decode("utf-8")
+    if not ans.startswith("2") and not ans.startswith("3"):
+        ok = False
+
+    s.sendall(f"{msg.as_string()}\r\n".encode("utf-8"))
+    s.sendall(f".\r\n".encode("utf-8"))
+    ans = s.recv(MAXLINE).decode("utf-8")
+    if not ans.startswith("2") and not ans.startswith("3"):
+        ok = False
+
+
+    ans = ans.strip()
+    
+    if verbose:
+        print(f"SEND debugging : {ans}")
+        
+>>>>>>> b084d19787e4bf87e3ff423f6f2bede3f77c8533
     return ok, ans
 
 ###############################################
@@ -169,7 +234,19 @@ def smtp_quit(s, verbose):
     """
     ok = False
     ans = ""
-    # ...
+    
+    s.sendall(f"QUIT\r\n".encode("utf-8"))
+    ans = s.recv(MAXLINE).decode("utf-8")
+    if ans.startswith("2") or ans.startswith("3"):
+        ok = True
+
+    s.close()
+
+    ans = ans.strip()
+
+    if verbose:
+        print(f"QUIT debugging : {ans}")
+
     return ok, ans
 
 ### EOF
