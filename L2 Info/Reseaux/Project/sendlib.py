@@ -66,6 +66,7 @@ def smtp_hello(s, verbose):
 
     s.sendall(f"EHLO {DOMAIN}\r\n".encode("utf-8"))
     ans = s.recv(MAXLINE).decode("utf-8")
+    
     if ans.startswith("2") or ans.startswith("3"):
         ok = True
     
@@ -94,7 +95,14 @@ def smtp_auth(s, login, password, verbose):
     """
     ok = False
     ans = ""
-    # ...
+    
+    # s.sendall(f"AU")
+    
+    # ans = s.recv(MAXLINE).decode("utf-8")
+    
+    # if verbose:
+    #     print(f"EHLO debugging : {ans}")
+    
     return ok, ans
 
 ###############################################
@@ -133,7 +141,15 @@ def smtp_send(s, msg, verbose):
     """
     ok = False
     ans = ""
-    # ...
+    
+    s.sendall(f"SEND {msg}\r\n".encode("utf-8"))
+    
+    ans = s.recv(MAXLINE).decode("utf-8")
+    print(ans)
+    
+    if verbose:
+        print(f"EHLO debugging : {ans}")
+    
     return ok, ans
 
 ###############################################

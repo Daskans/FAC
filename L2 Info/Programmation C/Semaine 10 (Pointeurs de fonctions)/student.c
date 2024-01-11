@@ -135,6 +135,7 @@ int main(int argc, char *argv[]) {
         void f3(char *(*fun)(long, long));
         char *(*(*f4(double *d))(int))(long, long);
         char *(*(*f5(char *(*fun)(long, long)))(int))(long, long);
+
     } else if (strcmp("ex4",argv[1]) == 0) {
         char c = 'c';
         char *s = "Le terme grenouille est un nom vernaculaire attribué à certains amphibiens, principalement dans le genre rana";

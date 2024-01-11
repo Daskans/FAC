@@ -21,7 +21,6 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdbool.h>
-#include <stdbool.h>
 #include "intset.h"
 
 struct intset{
@@ -106,19 +105,34 @@ intset_t* generate_set (unsigned int min, unsigned int max, unsigned int n){
  Tests whether an element is part of the set
  */
 //TO DO
-bool is_in(intset_t* s, unsigned int elem);
+bool is_in(intset_t* s, unsigned int elem) {
+    if (elem < s->min || elem > s->max) {
+        return false;
+    }
+    return s->set[elem - s->min];
+}
 
 /*
  Adds an element to the set
  */
 //TO DO
-void add(intset_t* s, unsigned int elem);
+void add(intset_t* s, unsigned int elem) {
+    if (elem < s->min || elem > s->max) {
+        return;
+    }
+    s->set[elem - s->min] = true;
+}
 
 /*
  Deletes an element from the set
  */
  //TO DO
-void delete(intset_t* s, unsigned int elem);
+void delete(intset_t* s, unsigned int elem) {
+    if (elem < s->min || elem > s->max) {
+        return;
+    }
+    s->set[elem - s->min] = false;
+}
 
 /*
  Utilitary functions to implement
@@ -128,37 +142,81 @@ void delete(intset_t* s, unsigned int elem);
  Returns the number of elements of the set
  */
 //TO DO
-unsigned int nb_elements(intset_t* s);
+unsigned int nb_elements(intset_t* s) {
+    unsigned int count = 0;
+    for (unsigned int i = s->min; i <= s->max; i++) {
+        if (is_in(s, i)) {
+            count++;
+        }
+    }
+    return count;
+}
 
 /*
  Empties a set
  */
 //TO DO
-void empty_set(intset_t* s);
+void empty_set(intset_t* s) {
+    for (unsigned int i = s->min; i <= s->max; i++) {
+        delete(s, i);
+    }
+}
 
 /*
  Prints a set in the interval [min, max]
  */
  //TO DO
-void print_set (intset_t* s);
+void print_set (intset_t* s) {
+    printf("{");
+    for (unsigned int i = s->min; i <= s->max; i++) {
+        if (is_in(s, i)) {
+            printf("%d ", i);
+        }
+    }
+    printf("}\n");
+}
 
 /*
  Computes and outputs the union of two sets
  */
 //TO DO
-intset_t* union_set(intset_t* s1, intset_t* s2);
+intset_t* union_set(intset_t* s1, intset_t* s2) {
+    intset_t* s = generate_empty_set(s1->min, s1->max);
+    for (unsigned int i = s->min; i <= s->max; i++) {
+        if (is_in(s1, i) || is_in(s2, i)) {
+            add(s, i);
+        }
+    }
+    return s;
+}
 
 /*
  Computes and outputs the intersection of two sets
  */
  //TO DO
-intset_t* intersection(intset_t* s1, intset_t* s2);
+intset_t* intersection(intset_t* s1, intset_t* s2) {
+    intset_t* s = generate_empty_set(s1->min, s1->max);
+    for (unsigned int i = s->min; i <= s->max; i++) {
+        if (is_in(s1, i) && is_in(s2, i)) {
+            add(s, i);
+        }
+    }
+    return s;
+}
 
 /*
  Computes and outputs the difference of two sets
  */
 //TO DO
-intset_t* difference(intset_t* s1, intset_t* s2);
+intset_t* difference(intset_t* s1, intset_t* s2) {
+    intset_t* s = generate_empty_set(s1->min, s1->max);
+    for (unsigned int i = s->min; i <= s->max; i++) {
+        if (is_in(s1, i) && !is_in(s2, i)) {
+            add(s, i);
+        }
+    }
+    return s;
+}
 
 
 int main()
