@@ -1,0 +1,12 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+ColumnLimit: 120
+IndentWidth: 4
+TabWidth: 8
+UseTab: Never
+DerivePointerAlignment: false
+PointerAlignment: Left
+# BreakBeforeBraces: Attach
+BreakBeforeBraces: Linux
+---
