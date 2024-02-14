@@ -1,0 +1,34 @@
+#Question 1 :
+
+b c - c d - & a b - +
+
+
+#Question 2 :
+
+        .pos 0
+init:   irmovl  stack,%esp
+        mrmovl  b, %eax
+        mrmovl  c, %ebx
+        subl    %ebx, %eax  # (b - c)
+        pushl   %eax
+        mrmovl  d, %eax
+        subl    %eax, %ebx  # (c - d)
+        popl    %eax
+        andl    %ebx, %eax  # ((b - c) & (c - d))
+        pushl   %eax
+        mrmovl  a, %eax
+        mrmovl  b, %ebx
+        subl    %ebx, %eax
+        popl    %ebx
+        addl    %ebx, %eax
+        
+        
+        
+        
+
+        .pos 0x200
+stack:  
+        a: .long 2
+        b: .long 1
+        c: .long 2
+        d: .long 1

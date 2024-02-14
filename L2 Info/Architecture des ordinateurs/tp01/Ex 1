@@ -1,4 +1,4 @@
-Question 1:
+#Question 1:
 
         .pos 0
 init:   mrmovl a,%eax
@@ -13,7 +13,7 @@ stack:
         a: .long 43
         b: .long 26
 
-Question 2:
+#Question 2:
 
         .pos 0
 init:   mrmovl a,%eax
@@ -28,7 +28,7 @@ stack:
         a: .long 43
         b: .long 26
 
-Question 3:
+#Question 3:
 
         .pos 0
 init:   mrmovl a,%eax
