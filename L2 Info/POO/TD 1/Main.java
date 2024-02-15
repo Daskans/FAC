@@ -8,6 +8,4 @@ class Main {
         for (int i = 0; i < args.length; i++) {
             System.out.printf(args[args.length - i - 1] + " ");
         }
-        System.out.printf("\n");
-    }
-}
+        SystemTD 4
