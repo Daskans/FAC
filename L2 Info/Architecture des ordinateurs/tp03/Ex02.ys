@@ -1,0 +1,22 @@
+        .pos 0
+main:   irmovl  stack,%esp
+        mrmovl  j, %eax
+        pushl   %eax
+        mrmovl  i, %eax
+        pushl   %eax
+        call    sub
+        popl    %eax
+        halt
+        
+        
+sub:    popl    %eax
+        popl    %eax
+        popl    %ebx
+        subl    %ebx, %eax
+        pushl   %ebx
+        ret
+
+        .pos 0x200
+stack:
+        i:  .long 5
+        j:  .long 3

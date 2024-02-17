@@ -1,0 +1,44 @@
+#Question 1:
+
+        .pos 0
+init:   mrmovl a,%eax
+        mrmovl b,%ecx
+        addl %eax,%ecx
+        rrmovl %ecx,%edx
+        mrmovl b,%ecx
+        halt
+
+        .pos 0x200
+stack:  
+        a: .long 43
+        b: .long 26
+
+#Question 2:
+
+        .pos 0
+init:   mrmovl a,%eax
+        mrmovl b,%ecx
+        andl %eax,%ecx
+        rrmovl %ecx,%edx
+        mrmovl b,%ecx
+        halt
+
+        .pos 0x200
+stack:  
+        a: .long 43
+        b: .long 26
+
+#Question 3:
+
+        .pos 0
+init:   mrmovl a,%eax
+        mrmovl b,%ecx
+        addl %eax,%ecx
+        rrmovl %ecx,%edx
+        mrmovl b,%ecx
+        halt
+
+        .pos 0x200
+stack:  
+        a: .long 43
+        b: .long 26

@@ -98,4 +98,3 @@ let rec btree_height t =
     | Empty -> -1
     | Node(_,left,right) -> 1 + max (btree_height left) (btree_height right)
 ;;
-

@@ -1,0 +1,53 @@
+cmake_minimum_required(VERSION 3.3)
+
+project(game_text C)
+include(CTest)
+
+set(CMAKE_C_FLAGS "-std=c99 -g -Wall --coverage")
+
+link_directories(${CMAKE_SOURCE_DIR})
+enable_testing()
+
+#add_library(game game.c game_aux.c game_ext.c queue.c)
+
+
+add_executable(game_text game_text.c)
+target_link_libraries(game_text game)
+add_executable(game_test_yflores game_test_yflores.c)
+target_link_libraries(game_test_yflores game)
+add_executable(game_test_lthin game_test_lthin.c)
+target_link_libraries(game_test_lthin game)
+add_executable(game_test_clemsimon game_test_clemsimon.c)
+target_link_libraries(game_test_clemsimon game)
+
+add_test(test_yflores_dummy ./game_test_yflores dummy)
+add_test(test_yflores_game_equal ./game_test_yflores game_equal)
+add_test(test_yflores_game_copy ./game_test_yflores game_copy)
+add_test(test_yflores_game_restart ./game_test_yflores game_restart)
+add_test(test_yflores_game_get_color ./game_test_yflores game_get_color)
+add_test(test_yflores_game_get_constraint ./game_test_yflores game_get_constraint)
+add_test(test_yflores_game_nb_neighbors ./game_test_yflores game_nb_neighbors)
+add_test(test_yflores_game_undo ./game_test_yflores game_undo)
+add_test(test_yflores_game_redo ./game_test_yflores game_redo)
+
+add_test(test_lthin_dummy ./game_test_lthin dummy)
+add_test(test_lthin_game_set_constraint ./game_test_lthin game_set_constraint)
+add_test(test_lthin_game_play_move ./game_test_lthin game_play_move)
+add_test(test_lthin_game_default_solution ./game_test_lthin game_default_solution)
+add_test(test_lthin_game_print ./game_test_lthin game_print)
+add_test(test_lthin_game_get_status ./game_test_lthin game_get_status)
+add_test(test_lthin_game_get_next_square ./game_test_lthin game_get_next_square)
+add_test(test_lthin_game_nb_rows ./game_test_lthin game_nb_rows)
+add_test(test_lthin_game_nb_cols ./game_test_lthin game_nb_cols)
+add_test(test_lthin_game_is_wrapping ./game_test_lthin game_is_wrapping)
+
+add_test(test_clemsimon_dummy ./game_test_clemsimon dummy)
+add_test(test_clemsimon_game_new_empty ./game_test_clemsimon game_new_empty)
+add_test(test_clemsimon_game_new ./game_test_clemsimon game_new)
+add_test(test_clemsimon_game_default ./game_test_clemsimon game_default)
+add_test(test_clemsimon_game_won ./game_test_clemsimon game_won)
+add_test(test_clemsimon_game_delete ./game_test_clemsimon game_delete)
+add_test(test_clemsimon_game_set_color ./game_test_clemsimon game_set_color)
+add_test(test_clemsimon_game_get_neighbourhood ./game_test_clemsimon game_get_neighbourhood)
+add_test(test_clemsimon_game_new_ext ./game_test_clemsimon game_new_ext)
+add_test(test_clemsimon_game_new_empty_ext ./game_test_clemsimon game_new_empty_ext)

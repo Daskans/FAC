@@ -1,0 +1,29 @@
+#Question 1:
+
+        .pos 0
+init:   mrmovl a,%eax
+        mrmovl b,%ecx
+        subl %ecx,%eax
+        rrmovl %eax,%edx
+        mrmovl a,%eax
+        halt
+
+        .pos 0x200
+stack:  
+        a: .long 15
+        b: .long 2000000000
+
+#Question 2:
+
+        .pos 0
+init:   mrmovl a,%eax
+        mrmovl b,%ecx
+        andl %ecx,%ecx
+        rrmovl %eax,%edx
+        mrmovl a,%eax
+        halt
+
+        .pos 0x200
+stack:  
+        a: .long 1
+        b: .long 2000000000
