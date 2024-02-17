@@ -9,3 +9,7 @@ Game/
 CMakeCache.txt
 cmake_install.cmake
 CmakeFiles
+
+#ignore previous years
+L1 Info/
+L1 Info/Init dev/video-tracker/firstproject
