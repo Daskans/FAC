@@ -14,7 +14,7 @@ public final record Position(int x, int y){
         return new Position(x + delta, y + delta);
     }
 
-    public random(int width, int height) {
+    public static Position random(int width, int height) {
         Random random = new Random();
         int random_width = random.nextInt(width);
         int random_height = random.nextInt(height);

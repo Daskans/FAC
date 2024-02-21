@@ -8,6 +8,7 @@ public class ImageResource {
     public static final Image imageRobot = loadImage("robot.png");
     public static final Image imageDrone = loadImage("drone.png");
     public static final Image imageDust = loadImage("dust2.png");
+    public static final Image imageGround = loadImage("ground.png");
     public static final Image imageRock = loadImage("rock.png");
 
     private static Image loadImage(String file) {

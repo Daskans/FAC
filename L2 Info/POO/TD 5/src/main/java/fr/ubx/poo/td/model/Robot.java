@@ -16,38 +16,75 @@ public class Robot extends Vehicle {
 
 
     public Position[] getPathTo(Position target) {
-        Position[] Movement_Array = new Position[2];
-        Movement_Array[0] = new Position(target.x(), getPosition().y());
-        Movement_Array[1] = new Position(target.x(), target.y());
-        return Movement_Array;
-    }
-    /*
-    Position[] getPathTo(Position target) {
-        int length;
-        if (Math.abs(target.x()) > Math.abs(target.y())) {
-            length = Math.abs(target.x() - getPosition().x())*2 + 1;
+
+        int actualX = getPosition().x();
+        int actualY = getPosition().y();
+        int distanceT = distance(target);
+        int length = distanceT + Math.abs(target.x()-target.y());
+        if (length % 2 == 0) {
+            length += 1;
         } else {
-            length = Math.abs(target.y() - getPosition().y())*2 + 1;
+            length += 2;
         }
-        Position[] Movement_Array = new Position[length + 2];
-        Movement_Array[0] = new Position(getPosition().x(), getPosition().y());
-        for (int i = 1; i < length; i += 2) {
-            if (Math.abs(target.x()) > Math.abs(Movement_Array[i-1].x())) {
-                if (target.x() > getPosition().x()) {
-                    Movement_Array[i] = new Position(Movement_Array[i-1].x()+1, Movement_Array[i-1].y());
-                } else {
-                    Movement_Array[i] = new Position(Movement_Array[i-1].x()-1, Movement_Array[i-1].y());
+        
+        boolean stop = false;
+
+        Position[] Movement_Array = new Position[length];
+        Movement_Array[0] = new Position(actualX, actualY);
+        System.out.println("length: " + length + " distanceT: " + distanceT + " | ick" + Math.abs(target.x()-target.y()));
+        System.out.println("actualX: " + actualX + " actualY: " + actualY);
+        System.out.println("target position: " + target.x() + " " + target.y());
+        int i = 1;
+        for (; (actualX != target.x() || actualY != target.y()) && i < length; i+=2) {
+            if (target.x() != actualX) {
+                if (actualX < target.x()) {
+                    actualX++;
+                    if (World.get(new Position(actualX, actualY)) == World.ROCK) {
+                        actualX--;
+                        stop = true;
+                        break;
+                    }
+                } else if (actualX > target.x()) {
+                    actualX--;
+                    if (World.get(new Position(actualX, actualY)) == World.ROCK) {
+                        actualX++;
+                        stop = true;
+                        break;
+                    }
                 }
-            if (Math.abs(target.y()) > Math.abs(Movement_Array[i-1].y())) {
-                } if (target.y() > getPosition().y()) {
-                    Movement_Array[i+1] = new Position(Movement_Array[i].x(), Movement_Array[i].y()+1);
-                } else {
-                    Movement_Array[i+1] = new Position(Movement_Array[i].x(), Movement_Array[i].y()-1);
+                Movement_Array[i] = new Position(actualX, actualY);
+                System.out.println(" X move -> actualX: " + actualX + " actualY: " + actualY + " | i: " + i);
+            } else {
+                Movement_Array[i] = new Position(actualX, actualY);
+                System.out.println(" X move (N) -> actualX: " + actualX + " actualY: " + actualY + " | i: " + i);
+            }
+
+            if (target.y() != actualY) {
+                if (actualY < target.y()) {
+                    actualY++;
+                    if (World.get(new Position(actualX, actualY)) == World.ROCK) {
+                        actualY--;
+                        stop = true;
+                        break;
+                    }
+                } else if (actualY > target.y()) {
+                    actualY--;
+                    if (World.get(new Position(actualX, actualY)) == World.ROCK) {
+                        actualY++;
+                        stop = true;
+                        break;
+                    }
                 }
+                Movement_Array[i+1] = new Position(actualX, actualY);
+                System.out.println(" Y move -> actualX: " + actualX + " actualY: " + actualY + " | i: " + (i+1));
+            } else {
+                Movement_Array[i+1] = new Position(actualX, actualY);
+                System.out.println(" Y move (N) -> actualX: " + actualX + " actualY: " + actualY + " | i: " + (i+1));
             }
         }
-        Movement_Array[length] = new Position(target.x(), Movement_Array[length-1].y());
-        Movement_Array[length+1] = new Position(Movement_Array[length].x(), target.y());
+        for (; i < length; i++) {
+            Movement_Array[i] = new Position(actualX, actualY);
+        }
         return Movement_Array;
-    }*/
+    }
 }
