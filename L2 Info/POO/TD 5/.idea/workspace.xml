@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6ea24a51-7632-4054-8f6b-b87e121330de" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/ImageResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/ImageResource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/Sprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/Sprite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/SpriteDrone.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/SpriteDrone.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/SpriteRobot.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/SpriteRobot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 3/bin/main/fr/ubx/poo/td/View.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/ImageResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/ImageResource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/Sprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/Sprite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteDecor.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteDecor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteDrone.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteDrone.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteDust.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteDust.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteRobot.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteRobot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteRock.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteRock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteVehicle.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/SpriteVehicle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TD 4/bin/main/fr/ubx/poo/td/view/View.class" afterDir="false" />
-    </list>
+    <list default="true" id="2e755ebd-d1c1-4754-8c5f-d57a3076c9cd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,44 +15,34 @@
       <ProjectState />
     </projectState>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="2cOemjd3CwBMiRDpUFKCxsUXg6b" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2cg5kex2YXanfpQutCM5B40u6fM" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/net/cremi/kbalavoine/espaces/travail/FAC/L2 Info/POO/TD 5&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6ea24a51-7632-4054-8f6b-b87e121330de" name="Changes" comment="" />
-      <created>1707987212550</created>
+      <changelist id="2e755ebd-d1c1-4754-8c5f-d57a3076c9cd" name="Changes" comment="" />
+      <created>1708520527561</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1707987212550</updated>
-      <workItem from="1707987213571" duration="28000" />
-      <workItem from="1707987256345" duration="7000" />
-      <workItem from="1707987341294" duration="63000" />
-      <workItem from="1707987441922" duration="5000" />
+      <updated>1708520527561</updated>
+      <workItem from="1708520528884" duration="3000" />
     </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
 </project>

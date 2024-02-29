@@ -43,3 +43,11 @@ let rec btree_perfect h =
             Node(n, aux(2*n) (h-1), aux(1+2*n) (h-1))
         in aux 1 h
 ;;
+
+(*Exercices ABR*)
+
+let rec bst_search t x = 
+    match t with
+    | Empty -> false
+    | Node(head,left,right) -> if head = x then true else if x < head then bst_search left x else bst_search right x
+;;
