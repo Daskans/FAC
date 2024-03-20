@@ -42,6 +42,18 @@ public class GridView extends BorderPane {
             pickerView.setTilePos(null);
             tile.setEffect(null);
         });
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(-0.2);
+        tile.setOnMouseEntered(e -> {
+            if (e.isShiftDown()) {
+                update(tile, i, j);
+            }
+            tile.setEffect(colorAdjust);
+        });
+        tile.setOnMouseExited(e -> {
+            tile.setEffect(null);
+        });
+
     }
 
     private void update(Tile tile, int i, int j) {

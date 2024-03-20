@@ -19,7 +19,7 @@ public class EditorView extends BorderPane {
     public EditorView(Stage stage)  {
         this.stage = stage;
         GridRepo gridRepoVar = new GridRepoVar();
-        //GridRepo gridRepoString = new GridRepoString();
+        GridRepoString gridRepoString = new GridRepoString();
         //GridRepo gridRepoStringRLE = new GridRepoStringRLE();
 
         // Tile picker
@@ -36,33 +36,50 @@ public class EditorView extends BorderPane {
         MenuItem exportItemS = new MenuItem("Export as string");
         MenuItem loadItemSZ = new MenuItem("Load from compressed string");
         MenuItem exportItemSZ = new MenuItem("Export as compressed string");
+        MenuItem newItem = new MenuItem("New map");
         MenuItem exitItem = new MenuItem("Exit");
         exitItem.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
         fileMenu.getItems().addAll(
                 loadItemJ, exportItemJ, new SeparatorMenuItem(),
                 loadItemS, exportItemS, new SeparatorMenuItem(),
                 loadItemSZ, exportItemSZ, new SeparatorMenuItem(),
+                newItem, new SeparatorMenuItem(),
                 exitItem);
         menuBar.getMenus().addAll(fileMenu);
         this.setTop(menuBar);
-
-
+        
+        // New map
+        newItem.setOnAction(e -> {
+            Form form = new Form(stage, "Size of the map : width x height");
+            String[] parts = form.getText().replaceAll("\\s+","").split("x");
+            if (parts.length != 2)
+                return;
+            try {
+                int x = Integer.parseInt(parts[0]);
+                int y = Integer.parseInt(parts[1]);
+                this.grid = gridRepoString.create(x,y);
+                updateGrid(grid);
+            } catch (NumberFormatException numberFormatException) {
+                return;
+            }
+        });
+        
         // Load from Java declarastion
         loadItemJ.setOnAction(e -> {
             Form form = new Form(stage, "Name field");
             this.grid = gridRepoVar.load(form.getText());
             updateGrid(grid);
         });
-
+        
         // Export as Java declaration
         exportItemJ.setOnAction(e -> {
             exportDialog(gridRepoVar.export(grid));
         });
-
+        
         // Load from String
         loadItemS.setOnAction(e -> {
             Form form = new Form(stage, "Input string");
-//            this.grid = gridRepoString.load(form.getText());
+            this.grid = gridRepoString.load(form.getText());
             updateGrid(grid);
         });
 
@@ -105,5 +122,10 @@ public class EditorView extends BorderPane {
         alert.setResizable(true);
         alert.showAndWait();
     }
+
+
+
+
+
 
 }

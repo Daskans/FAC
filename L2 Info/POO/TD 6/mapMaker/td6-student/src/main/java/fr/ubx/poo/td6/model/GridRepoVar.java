@@ -20,16 +20,29 @@ public class GridRepoVar implements GridRepo {
             {GROUND, GROUND, GROUND, CRACK, GROUND, DUST, BIGROCK, GROUND, GROUND},
             {GROUND, ROCK, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND},
     };
+    private final Entity[][] sample2 = {
+            {GROUND, ROCK, DUST, ROCK, GROUND},
+            {GROUND, CRACK, BIGROCK, CRACK, DUST},
+            {GROUND, CRACK, CRACK, GROUND, BIGROCK},
+            {ROCK, DUST, DUST, GROUND, DUST}
+    };
+
 
     @Override
     public Grid load(String string) {
         /*  Crée une nouvelle instance de la classe Grid et initialise les champs de l'objet avec les informations de sample1.
             Retourn le nouvel objet.
          */
-        Grid new_grid = new Grid(9,9 );
-        for(int i = 0 ;i<new_grid.getHeight();i++){
-            for(int j = 0;j<new_grid.getWidth();j++){
-                new_grid.set(i, j, sample1[i][j]);
+        Entity[][] entities = getEntities(string);
+        if (entities == null)
+            return null;
+        int height = entities.length;
+        int width = entities[0].length;
+        Grid new_grid = new Grid(width, height);
+        for(int i = 0 ;i < height;i++){
+            for(int j = 0;j < width;j++){
+                System.out.printf("%d %d %d %d\n", i, j, height, width);
+                new_grid.set(j, i, entities[i][j]);
             }
         }
         return new_grid;
@@ -43,4 +56,15 @@ public class GridRepoVar implements GridRepo {
         */
         return null;
     }
+    private Entity[][] getEntities(String name) {
+        try {
+            Field field = this.getClass().getDeclaredField(name);
+            return (Entity[][]) field.get(this);
+        } catch (IllegalAccessException e) {
+            return null;
+        } catch (NoSuchFieldException e) {
+            return null;
+        }
+    }
+
 }

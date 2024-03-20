@@ -2,14 +2,14 @@ package fr.ubx.poo.td6.model;
 
 public class Grid {
 
-    private final int width;
     private final int height;
+    private final int width;
     private final Entity[][] grid;
 
 
     public Grid(int width, int height) {
-        this.width = width;
         this.height = height;
+        this.width = width;
         this.grid = new Entity[height][width];
     }
 

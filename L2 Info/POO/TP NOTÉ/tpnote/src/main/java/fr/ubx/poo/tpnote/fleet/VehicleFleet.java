@@ -24,7 +24,7 @@ public class VehicleFleet {
         double MinPrice = 999;
         Vehicle bestVehicle = null;
         for (int i = 1; i < fleet.length; i++) {
-            double currentPrice = fleet[i].travelPricePerPerson(distance, averageSpeed, numberOfPeople);
+            doublecurrentPrice = fleet[i].travelPricePerPerson(distance, averageSpeed, numberOfPeople);
             double travelTime = fleet[i].travelTime(distance, averageSpeed);
             if (currentPrice < MinPrice && travelTime < maxTime) {
                 MinPrice = currentPrice;
