@@ -4,6 +4,7 @@
 # Ignore random things
 exo gitlab/
 Game/
+Git/mosaic-b15/
 
 # ignore CMake product
 CMakeCache.txt
