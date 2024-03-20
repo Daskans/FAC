@@ -6,6 +6,10 @@ exo gitlab/
 Game/
 Git/mosaic-b15/
 
+.build
+.gradle
+.idea
+
 # ignore CMake product
 CMakeCache.txt
 cmake_install.cmake
