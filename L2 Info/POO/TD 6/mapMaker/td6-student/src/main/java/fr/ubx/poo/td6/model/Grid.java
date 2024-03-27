@@ -22,12 +22,12 @@ public class Grid {
     }
 
 
-    public Entity get(int i, int j) {
-        return grid[j][i];
+    public Entity get(int width, int height) {
+        return grid[height][width];
     }
 
-    public void set(int i, int j, Entity entity) {
-        grid[j][i] = entity;
+    public void set(int width, int height, Entity entity) {
+        grid[height][width] = entity;
     }
 
 }

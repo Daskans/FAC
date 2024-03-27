@@ -52,6 +52,14 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TD 7/mapMaker/td7-student" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/TD 7/mapMaker/td7-student" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/TP NOTÉ/tpnote" />
         <option name="modules">
           <set>

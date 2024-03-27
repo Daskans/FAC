@@ -27,17 +27,17 @@ public class GridRepoString implements GridRepo{
             }
             width++;
         }
-        int height = len/width - 1;
+        int height = len/(width + 1);
         String[] entityString = string.split("x");
         string = String.join("",entityString);
         part = string.toCharArray();
         Grid new_grid = new Grid(width, height);
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                char actualChar = part[i * width + j];
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+                char actualChar = part[j * (width) + i];
                 GridException.checkCharacter(actualChar);
                 if (actualChar != EOL) {
-                    new_grid.set(j, i, Entity.fromCode(actualChar));
+                    new_grid.set(i, j, Entity.fromCode(actualChar));
                 }
             }
         }
@@ -46,14 +46,17 @@ public class GridRepoString implements GridRepo{
 
     @Override
     public String export(Grid grid) {
-        /*  Retourne sous forme de chaîne de caractères la déclaration Java correspondant aux tableau d'entités de l'objet grid.
-            Le résultat produit doit être de la forme: private final Entity[][] sample1 = {....};
-            Le code produit peut être utilisé pour remplacer la déclaration de sample1 plus haut.
-        */
-        return null;
+        String string = "";
+        for (int height = 0; height < grid.getHeight(); height++) {
+            for (int width = 0; width < grid.getWidth(); width++) {
+                string += grid.get(width, height).getCode();
+            }
+            string += 'x';
+        }
+        return string;
     }
 
-    public Grid create(int height, int width) {
+    public Grid create(int width, int height) {
         Grid new_grid = new Grid(width, height);
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {

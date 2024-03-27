@@ -18,7 +18,7 @@ public class GridException {
     }
 
     public static void checkEOLLocation(String string) {
-        if (string.charAt(string.length() - 1) != 'x') {
+        if (string.charAt(string.length() - 1) != 'x' ) {
             throw new IllegalArgumentException("Invalid EOL location");
         }
     }
