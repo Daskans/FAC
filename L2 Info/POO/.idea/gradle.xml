@@ -67,6 +67,14 @@
           </set>
         </option>
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/projet-poo/UBGarden-student-2024" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/projet-poo/UBGarden-student-2024" />
+          </set>
+        </option>
+      </GradleProjectSettings>
     </option>
   </component>
 </project>

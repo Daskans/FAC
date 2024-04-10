@@ -23,14 +23,35 @@ public class Graph<T> {
 
     public Set<Node<T>> getNodes() { return nodes;}
 
-    public boolean isConnected() {
-        Hashtable<T, Boolean> visited = new Hashtable<>();
-        nodes.forEach(node -> visited.put(node.getData(), false));
-        if (nodes.stream().findFirst().isPresent()) {
-            Node<T> source = nodes.stream().findFirst().get();
-            dfs(source, visited);
+    double HeuristicValue(Node<Position> start, Node<Position> end) {
+        return Math.sqrt(Math.pow(start.getData().x() - end.getData().x(), 2) + Math.pow(start.getData().y() - end.getData().y(), 2));
+    }
+
+    public List<Node<Position>>reconstruct_path(Node<Position> cameFrom[], Node<Position> current) {
+        List<Node<Position>> total_path = new ArrayList<>();
+        for (int i = cameFrom.length - 1; i >= 0; i--) {
+            total_path.add(cameFrom[i]);
         }
-        return ! visited.containsValue(false);
+        total_path.add(current);
+        return total_path;
+    }
+
+    public List<Node<Position>> AStar(Node<Position> start, Node<Position> end) {
+        // The set of discovered nodes that may need to be (re-)expanded.
+        // Initially, only the start node is known.
+        // This is usually implemented as a min-heap or priority queue rather than a hash-set.
+        Queue<Node<Position>> openSet = new PriorityQueue<>();
+        openSet.add(start);
+
+        // For node n, cameFrom[n] is the node immediately preceding it on the cheapest path from the start
+        // to n currently known.
+        Map<Node<Position>, Node<Position>> cameFrom = new HashMap<>();
+
+        // For node n, gScore[n] is the cost of the cheapest path from start to n currently known.
+        Map<Node<Position>, Double> gScore = new HashMap<>();
+        
+        
+        return null;
     }
 
 }

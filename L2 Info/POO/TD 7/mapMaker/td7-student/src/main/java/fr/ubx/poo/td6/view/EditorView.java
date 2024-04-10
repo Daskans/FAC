@@ -21,15 +21,18 @@ public class EditorView extends BorderPane {
     private final ClipboardContent clipboardContent = new ClipboardContent();
 
     public EditorView(Stage stage)  {
+        // Tile picker
+        this.pickerView = new PickerView();
+        this.setRight(pickerView);
         this.stage = stage;
+        
         GridRepo gridRepoVar = new GridRepoVar();
         GridRepoString gridRepoString = new GridRepoString();
         GridRepoStringRLE gridRepoStringRLE = new GridRepoStringRLE();
         FileChooser fileChooser = new FileChooser();
+        GridView gridView = new GridView(grid, pickerView);
+        
 
-        // Tile picker
-        this.pickerView = new PickerView();
-        this.setRight(pickerView);
 
         // Create menu
         MenuBar menuBar = new MenuBar();
@@ -46,6 +49,7 @@ public class EditorView extends BorderPane {
         MenuItem loadItemF = new MenuItem("Load from file");
         MenuItem exportItemF = new MenuItem("Export to file");
         MenuItem connectivityItem = new MenuItem("Check connectivity");
+        MenuItem marksItem = new MenuItem("Clear marks");
         MenuItem exitItem = new MenuItem("Exit");
         exitItem.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
         fileMenu.getItems().addAll(
@@ -57,7 +61,7 @@ public class EditorView extends BorderPane {
             exitItem);
             menuBar.getMenus().addAll(fileMenu, editMenu);
             this.setTop(menuBar);
-            editMenu.getItems().add(connectivityItem);
+            editMenu.getItems().addAll(connectivityItem, marksItem);
         
         // New map
         newItem.setOnAction(e -> {
@@ -137,6 +141,8 @@ public class EditorView extends BorderPane {
                 ex.printStackTrace();
             }
         });
+
+        marksItem.setOnAction(e -> gridView.getMarker().clear());
 
         // Exit
         exitItem.setOnAction(e -> System.exit(0));

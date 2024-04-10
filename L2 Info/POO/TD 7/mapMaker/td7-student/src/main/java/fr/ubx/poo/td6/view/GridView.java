@@ -4,10 +4,13 @@ import fr.ubx.poo.td6.model.Grid;
 import fr.ubx.poo.td6.model.Position;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 
 public class GridView extends BorderPane {
     private final Grid grid;
     private final PickerView pickerView;
+    private final Marker marker;
 
     private final ColorAdjust effect = new ColorAdjust();
 
@@ -15,6 +18,7 @@ public class GridView extends BorderPane {
     public GridView(Grid grid, PickerView pickerView) {
         this.grid = grid;
         this.pickerView = pickerView;
+        this.marker = new Marker(this);
         effect.setBrightness(0.2);
         setPrefSize(grid.getWidth() * ImageResource.size,
                 grid.getHeight() * ImageResource.size);
@@ -53,7 +57,25 @@ public class GridView extends BorderPane {
         tile.setOnMouseExited(e -> {
             tile.setEffect(null);
         });
-
+        tile.setOnContextMenuRequested(e -> {
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem itemMark = new MenuItem("Set mark");
+            MenuItem itemPath = new MenuItem("Path finding");
+            itemPath.setDisable(!marker.exists());
+            // Put marker
+            itemMark.setOnAction(event -> {
+                marker.create(new Position(i, j));
+            });
+            // Path finding
+            itemPath.setOnAction(event -> {
+                System.out.println("Path finding " + marker.getPosition() + " -> " + new Position(i,j));
+                // This needs to be updated!
+                // Create the graph and run A* to find the shortest path
+            });
+            contextMenu.getItems().addAll(itemMark, itemPath);
+            contextMenu.show(tile, e.getScreenX(), e.getScreenY());
+        });
+        
     }
 
     private void update(Tile tile, int i, int j) {
@@ -62,5 +84,9 @@ public class GridView extends BorderPane {
             grid.set(i, j, pickerView.getSelected());
             createTile(i, j);
         }
+    }
+
+    public Marker getMarker() {
+        return marker;
     }
 }
