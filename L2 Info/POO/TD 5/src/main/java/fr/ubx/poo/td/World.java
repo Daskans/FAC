@@ -1,4 +1,4 @@
-package fr.ubx.poo.td.view;
+package fr.ubx.poo.td;
 
 import fr.ubx.poo.td.model.*;
 import fr.ubx.poo.td.view.*;
@@ -12,7 +12,7 @@ public class World {
     private static int[][] grid;
     
     public World(int width, int height, int percentageRock, int percentageDust) {
-        this.grid = new int[height][width];
+        grid = new int[height][width];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 grid[i][j] = EMPTY;

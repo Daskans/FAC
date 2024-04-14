@@ -54,11 +54,13 @@ public class Main extends Application {
         SpriteVehicle[] spriteVehiclesList = {spriteRobot1, spriteDrone1};
 
         view.getPane().setOnMouseClicked(e -> {
-            Position target = view.getPosition(e);
             for (int i = 0; i < vehicles.length; i++) {
-                if (!(vehicles[i].getPosition().equals(target))) {
-                    if (vehicles[i].canMove(target)) {
-                        spriteVehiclesList[i].animateMove(target);
+                if (!vehicles[i].isMoving) {
+                    Position target = view.getPosition(e);
+                    if (!(vehicles[i].getPosition().equals(target))) {
+                        if (vehicles[i].canMove(target)) {
+                            spriteVehiclesList[i].animateMove(target);
+                        }
                     }
                 }
             }

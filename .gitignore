@@ -4,6 +4,10 @@
 # Ignore random things
 exo gitlab/
 Game/
+*.log
+build/
+.idea/
+.gradle/
 
 # ignore CMake product
 CMakeCache.txt

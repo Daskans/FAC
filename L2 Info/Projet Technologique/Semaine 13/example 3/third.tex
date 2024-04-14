@@ -1,0 +1,28 @@
+% my first latex document in french
+\documentclass[a4paper]{article}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+Ceci est mon \textbf{premier} document en \LaTeX, écrit le \today{} en TP de \textsc{Projet Techno}, avec le mode « article ».
+
+Après une ligne blanche: un nouveau paragraphe commence implictement dont la première ligne est \emph{indentée}.\\
+
+\textbf{\emph{texte}}, \textsf{\emph{texte}}, \textsf{\textbf{texte}}.
+
+Lorem ipsum dolor sit amet \textbf{pas de \textbackslash text}
+
+\textrm{Lorem ipsum dolor sit amet \textbf{\textbackslash textrm}}
+
+\textsf{Lorem ipsum dolor sit amet \textbf{\textbackslash textsf}}
+
+\texttt{Lorem ipsum dolor sit amet \textbf{\textbackslash texttt}}
+
+\textmd{Lorem ipsum dolor sit amet \textbf{\textbackslash textmd}}.
+
+L’équation de la droite est $3x - 2y + 4 = 0$.
+
+Pythagore à dit $\sqrt{a²+b²} = c$
+\end{document}

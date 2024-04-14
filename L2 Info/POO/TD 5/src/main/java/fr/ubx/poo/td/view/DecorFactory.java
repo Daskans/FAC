@@ -1,5 +1,6 @@
 package fr.ubx.poo.td.view;
 
+import fr.ubx.poo.td.*;
 import fr.ubx.poo.td.model.*;
 
 public class DecorFactory {

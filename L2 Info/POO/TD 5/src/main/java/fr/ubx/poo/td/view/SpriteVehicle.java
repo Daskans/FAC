@@ -20,7 +20,8 @@ abstract public class SpriteVehicle extends Sprite {
     public void animateMove(Position target) {
         // Make the path movement
         Position[] positionPath = vehicle.getPathTo(target);
-
+        vehicle.isMoving = true;
+        
         if (positionPath == null) {
             updateLocation(target);
             vehicle.move(target);
@@ -44,5 +45,6 @@ abstract public class SpriteVehicle extends Sprite {
             ptr.play();
 
         }
+        vehicle.isMoving = false;
     }
 }
