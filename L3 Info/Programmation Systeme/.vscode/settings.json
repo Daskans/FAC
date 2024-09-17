@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "random": "c",
+        "queue": "c",
+        "stack": "c",
+        "ratio": "c"
+    }
+}
