@@ -218,3 +218,16 @@ let rec derivee var expr =
     | _, _ -> failwith "cas non calculé"
 ;;
 ```
+
+*5. Écrire la fonction derivee_n var expr n qui retourne une expression correspondant à la dérivée n-ème de expr .*
+
+```ml
+let rec derivee_n var expr n =
+    if n = 1 then
+        derivee var expr
+    else if n > 1 then
+        derivee_n var (derivee var expr) (n-1)
+    else 
+        Var("ERROR")
+;;
+```

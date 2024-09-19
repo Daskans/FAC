@@ -9,21 +9,24 @@
 #include "error.h"
 
 int main(int argc, char* argv[]) {
-    check(argc==3,"il faut 3 arguments");
-    int num = atoi(argv[2]);
-    int len = log2((double)num) + 1;
-    int bin[len];
-    int w;
-    FILE *file = fopen(argv[1],"w");
-    check_syscall(w, "%s", argv[1]);
-    for (int i = 0; i != len; i++) {
-        printf("num = %d, num%2 = %d\n", num, num%2);
-        bin[i] = num%2;
-        num = num/2;
+    check(argc==4,"il faut 4 arguments");
+    int num = atoi(argv[3]);
+    ssize_t w;
+    char *c = (char *)&num;
+    int out = open(argv[1], O_CREAT | O_WRONLY | O_TRUNC, 0640);
+    off_t pos = lseek(out, argv[2], SEEK_SET);
+    check_syscall(out, "%s", argv[1]);
+    int byte_written = 0;
+    while (byte_written < sizeof(num)) {
+        w = write(out, &c[byte_written], 1);
+        check_syscall(w, "write");
+        if (w != 1) {
+            perror("ERROR : error in writing in file");
+            close(out);
+            exit(EXIT_FAILURE);
+        }
+        byte_written++;
     }
-    for (int i = 0; i < len; i++) {
-        printf("bin[%d] = %d\n",i , bin[i]);
-        fprintf(file, "%d", bin[len-1-i]);
-    }
-    printf("\n");
+    close(out);
+    return EXIT_SUCCESS;
 }

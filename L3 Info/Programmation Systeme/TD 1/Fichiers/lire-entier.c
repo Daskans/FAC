@@ -8,26 +8,28 @@
 
 #include "error.h"
 
+#define BUFFERSIZE 64
+
+char *filename = "ERREURS-LIRE.log";
+
 int main(int argc, char* argv[]) {
-    check(argc==2,"il faut 2 arguments");
-    char c;
-    int r;
-    int num = 0;
-    int len = 0;
-    int result = 0;
+    check(argc==3,"il faut 3 arguments");
+    int log = open(filename, O_CREAT | O_TRUNC | O_WRONLY, 0600);
+    dup2(log, STDERR_FILENO);
+    char c[BUFFERSIZE];
+    int r, w;
     int in = open(argv[1], O_RDONLY);
-    while((r = read(in, &c, 1)) != 0) {
-        len++;
+    check_syscall(in, "%s", argv[1]);
+    off_t pos = lseek(in, atoi(argv[2]), SEEK_SET);
+    while((r = read(in, c, BUFFERSIZE)) != 0) {
+        check_syscall(r, "read");
+        for (int i = 0; i < r; i++) {
+            printf("%d ", c[i]);
+        }
+        //w = write(STDOUT_FILENO, c, r);
+        check_syscall(w, "write");
     }
-    lseek(in, 0, SEEK_SET);
-    int i = 0;
-    while((r = read(in, &c, 1)) != 0) {
-        num = (&c)[0] - '0';
-        result += pow((num*2),len-1-i);
-        printf("num = %d, len = %d, i = %d, result = %d\n",num, len, i, result);
-        i++;
-    }
-    printf("result = %d\n",result);
+    
     close(in);
     
 }

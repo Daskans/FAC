@@ -17,7 +17,12 @@ void quelques_prints (void)
 
 void rediriger_vers (void (*f)(void), char *file)
 {
-  // A COMPLETER
+  int backup = dup(STDOUT_FILENO);
+  dup2(file, STDOUT_FILENO);
+
+  (f);
+
+  dup2(backup, STDERR_FILENO);
 }
 
 int main(int argc, char *argv[])

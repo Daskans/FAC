@@ -3,6 +3,8 @@
         "random": "c",
         "queue": "c",
         "stack": "c",
-        "ratio": "c"
+        "ratio": "c",
+        "__locale": "c",
+        "ios": "c"
     }
 }
