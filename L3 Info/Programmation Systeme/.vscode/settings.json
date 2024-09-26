@@ -5,6 +5,7 @@
         "stack": "c",
         "ratio": "c",
         "__locale": "c",
-        "ios": "c"
+        "ios": "c",
+        "wait.h": "c"
     }
 }

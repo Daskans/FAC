@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
     ssize_t w;
     char *c = (char *)&num;
     int out = open(argv[1], O_CREAT | O_WRONLY | O_TRUNC, 0640);
-    off_t pos = lseek(out, argv[2], SEEK_SET);
+    off_t pos = lseek(out, atoi(argv[2]), SEEK_SET);
     check_syscall(out, "%s", argv[1]);
     int byte_written = 0;
     while (byte_written < sizeof(num)) {

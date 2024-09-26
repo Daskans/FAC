@@ -9,4 +9,4 @@ CFLAGS	:= -O3 -Wall
 all: $(PROGS)
 
 clean:
-	rm -f *.exe *.o *.bin
+	rm -f *.exe *.o *.bin ../*.exe ../*.o ../*.bin

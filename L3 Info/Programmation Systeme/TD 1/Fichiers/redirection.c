@@ -20,7 +20,7 @@ void rediriger_vers (void (*f)(void), char *file)
   int backup = dup(STDOUT_FILENO);
   dup2(file, STDOUT_FILENO);
 
-  (f);
+  f();
 
   dup2(backup, STDERR_FILENO);
 }
