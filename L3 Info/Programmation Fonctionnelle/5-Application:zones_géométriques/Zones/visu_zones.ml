@@ -52,7 +52,7 @@ let random_signed_float z = random_sign () *. Random.float z
 
 let random_point z = make_point (random_signed_float z) (random_signed_float z)
 
-(*
+
 let gruyere n =
   let radius = 40. in
   let zone = ref (make_disk0 radius)
@@ -61,7 +61,7 @@ let gruyere n =
     zone := zone_difference !zone (translate_zone disk (random_point radius))
   done;
   !zone
-*)
+;;
 
 let uname () =
   let (inchannel, outchannel) = Unix.open_process "uname" in
