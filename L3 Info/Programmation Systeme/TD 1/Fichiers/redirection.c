@@ -17,12 +17,17 @@ void quelques_prints (void)
 
 void rediriger_vers (void (*f)(void), char *file)
 {
+
+  int log =  open(file, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+  check_syscall (log, "Cannot open file %s", file);
   int backup = dup(STDOUT_FILENO);
-  dup2(file, STDOUT_FILENO);
+  dup2(log, STDOUT_FILENO);
+  close(log);
 
   f();
-
-  dup2(backup, STDERR_FILENO);
+  
+  dup2(backup, STDOUT_FILENO);
+  close(backup);
 }
 
 int main(int argc, char *argv[])

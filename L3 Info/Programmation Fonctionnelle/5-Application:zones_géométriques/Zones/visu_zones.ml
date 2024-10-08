@@ -61,7 +61,7 @@ let gruyere n =
     zone := zone_difference !zone (translate_zone disk (random_point radius))
   done;
   !zone
-;;
+
 
 let uname () =
   let (inchannel, outchannel) = Unix.open_process "uname" in

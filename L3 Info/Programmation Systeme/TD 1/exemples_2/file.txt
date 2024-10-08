@@ -1,6 +1,6 @@
-Coucou,
-Ceci est un message qui ne paie pas de mine,
-mais qui se revele redoutablement long en pratique,
-sans toutefois atteindre non plus des proportions gigantesques.
-Il s'agit de rester raisonnable. Enfin juste ce qu'il faut quoi...
-Au revoir!
+COUCOU,
+CECI EST UN MESSAGE QUI NE PAIE PAS DE MINE,
+MAIS QUI SE REVELE REDOUTABLEMENT LONG EN PRATIQUE,
+SANS TOUTEFOIS ATTEINDRE NON PLUS DES PROPORTIONS GIGANTESQUES.
+IL S'AGIT DE RESTER RAISONNABLE. ENFIN JUSTE CE QU'IL FAUT QUOI...
+AU REVOIR!

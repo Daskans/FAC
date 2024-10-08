@@ -8,25 +8,30 @@
 
 #include "error.h"
 
+#define SUFFIXE ".bin"
+
 int main(int argc, char* argv[]) {
-    check(argc==4,"il faut 4 arguments");
-    int num = atoi(argv[3]);
-    ssize_t w;
-    char *c = (char *)&num;
-    int out = open(argv[1], O_CREAT | O_WRONLY | O_TRUNC, 0640);
-    off_t pos = lseek(out, atoi(argv[2]), SEEK_SET);
+
+    check(argc==4,"./enregistrer-entier [filename] [position] [number]");
+
+    int l = strlen(argv[1]);
+    char bin_filename[l + strlen(SUFFIXE) + 1];
+    strncpy(bin_filename, argv[1], l);
+    strcpy(bin_filename + l, SUFFIXE);
+
+    int out = open(bin_filename, O_CREAT | O_WRONLY | O_TRUNC, 0640);
     check_syscall(out, "%s", argv[1]);
-    int byte_written = 0;
-    while (byte_written < sizeof(num)) {
-        w = write(out, &c[byte_written], 1);
-        check_syscall(w, "write");
-        if (w != 1) {
-            perror("ERROR : error in writing in file");
-            close(out);
-            exit(EXIT_FAILURE);
-        }
-        byte_written++;
-    }
+
+    off_t pos = lseek(out, atoi(argv[2]), SEEK_SET);
+
+    off_t num = atoi(argv[3]);
+    printf("%d\n",num);
+    ssize_t w;
+
+    w = write(out, &num, sizeof(num));
+    check_syscall(w, "write");
+
     close(out);
+
     return EXIT_SUCCESS;
 }

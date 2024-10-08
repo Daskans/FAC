@@ -25,7 +25,7 @@ int main (int argc, char *argv[])
   printf ("File \"%s\" mapped at address %p\n", FILENAME, region);
 
   for (int i = 0; i < len; i++) {
-    usleep (100000);
+    usleep (10);
     region[i] = toupper (region[i]);
   }
 

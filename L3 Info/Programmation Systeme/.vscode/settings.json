@@ -6,6 +6,11 @@
         "ratio": "c",
         "__locale": "c",
         "ios": "c",
-        "wait.h": "c"
+        "wait.h": "c",
+        "variant": "c",
+        "chrono": "c",
+        "error.h": "c",
+        "unistd.h": "c",
+        "string.h": "c"
     }
 }
