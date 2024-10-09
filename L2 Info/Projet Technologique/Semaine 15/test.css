@@ -1,0 +1,9 @@
+.mycanvas {
+    background: lightgray;
+    outline: 1px solid red;
+}
+
+.mycanvas2 {
+    background: red;
+    outline: 1px solid blue;
+}

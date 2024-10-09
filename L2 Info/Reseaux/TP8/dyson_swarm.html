@@ -4,79 +4,93 @@
         <meta charset="utf-8">
         <meta name="keywords" content="mégastructure, dyson, sphère, essaim, énergie">
         <title>L'énergie quasi-infinie</title>
-        <author>Kyrian Balavoine</author>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <header>
-            <h1>l'essaim de Dyson</h1>
-            <section classe="menu">
+            <h1 onmouseover="startColorCycle()" onmouseout="stopColorCycle()">l'essaim de Dyson</h1>
+            <section class="menu">
                 <nav id="matières">
-                    <h4>Matières</h4>
                     <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="dyson_sphere.html">Sphère de Dyson</a></li>
-                        <li><a href="dyson_swarm.html">Essaim de Dyson</a></li>
+                        <li class="menu_boutton">
+                            <a href="javascript:void(0)">Matières</a>
+                            <section class="menu_defil">
+                                <ul>
+                                    <li><a href="index.html">Accueil</a></li>
+                                    <li><a href="dyson_sphere.html">Sphère de Dyson</a></li>
+                                    <li><a href="dyson_swarm.html" class="actuel">Essaim de Dyson</a></li>
+                                    <li><a href="funny-moment.html">Funny moment</a></li>
+                                </ul>
+                            </section>
+                        </li>
+                        <li class="menu_boutton">
+                            <a href="javascript:void(0)">Sources</a>
+                            <section class="menu_defil">
+                                <ul>
+                                    <li><a href="https://fr.wikipedia.org/wiki/Sph%C3%A8re_de_Dyson">Wikipédia</a></li>
+                                    <li><a href="https://youtu.be/pP44EPBMb8A">Youtube</a></li>
+                                </ul>
+                            </section>
+                        </li>
                     </ul>
-                </nav>
-                <nav id="sources">
-                    <h4>Sources</h4>
-                    <ul>
-                        <li><a href="https://fr.wikipedia.org/wiki/Sph%C3%A8re_de_Dyson">Wikipédia</a></li>
-                        <li><a href="https://youtu.be/pP44EPBMb8A">Youtube</a></li>
-                    </ul>
+                    
                 </nav>
             </section>
         </header>
         <main>
-            <section id="sommaire">
-                <h2>Sommaire :</h2>
-                <ul>
-                    <li><a href="#description">Description</a></li>
-                    <li><a href="#fabrication">Fabrication</a></li>
-                    <li><a href="#réalité">Réalité</a></li>
-                </ul>
-            </section>
-            <section id="description">
-                <h2>Description</h2>
-                <p>
-                    Un essaim de Dyson est un essemble de satellites qui entoure une étoile pour récupérer son énergie.<br>
-                    Chaque satelitte serait composé d'un simple miroire qui réfléchirait la lumière de l'étoile vers une autre<br>
-                    structure. Cette structure, plus petite, serait en fait un canalisant qui dirigerait la lumière vers une<br>
-                    ferme solaire sur terre ou ailleurs, qui produirait de l'électricité.<br>
-                    <img src="Dyson_swarm.PNG" id="small_img" title="source: vidéo youtube de Kursgesagt sur les sphères de dyson">
-                </p>
-            </section>
-            <section id="fabrication">
-                <h2>Fabrication</h2>
-                <p>
-                    Des milliards de satellites seraient nécessaires pour entourer le soleil, et le design devrait être<br>
-                    parfait : le plus simple possible, le plus léger possible, et le plus résistant possible.<br>
-                    Pour construire ces satellites, il faudrait utiliser des ressources extra-terrestres, etc'est vers Mercure<br>
-                    que les yeux se tournent. En effet, Mercure est la planète la plus proche du soleil, et donc la plus<br>
-                    exposé à ses rayons. L'énergie solaire y est donc très abondante, et il y a aussi beaucoup de ressources.<br>
-                    On peut en effet assumer que comme sur terre, on y retrouve du fer, du nickel, du souffre, du carbone, etc...<br>
-                    La construction de l'essaim de Dyson serait entièrement localisée sur Mercure, et les satellites seraient<br>
-                    construit automatiquement par des robots. L'essaim pourrait même allimenter sa propre construction, et augmenter<br>
-                    de façon géométrique.<br>
-                </p>
-            </section>
-            <section id="réalité">
-                <h2>Réalité</h2>
-                <p>
-                    Contrairement à la sphère de Dyson, l'essaim de Dyson est une structure qui pourrait être réalisée.<br>
-                    En effet, les satellites sont des structures simples, et la construction pourrait être automatisée.<br>
-                    Il y a cependant quelques problèmes :<br>
+            <section class="sommaire">
+                <section>
+                    <h2>Sommaire :</h2>
                     <ul>
-                        <li>Mercure est très éloignée de la Terre, et y envoyer les infrastructures nécessaires à la construction<br>
-                            de l'essaim serait très couteux.</li>
-                        <li>L'état actuelle de l'environnement politique mondiale est totalement hostile à un tel projet.</li>
-                        <li>Nous n'avons pas conscience de l'ensemble des obstacles qui pourraient se présenter.</li>
+                        <li><a href="#description">Description</a></li>
+                        <li><a href="#fabrication">Fabrication</a></li>
+                        <li><a href="#réalité">Réalité</a></li>
                     </ul>
-                </p>
+                </section>
+            </section>
+            <section class="content">
+                <section id="description">
+                    <h2>Description</h2>
+                    <p>
+                        Un essaim de Dyson est un essemble de satellites qui entoure une étoile pour récupérer son énergie.
+                        Chaque satelitte serait composé d'un simple miroire qui réfléchirait la lumière de l'étoile vers une autre
+                        structure. Cette structure, plus petite, serait en fait un canalisant qui dirigerait la lumière vers une
+                        ferme solaire sur terre ou ailleurs, qui produirait de l'électricité.<br>
+                        <img src="Dyson_swarm.PNG" class="small_img" title="source: vidéo youtube de Kursgesagt sur les sphères de dyson">
+                    </p>
+                </section>
+                <section id="fabrication">
+                    <h2>Fabrication</h2>
+                    <p>
+                        Des milliards de satellites seraient nécessaires pour entourer le soleil, et le design devrait être
+                        parfait : le plus simple possible, le plus léger possible, et le plus résistant possible.
+                        Pour construire ces satellites, il faudrait utiliser des ressources extra-terrestres, etc'est vers Mercure
+                        que les yeux se tournent. En effet, Mercure est la planète la plus proche du soleil, et donc la plus
+                        exposé à ses rayons. L'énergie solaire y est donc très abondante, et il y a aussi beaucoup de ressources.
+                        On peut en effet assumer que comme sur terre, on y retrouve du fer, du nickel, du souffre, du carbone, etc...
+                        La construction de l'essaim de Dyson serait entièrement localisée sur Mercure, et les satellites seraient
+                        construit automatiquement par des robots. L'essaim pourrait même allimenter sa propre construction, et augmenter
+                        de façon géométrique.
+                    </p>
+                </section>
+                <section id="réalité">
+                    <h2>Réalité</h2>
+                    <p>
+                        Contrairement à la <a href="dyson_sphere.html">sphère de Dyson</a>, l'essaim de Dyson est une structure qui pourrait être réalisée.
+                        En effet, les satellites sont des structures simples, et la construction pourrait être automatisée.
+                        Il y a cependant quelques problèmes :
+                        <ul>
+                            <li>Mercure est très éloignée de la Terre, et y envoyer les infrastructures nécessaires à la construction
+                                de l'essaim serait très couteux.</li>
+                            <li>L'état actuelle de l'environnement politique mondiale est totalement hostile à un tel projet.</li>
+                            <li>Nous n'avons pas conscience de l'ensemble des obstacles qui pourraient se présenter.</li>
+                        </ul>
+                    </p>
+                </section>
             </section>
         <footer>
             <p>contact : kyrian.balavoine@etu.u-bordeaux.fr</p>
         </footer>
+        <script src="script.js"></script>
     </body>
 </html>

@@ -8,6 +8,12 @@ Game/
 build/
 .idea/
 .gradle/
+Git/mosaic-b15/
+L2 Info/POO/projet-poo
+
+.build
+.gradle
+.idea
 
 # ignore CMake product
 CMakeCache.txt

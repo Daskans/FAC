@@ -1,5 +1,7 @@
 package fr.ubx.poo.td6.view;
 
+import java.io.*;
+
 import fr.ubx.poo.td6.model.*;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
@@ -8,6 +10,8 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser;
+import javafx.application.Application;
 
 public class EditorView extends BorderPane {
     private final Stage stage;
@@ -20,7 +24,7 @@ public class EditorView extends BorderPane {
         this.stage = stage;
         GridRepo gridRepoVar = new GridRepoVar();
         GridRepoString gridRepoString = new GridRepoString();
-        //GridRepo gridRepoStringRLE = new GridRepoStringRLE();
+        GridRepoStringRLE gridRepoStringRLE = new GridRepoStringRLE();
 
         // Tile picker
         this.pickerView = new PickerView();
@@ -30,20 +34,20 @@ public class EditorView extends BorderPane {
         MenuBar menuBar = new MenuBar();
         Menu fileMenu = new Menu("File");
 
+        MenuItem newItem = new MenuItem("New map");
         MenuItem loadItemJ = new MenuItem("Load from Java declaration");
         MenuItem exportItemJ = new MenuItem("Export as Java declaration");
         MenuItem loadItemS = new MenuItem("Load from string");
         MenuItem exportItemS = new MenuItem("Export as string");
         MenuItem loadItemSZ = new MenuItem("Load from compressed string");
         MenuItem exportItemSZ = new MenuItem("Export as compressed string");
-        MenuItem newItem = new MenuItem("New map");
         MenuItem exitItem = new MenuItem("Exit");
         exitItem.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
         fileMenu.getItems().addAll(
+                newItem, new SeparatorMenuItem(),
                 loadItemJ, exportItemJ, new SeparatorMenuItem(),
                 loadItemS, exportItemS, new SeparatorMenuItem(),
                 loadItemSZ, exportItemSZ, new SeparatorMenuItem(),
-                newItem, new SeparatorMenuItem(),
                 exitItem);
         menuBar.getMenus().addAll(fileMenu);
         this.setTop(menuBar);
@@ -85,19 +89,19 @@ public class EditorView extends BorderPane {
 
         // Export as String
         exportItemS.setOnAction(e -> {
-//            exportDialog(gridRepoString.export(grid))
+            exportDialog(gridRepoString.export(grid));
         });
 
         // Load from compressed String
         loadItemSZ.setOnAction(e -> {
             Form form = new Form(stage, "Input compressed string");
-//            this.grid = gridRepoStringRLE.load(form.getText());
+            this.grid = gridRepoStringRLE.load(form.getText());
             updateGrid(grid);
         });
 
         // Export as compressed String
         exportItemSZ.setOnAction(e -> {
-//            exportDialog(gridRepoStringRLE.export(grid))
+            exportDialog(gridRepoStringRLE.export(grid));
         });
 
         // Exit

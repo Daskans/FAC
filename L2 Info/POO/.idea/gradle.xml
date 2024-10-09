@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TD 2" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/TD 2" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TD 3" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/TD 3" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TD 4" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/TD 4" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TD 5" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/TD 5" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TD 6/body" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/TD 6/body" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TD 6/mapMaker/td6-student" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/TD 6/mapMaker/td6-student" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TD 7/mapMaker/td7-student" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/TD 7/mapMaker/td7-student" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TP NOTÉ/tpnote" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/TP NOTÉ/tpnote" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/projet-poo/UBGarden-student-2024" />
+        <option name="modules">
+          <set>
+            <option value="/autofs/unitytravail/travail/kbalavoine/FAC/L2 Info/POO/projet-poo/UBGarden-student-2024" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
