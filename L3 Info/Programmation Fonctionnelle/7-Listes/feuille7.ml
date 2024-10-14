@@ -112,3 +112,114 @@ let test =
         assert(terminal_reverse list = rev_list);
     end
 ;;
+
+(* EXERCICE 7 *)
+
+let l = iota 100000
+
+let time f =
+    let start = Sys.time() in
+    let _ = f () in
+    Sys.time() -. start
+
+(* EXERCICE 8 *)
+
+let l1_1 = []
+let l1_2 = [1;2;3;4;5;6]
+let l1_3 = [6;5;4;3;2;1]
+let l1_4 = [1;2;3;4;50]
+let l2 = [8;6;7;4;1;2;3;9;5]
+
+let rec list_subset l1 l2 =
+    match l1 with
+    | [] -> true
+    | (head::tail) -> List.mem head l2 && list_subset tail l2
+
+let test =
+    begin
+        assert(list_subset l1_1 l2 = true);
+        assert(list_subset l1_2 l2 = true);
+        assert(list_subset l1_3 l2 = true);
+        assert(list_subset l1_4 l2 = false);
+    end
+;;
+
+(* EXERCICE 9 *)
+
+(* EXERCICE 10 *)
+
+let pref1 = []
+let pref2 = [1;2;3]
+let l1 = [1;2;3]
+let l2 = [1;2]
+let l3 = [1;2;3;4]
+let l4 = [4;1;2;3]
+
+let rec is_prefixe list1 list2 =
+    match list1, list2 with
+    | [], _ -> true
+    | (head1::tail1), (head2::tail2) -> (head1 = head2) && is_prefixe tail1 tail2
+    | _, [] -> false
+
+let test =
+    begin
+        assert(is_prefixe pref1 l1 = true);
+        assert(is_prefixe pref2 l1 = true);
+        assert(is_prefixe pref2 l2 = false);
+        assert(is_prefixe pref2 l3 = true);
+        assert(is_prefixe pref2 l4 = false);
+    end
+;;
+
+(* EXERCICE 11 *)
+
+let rec squares list = 
+    match list with
+    | [] -> []
+    | (head::tail) ->  [(head*head)] @ (squares tail)
+
+let test =
+    begin
+        assert(squares [] = []);
+        assert(squares [1;2;3] = [1;4;9]);
+    end
+;;
+
+(* EXERCICE 12 *)
+
+let rec sum list = match list with | (head::[]) -> head | (head::tail) -> head + (sum tail) | [] -> failwith "NULL"
+
+let rec prod list = match list with | (head::[]) -> head | (head::tail) -> head * (prod tail) | [] -> failwith "NULL"
+
+let test =
+    begin
+        assert(sum [1;2;3;4] = 10);
+        assert(prod [1;2;3;4] = 24);
+    end
+;;
+
+(* EXERCICE 13 *)
+
+(* 1) ('a -> bool) 'a list -> a' list * a' list*)
+
+(* 2) la fonction n'a pas UNE valeure en générale ??? elle renvoit un couple de liste *)
+
+(* 3) *)
+
+let breakfast p list =
+    let rec aux p list result =
+        match list, result with
+        | [],_ -> result
+        | (head::tail), (l1, l2) -> if p head then
+                                        aux p tail ((l1 @ [head]), l2)
+                                    else
+                                        aux p tail (l1, (l2 @ [head]))
+    ;
+    in aux p list ([],[])
+
+
+let test =
+    begin
+        assert(breakfast (fun x -> x mod 2 = 0) [1;2;3;4;5;6;7;8;9] = ([2;4;6;8],[1;3;5;7;9]));
+    end
+;;
