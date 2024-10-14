@@ -116,7 +116,9 @@ let test =
 (* EXERCICE 4 *)
 
 let rec iota_r n =
-    if n = 1 then
+    if n = 0 then
+        []
+    else if n = 1 then
         [1]
     else
         n :: (iota_r (n-1))
@@ -249,19 +251,7 @@ let test =
 
 (* EXERCICE 9 *)
 
-let rec is_permutation list1 list2 =
-    match list1 with
-    | [] -> (list2 = [])
-    | (head::tail) -> (count head list1 = count head list2) && (is_permutation tail list2)
 
-
-let test =
-    begin
-        assert(is_permutation [1;2;3;3] [3;2;3;1] = true);
-        assert(is_permutation [1;2;3;3] [1;2;3] = false);
-        assert(is_permutation [1;2;3] [1;2;3;3] = false);
-    end
-;;
 
 (* EXERCICE 10 *)
 

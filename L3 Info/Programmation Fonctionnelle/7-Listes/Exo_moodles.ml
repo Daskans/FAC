@@ -1,5 +1,14 @@
 (* Écrire une fonction iota_r de type  int -> int list telle que iota_r n renvoie la liste [n; n-1; ...; 1]. *)
 
+let rec iota_r n =
+    if n = 0 then
+        []
+    else if n = 1 then
+        [1]
+    else
+        n :: (iota_r (n-1))
+;;
+
 (* Écrire une fonction rotate_left de type  'a list -> 'a list telle que rotate_left [e1; e2; ... ; en] renvoie la liste [e2;...; en; e1]. *)
 
 let rotate_left list =
