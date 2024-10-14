@@ -1,0 +1,11 @@
+total 96
+drwxr-xr-x 2 kbalavoine grp30001  8192 11 oct.  16:08 .
+drwxr-xr-x 6 kbalavoine grp30001  8192  4 oct.  16:40 ..
+-rw-rw-rw- 1 kbalavoine grp30001  1281 11 oct.  15:14 error.h
+-rwxr-xr-x 1 kbalavoine grp30001 16056 11 oct.  14:30 Exercice2
+-rw-r--r-- 1 kbalavoine grp30001   427 11 oct.  14:56 Exercice2.c
+-rwxr-xr-x 1 kbalavoine grp30001 16104 11 oct.  14:36 Exercice3
+-rw-r--r-- 1 kbalavoine grp30001   475 11 oct.  14:56 Exercice3.c
+-rwxr-xr-x 1 kbalavoine grp30001 16304 11 oct.  15:55 Exercice4
+-rw-r--r-- 1 kbalavoine grp30001   620 11 oct.  16:01 Exercice4.c
+-rw-r--r-- 1 kbalavoine grp30001     0 11 oct.  16:08 log
