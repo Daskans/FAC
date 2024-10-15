@@ -25,7 +25,13 @@ L'ordre des paires n'est pas important.
 Exemple : list_to_pairs [1; 1; 2; 2; 5; 1; 1; 42; 2] renvoie la liste [(1, 4); (2, 3); (5, 1); (42, 1)]. 
 On pourra utiliser des fonctions auxiliaires et des fonctions du module List. *)
 
-
+let list_to_pairs list =
+    let rec aux list result =
+        match list with
+        | [] -> result
+        | (head::tail) -> aux (List.filter (fun x -> x <> head) list) ((head, count head list)::result)
+    in aux list []
+;;
 
 
 (* fonction split list

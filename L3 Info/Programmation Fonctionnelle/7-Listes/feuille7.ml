@@ -15,8 +15,6 @@ let rec mylist_length list =
 let rec interval_list n p =
     if n > p then
         Nil
-    else if n = p then
-        C(p, Nil)
     else
         C(n, (interval_list (n+1) p))
 
@@ -46,6 +44,7 @@ let rec mylist_of_list list =
     match list with
     | [] -> Nil
     | head :: tail -> C(head, mylist_of_list tail)
+
 
 
 let test =
@@ -251,7 +250,31 @@ let test =
 
 (* EXERCICE 9 *)
 
+let rec count x list =
+    match list with
+    | [] -> 0
+    | head::tail -> if head = x then
+                        1 + count x tail
+                    else
+                        count x tail
 
+let list_to_pairs list =
+    let rec aux list result =
+        match list with
+        | [] -> result
+        | (head::tail) -> aux (List.filter (fun x -> x <> head) list) ((head, count head list)::result)
+    in aux list []
+
+
+let is_permutation list1 list2 =
+    List.equal (=) (List.sort compare (list_to_pairs list1)) (List.sort compare (list_to_pairs list2))
+
+let test =
+    begin
+        assert(is_permutation [1;2;3;3] [3;2;3;1] = true);
+        assert(is_permutation [1;2;3;3] [1;2;3] = false);
+    end
+;;
 
 (* EXERCICE 10 *)
 
@@ -294,9 +317,17 @@ let test =
 
 (* EXERCICE 12 *)
 
-let rec sum list = match list with | (head::[]) -> head | (head::tail) -> head + (sum tail) | [] -> failwith "NULL"
+let rec sum list =
+    match list with 
+    | (head::[]) -> head 
+    | (head::tail) -> head + (sum tail) 
+    | [] -> failwith "NULL"
 
-let rec prod list = match list with | (head::[]) -> head | (head::tail) -> head * (prod tail) | [] -> failwith "NULL"
+let rec prod list =
+    match list with 
+    | (head::[]) -> head 
+    | (head::tail) -> head * (prod tail) 
+    | [] -> failwith "NULL"
 
 let test =
     begin
