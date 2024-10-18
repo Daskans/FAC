@@ -7,8 +7,12 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <bits/sigaction.h>
+#include <asm-generic/signal-defs.h>
 
 #define NSIGNORT 32
+
+struct sigaction tout;
 
 int emetteur(int pere, int argc, char * argv[]) {
   int k = atoi(argv[1]);
@@ -24,16 +28,27 @@ int emetteur(int pere, int argc, char * argv[]) {
   return 0;
 }
 
-
+void traitant_reception(int s) {
+  static int occ[32];
+  printf("%d - %d\n", ++occ[s], s);
+}
 
 int recepteur(int fils) {
   printf("récepteur : %d\n", getpid());
 
+  struct sigaction a;
+  a.sa_handler = traitant_reception;
+  a.sa_flags = SA_RESETHAND;
+  sigemptyset(&a.sa_mask);
+  //sigaction(SIGINT, &a, NULL);
+
   // installation du handler pour tous les signaux non RT  
 
   for(int sig = 0 ; sig < NSIGNORT ; sig++) {
-    //sigaction( , , ); 
+    sigaction( sig, &a, NULL);
   }
+  //printf("%d\n",sig);
+  sigprocmask(SIG_UNBLOCK, &tout, NULL);
     
   while(1) 
     pause();
@@ -43,6 +58,8 @@ int recepteur(int fils) {
 
 
 int main(int argc, char *argv[]){
+  sigfillset(&tout);
+  sigprocmask(SIG_BLOCK, &tout, NULL);
   pid_t pid = fork();  
   if (pid == 0)
     emetteur(getppid(),argc,argv);

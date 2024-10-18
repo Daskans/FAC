@@ -6,6 +6,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <stdint.h>
+#include <sys/wait.h>
 
 /* mode_t st_mode; -> File type and mode */
 /* off_t st_size; -> Total size, in bytes */
@@ -27,39 +28,39 @@ int tailRegularFile(int inputFD, int outputFD, int numLines)
     int r;
     off_t pos;
     char c;
-    read(inputFD, &c, sizeof(char));
     pos = lseek(inputFD, 0, SEEK_END);
-    printf("bytes = %ld\n",pos*sizeof(pos));
+    read(inputFD, &c, 1);
+    //printf("bytes = %ld\n",pos*sizeof(pos));
     if (c == '\n') {
         line = -1;
     }
     while (line < numLines && pos != 0) {
-        read(inputFD, &c, sizeof(char));
+        read(inputFD, &c, 1);
         if (c == '\n') {
             line++;
         }
         pos = lseek(inputFD, -2, SEEK_CUR);
     }
-    if (line == 10) {
+    if (line == numLines) {
         lseek(inputFD, 2, SEEK_CUR);
     }
-    while ((r = read(inputFD, &c, sizeof(char))) != 0) {
-        write(outputFD, &c, sizeof(char));
-        if (c == '\n') {
-            printf("-->\n");
-        }
+    while ((r = read(inputFD, &c, 1)) > 0) {
+        write(outputFD, &c, 1);
     }
     return EXIT_SUCCESS;
 }
+
 
 int tailIregularFile(int inputFD, int outputFD, int numLines) {
     int tempfile = open("tempfile", O_CREAT | O_TRUNC | O_RDWR, 0640);
     int r;
     char c;
-    while ((r = read(inputFD, &c, sizeof(char))) > 0) {
-        write(tempfile, &c, sizeof(char));
+    while ((r = read(inputFD, &c, 1)) > 0) {
+        write(tempfile, &c, 1);
     }
-    tailRegularFile(inputFD, outputFD, numLines);
+    tailRegularFile(tempfile, outputFD, numLines);
+    wait(NULL);
+    close(inputFD);
     close(tempfile);
     return EXIT_SUCCESS;
 }
@@ -78,5 +79,5 @@ int tailFile(int inputFD, int outputFD, int numLines) {
 int main(int argc, char *argv[])
 {
     int fd = open("test", O_RDONLY);
-    return tailFile(0, 1, 10);  
+    return tailFile(fd, 1, 10);  
  }

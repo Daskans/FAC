@@ -1,0 +1,10 @@
+        tailIregularFile(inputFD, outputFD, numLines);
+    }
+    return EXIT_SUCCESS;
+}
+
+int main(int argc, char *argv[])
+{
+    int fd = open("test", O_RDONLY);
+    return tailFile(0, 1, 10);  
+ }
