@@ -32,9 +32,9 @@ int tailRegularFile(int inputFD, int outputFD, int numLines)
     read(inputFD, &c, 1);
     //printf("bytes = %ld\n",pos*sizeof(pos));
     if (c == '\n') {
-        line = -1;
+        line = 1;
     }
-    while (line < numLines && pos != 0) {
+    while (line <= numLines && pos > 0) {
         read(inputFD, &c, 1);
         if (c == '\n') {
             line++;
@@ -75,9 +75,9 @@ int tailFile(int inputFD, int outputFD, int numLines) {
     }
     return EXIT_SUCCESS;
 }
-
+/*
 int main(int argc, char *argv[])
 {
     int fd = open("test", O_RDONLY);
     return tailFile(fd, 1, 10);  
- }
+ }*/
