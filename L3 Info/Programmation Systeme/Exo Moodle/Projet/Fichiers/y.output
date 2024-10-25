@@ -1,0 +1,323 @@
+Terminaux inutilisés dans la grammaire
+
+    ERROR
+
+
+Grammaire
+
+    0 $accept: commandLine $end
+
+    1 commandLine: expressionOrNothing '\n'
+    2            | expressionOrNothing error '\n'
+
+    3 expressionOrNothing: ε
+    4                    | expression
+
+    5 expression: command
+    6           | expression ';' expression
+    7           | expression AND expression
+    8           | expression OR expression
+    9           | expression '|' expression
+   10           | expression REDIR SINGLE_ARG
+   11           | expression '&'
+   12           | '(' expressionOrNothing ')'
+
+   13 command: SINGLE_ARG
+   14        | command SINGLE_ARG
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+    $end (0) 0
+    '\n' (10) 1 2
+    '&' (38) 11
+    '(' (40) 12
+    ')' (41) 12
+    ';' (59) 6
+    '|' (124) 9
+    error (256) 2
+    AND (258) 7
+    OR (259) 8
+    REDIR <redirect> (260) 10
+    ERROR (261)
+    SINGLE_ARG <singleArg> (262) 10 13 14
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+    $accept (14)
+        à gauche: 0
+    commandLine (15)
+        à gauche: 1 2
+        à droite: 0
+    expressionOrNothing <expr> (16)
+        à gauche: 3 4
+        à droite: 1 2 12
+    expression <expr> (17)
+        à gauche: 5 6 7 8 9 10 11 12
+        à droite: 4 6 7 8 9 10 11
+    command <argsList> (18)
+        à gauche: 13 14
+        à droite: 5 14
+
+
+État 0
+
+    0 $accept: • commandLine $end
+
+    SINGLE_ARG  décalage et aller à l'état 1
+    '('         décalage et aller à l'état 2
+
+    $défaut  réduction par utilisation de la règle 3 (expressionOrNothing)
+
+    commandLine          aller à l'état 3
+    expressionOrNothing  aller à l'état 4
+    expression           aller à l'état 5
+    command              aller à l'état 6
+
+
+État 1
+
+   13 command: SINGLE_ARG •
+
+    $défaut  réduction par utilisation de la règle 13 (command)
+
+
+État 2
+
+   12 expression: '(' • expressionOrNothing ')'
+
+    SINGLE_ARG  décalage et aller à l'état 1
+    '('         décalage et aller à l'état 2
+
+    $défaut  réduction par utilisation de la règle 3 (expressionOrNothing)
+
+    expressionOrNothing  aller à l'état 7
+    expression           aller à l'état 5
+    command              aller à l'état 6
+
+
+État 3
+
+    0 $accept: commandLine • $end
+
+    $end  décalage et aller à l'état 8
+
+
+État 4
+
+    1 commandLine: expressionOrNothing • '\n'
+    2            | expressionOrNothing • error '\n'
+
+    error  décalage et aller à l'état 9
+    '\n'   décalage et aller à l'état 10
+
+
+État 5
+
+    4 expressionOrNothing: expression •
+    6 expression: expression • ';' expression
+    7           | expression • AND expression
+    8           | expression • OR expression
+    9           | expression • '|' expression
+   10           | expression • REDIR SINGLE_ARG
+   11           | expression • '&'
+
+    ';'    décalage et aller à l'état 11
+    '&'    décalage et aller à l'état 12
+    AND    décalage et aller à l'état 13
+    OR     décalage et aller à l'état 14
+    '|'    décalage et aller à l'état 15
+    REDIR  décalage et aller à l'état 16
+
+    $défaut  réduction par utilisation de la règle 4 (expressionOrNothing)
+
+
+État 6
+
+    5 expression: command •
+   14 command: command • SINGLE_ARG
+
+    SINGLE_ARG  décalage et aller à l'état 17
+
+    $défaut  réduction par utilisation de la règle 5 (expression)
+
+
+État 7
+
+   12 expression: '(' expressionOrNothing • ')'
+
+    ')'  décalage et aller à l'état 18
+
+
+État 8
+
+    0 $accept: commandLine $end •
+
+    $défaut  accepter
+
+
+État 9
+
+    2 commandLine: expressionOrNothing error • '\n'
+
+    '\n'  décalage et aller à l'état 19
+
+
+État 10
+
+    1 commandLine: expressionOrNothing '\n' •
+
+    $défaut  réduction par utilisation de la règle 1 (commandLine)
+
+
+État 11
+
+    6 expression: expression ';' • expression
+
+    SINGLE_ARG  décalage et aller à l'état 1
+    '('         décalage et aller à l'état 2
+
+    expression  aller à l'état 20
+    command     aller à l'état 6
+
+
+État 12
+
+   11 expression: expression '&' •
+
+    $défaut  réduction par utilisation de la règle 11 (expression)
+
+
+État 13
+
+    7 expression: expression AND • expression
+
+    SINGLE_ARG  décalage et aller à l'état 1
+    '('         décalage et aller à l'état 2
+
+    expression  aller à l'état 21
+    command     aller à l'état 6
+
+
+État 14
+
+    8 expression: expression OR • expression
+
+    SINGLE_ARG  décalage et aller à l'état 1
+    '('         décalage et aller à l'état 2
+
+    expression  aller à l'état 22
+    command     aller à l'état 6
+
+
+État 15
+
+    9 expression: expression '|' • expression
+
+    SINGLE_ARG  décalage et aller à l'état 1
+    '('         décalage et aller à l'état 2
+
+    expression  aller à l'état 23
+    command     aller à l'état 6
+
+
+État 16
+
+   10 expression: expression REDIR • SINGLE_ARG
+
+    SINGLE_ARG  décalage et aller à l'état 24
+
+
+État 17
+
+   14 command: command SINGLE_ARG •
+
+    $défaut  réduction par utilisation de la règle 14 (command)
+
+
+État 18
+
+   12 expression: '(' expressionOrNothing ')' •
+
+    $défaut  réduction par utilisation de la règle 12 (expression)
+
+
+État 19
+
+    2 commandLine: expressionOrNothing error '\n' •
+
+    $défaut  réduction par utilisation de la règle 2 (commandLine)
+
+
+État 20
+
+    6 expression: expression • ';' expression
+    6           | expression ';' expression •
+    7           | expression • AND expression
+    8           | expression • OR expression
+    9           | expression • '|' expression
+   10           | expression • REDIR SINGLE_ARG
+   11           | expression • '&'
+
+    '&'    décalage et aller à l'état 12
+    AND    décalage et aller à l'état 13
+    OR     décalage et aller à l'état 14
+    '|'    décalage et aller à l'état 15
+    REDIR  décalage et aller à l'état 16
+
+    $défaut  réduction par utilisation de la règle 6 (expression)
+
+
+État 21
+
+    6 expression: expression • ';' expression
+    7           | expression • AND expression
+    7           | expression AND expression •
+    8           | expression • OR expression
+    9           | expression • '|' expression
+   10           | expression • REDIR SINGLE_ARG
+   11           | expression • '&'
+
+    '|'    décalage et aller à l'état 15
+    REDIR  décalage et aller à l'état 16
+
+    $défaut  réduction par utilisation de la règle 7 (expression)
+
+
+État 22
+
+    6 expression: expression • ';' expression
+    7           | expression • AND expression
+    8           | expression • OR expression
+    8           | expression OR expression •
+    9           | expression • '|' expression
+   10           | expression • REDIR SINGLE_ARG
+   11           | expression • '&'
+
+    '|'    décalage et aller à l'état 15
+    REDIR  décalage et aller à l'état 16
+
+    $défaut  réduction par utilisation de la règle 8 (expression)
+
+
+État 23
+
+    6 expression: expression • ';' expression
+    7           | expression • AND expression
+    8           | expression • OR expression
+    9           | expression • '|' expression
+    9           | expression '|' expression •
+   10           | expression • REDIR SINGLE_ARG
+   11           | expression • '&'
+
+    REDIR  décalage et aller à l'état 16
+
+    $défaut  réduction par utilisation de la règle 9 (expression)
+
+
+État 24
+
+   10 expression: expression REDIR SINGLE_ARG •
+
+    $défaut  réduction par utilisation de la règle 10 (expression)
