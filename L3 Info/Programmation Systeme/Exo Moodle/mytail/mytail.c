@@ -45,7 +45,7 @@ int tailRegularFile(int inputFD, int outputFD, int numLines)
         lseek(inputFD, 2, SEEK_CUR);
     }
     while ((r = read(inputFD, &c, 1)) > 0) {
-        write(outputFD, &c, 1);
+        write(outputFD, &c, r);
     }
     return EXIT_SUCCESS;
 }
@@ -75,9 +75,10 @@ int tailFile(int inputFD, int outputFD, int numLines) {
     }
     return EXIT_SUCCESS;
 }
-/*
+
+
 int main(int argc, char *argv[])
 {
     int fd = open("test", O_RDONLY);
     return tailFile(fd, 1, 10);  
- }*/
+ }

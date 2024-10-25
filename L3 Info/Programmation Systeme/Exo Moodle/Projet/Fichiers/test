@@ -16,6 +16,8 @@ InternalCommands.o
 lex.yy.c
 lex.yy.o
 Makefile
+output
+output_error
 Shell
 Shell.c
 Shell.h
