@@ -1,0 +1,179 @@
+# dune build
+# OCAMLPARAM: unset
+# Workspace root: "/autofs/unitytravail/travail/kbalavoine/FAC/L3
+# Info/Programmation Fonctionnelle/Graphes/graphes"
+$ /usr/bin/nproc > /tmp/cache-kbalavoine/dunedf1b3b.output 2> /dev/null
+# Auto-detected concurrency: 24
+# disable binary cache
+$ /usr/bin/ocamlc.opt -config > /tmp/cache-kbalavoine/dune57312a.output
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dyn
+#  ; merlin = true
+#  ; for_host = None
+#  ; fdo_target_exe = None
+#  ; build_dir = "default"
+#  ; toplevel_path = None
+#  ; ocaml_bin = External "/usr/bin"
+#  ; ocaml = Ok External "/usr/bin/ocaml"
+#  ; ocamlc = External "/usr/bin/ocamlc.opt"
+#  ; ocamlopt = Ok External "/usr/bin/ocamlopt.opt"
+#  ; ocamldep = Ok External "/usr/bin/ocamldep.opt"
+#  ; ocamlmklib = Ok External "/usr/bin/ocamlmklib.opt"
+#  ; env =
+#      map
+#        { "CAML_LD_LIBRARY_PATH" :
+#            "/autofs/unitytravail/travail/kbalavoine/FAC/L3 Info/Programmation Fonctionnelle/Graphes/graphes/_build/install/default/lib/stublibs"
+#        ; "DUNE_OCAML_HARDCODED" : "/usr/lib/ocaml"
+#        ; "DUNE_OCAML_STDLIB" : "/usr/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" :
+#            "/autofs/unitytravail/travail/kbalavoine/FAC/L3 Info/Programmation Fonctionnelle/Graphes/graphes"
+#        ; "INSIDE_DUNE" :
+#            "/autofs/unitytravail/travail/kbalavoine/FAC/L3 Info/Programmation Fonctionnelle/Graphes/graphes/_build/default"
+#        ; "MANPATH" :
+#            "/autofs/unitytravail/travail/kbalavoine/FAC/L3 Info/Programmation Fonctionnelle/Graphes/graphes/_build/install/default/bin"
+#        ; "OCAMLFIND_IGNORE_DUPS_IN" :
+#            "/autofs/unitytravail/travail/kbalavoine/FAC/L3 Info/Programmation Fonctionnelle/Graphes/graphes/_build/install/default/lib"
+#        ; "OCAMLPATH" :
+#            "/autofs/unitytravail/travail/kbalavoine/FAC/L3 Info/Programmation Fonctionnelle/Graphes/graphes/_build/install/default/lib"
+#        ; "OCAMLTOP_INCLUDE_PATH" :
+#            "/autofs/unitytravail/travail/kbalavoine/FAC/L3 Info/Programmation Fonctionnelle/Graphes/graphes/_build/install/default/lib/toplevel"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; findlib_path = [ External "/usr/lib/ocaml" ]
+#  ; arch_sixtyfour = true
+#  ; natdynlink_supported = true
+#  ; supports_shared_libraries = true
+#  ; ocaml_config =
+#      { version = "4.13.1"
+#      ; standard_library_default = "/usr/lib/ocaml"
+#      ; standard_library = "/usr/lib/ocaml"
+#      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
+#      ; ccomp_type = "cc"
+#      ; c_compiler = "x86_64-linux-gnu-gcc"
+#      ; ocamlc_cflags =
+#          [ "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-g"
+#          ; "-O2"
+#          ; "-fstack-protector-strong"
+#          ; "-Wformat"
+#          ; "-Werror=format-security"
+#          ]
+#      ; ocamlc_cppflags =
+#          [ "-D_FILE_OFFSET_BITS=64"; "-Wdate-time"; "-D_FORTIFY_SOURCE=2" ]
+#      ; ocamlopt_cflags =
+#          [ "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-g"
+#          ; "-O2"
+#          ; "-fstack-protector-strong"
+#          ; "-Wformat"
+#          ; "-Werror=format-security"
+#          ]
+#      ; ocamlopt_cppflags =
+#          [ "-D_FILE_OFFSET_BITS=64"; "-Wdate-time"; "-D_FORTIFY_SOURCE=2" ]
+#      ; bytecomp_c_compiler =
+#          [ "x86_64-linux-gnu-gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-g"
+#          ; "-O2"
+#          ; "-fstack-protector-strong"
+#          ; "-Wformat"
+#          ; "-Werror=format-security"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ; "-Wdate-time"
+#          ; "-D_FORTIFY_SOURCE=2"
+#          ]
+#      ; bytecomp_c_libraries = [ "-lm"; "-lpthread" ]
+#      ; native_c_compiler =
+#          [ "x86_64-linux-gnu-gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-g"
+#          ; "-O2"
+#          ; "-fstack-protector-strong"
+#          ; "-Wformat"
+#          ; "-Werror=format-security"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ; "-Wdate-time"
+#          ; "-D_FORTIFY_SOURCE=2"
+#          ]
+#      ; native_c_libraries = [ "-lm" ]
+#      ; cc_profile = []
+#      ; architecture = "amd64"
+#      ; model = "default"
+#      ; int_size = 63
+#      ; word_size = 64
+#      ; system = "linux"
+#      ; asm = [ "x86_64-linux-gnu-as" ]
+#      ; asm_cfi_supported = true
+#      ; with_frame_pointers = false
+#      ; ext_exe = ""
+#      ; ext_obj = ".o"
+#      ; ext_asm = ".s"
+#      ; ext_lib = ".a"
+#      ; ext_dll = ".so"
+#      ; os_type = "Unix"
+#      ; default_executable_name = "a.out"
+#      ; systhread_supported = true
+#      ; host = "x86_64-pc-linux-gnu"
+#      ; target = "x86_64-pc-linux-gnu"
+#      ; profiling = false
+#      ; flambda = false
+#      ; spacetime = false
+#      ; safe_string = true
+#      ; exec_magic_number = "Caml1999X030"
+#      ; cmi_magic_number = "Caml1999I030"
+#      ; cmo_magic_number = "Caml1999O030"
+#      ; cma_magic_number = "Caml1999A030"
+#      ; cmx_magic_number = "Caml1999Y030"
+#      ; cmxa_magic_number = "Caml1999Z030"
+#      ; ast_impl_magic_number = "Caml1999M030"
+#      ; ast_intf_magic_number = "Caml1999N030"
+#      ; cmxs_magic_number = "Caml1999D030"
+#      ; cmt_magic_number = "Caml1999T030"
+#      ; natdynlink_supported = true
+#      ; supports_shared_libraries = true
+#      ; windows_unicode = false
+#      }
+#  }
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/graph_input.ml) > _build/default/src/.graphes.objs/graph_input.ml.d
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I src/.graphes.objs/byte -no-alias-deps -opaque -open Graphes -o src/.graphes.objs/byte/graphes__Graph_input.cmo -c -impl src/graph_input.ml)
+> File "src/graph_input.ml", line 35, characters 8-25:
+> 35 | let rec earcs_from_epaths epaths =
+>              ^^^^^^^^^^^^^^^^^
+> Warning 39 [unused-rec-flag]: unused rec flag.
+> File "src/graph_input.ml", line 35, characters 26-32:
+> 35 | let rec earcs_from_epaths epaths =
+>                                ^^^^^^
+> Warning 27 [unused-var-strict]: unused variable epaths.
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I src/.graphes.objs/byte -no-alias-deps -opaque -open Graphes -o src/.graphes.objs/byte/graphes__Data.cmo -c -impl src/data.ml)
+$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I src/.graphes.objs/byte -I src/.graphes.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Graphes -o src/.graphes.objs/native/graphes__Graph_input.cmx -c -impl src/graph_input.ml)
+> File "src/graph_input.ml", line 35, characters 8-25:
+> 35 | let rec earcs_from_epaths epaths =
+>              ^^^^^^^^^^^^^^^^^
+> Warning 39 [unused-rec-flag]: unused rec flag.
+> File "src/graph_input.ml", line 35, characters 26-32:
+> 35 | let rec earcs_from_epaths epaths =
+>                                ^^^^^^
+> Warning 27 [unused-var-strict]: unused variable epaths.
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -a -o src/graphes.cma src/.graphes.objs/byte/graphes.cmo src/.graphes.objs/byte/graphes__Utils.cmo src/.graphes.objs/byte/graphes__Dict.cmo src/.graphes.objs/byte/graphes__Graph.cmo src/.graphes.objs/byte/graphes__Graph_input.cmo src/.graphes.objs/byte/graphes__Dot.cmo src/.graphes.objs/byte/graphes__Data.cmo)
+$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I src/.graphes.objs/byte -I src/.graphes.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Graphes -o src/.graphes.objs/native/graphes__Data.cmx -c -impl src/data.ml)
+$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -a -o src/graphes.cmxa src/.graphes.objs/native/graphes.cmx src/.graphes.objs/native/graphes__Utils.cmx src/.graphes.objs/native/graphes__Dict.cmx src/.graphes.objs/native/graphes__Graph.cmx src/.graphes.objs/native/graphes__Graph_input.cmx src/.graphes.objs/native/graphes__Dot.cmx src/.graphes.objs/native/graphes__Data.cmx)
+$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -shared -linkall -I src -o src/graphes.cmxs src/graphes.cmxa)

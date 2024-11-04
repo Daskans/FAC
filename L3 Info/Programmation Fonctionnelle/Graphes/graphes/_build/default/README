@@ -1,0 +1,16 @@
+Bibliothèque sur les graphes.
+- orientés ou non orientés
+- implémentation “orientée sommet”
+- ensemble de noeuds représenté par un dictionnaire
+- un graphe est un ensemble de noeuds possédant des voisins
+avec un nom et un booléen indiquant si orienté ou pas
+- ensemble de noeuds représenté par un dictionnaire
+- ensemble d’arcs représenté par un dictionnaire
+- un dictionnaire est implémenté par une table de hachage (donc mutable)
+
+Liste de fonctions à implémenter dans Doc/questions.txt
+
+Code source dans src
+
+Pour compiler: voir README dans src
+

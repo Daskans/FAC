@@ -1,0 +1,66 @@
+Représentation externe des graphes:
+
+Pour l'instant un graphe peut être entré sous forme de liste de couples de numéros de noeuds adjacents (format F1).
+Par exemple: [(2, 3); (1, 2); (1, 5); (5, 6); (3, 5); (4, 5)]
+
+On définit un deuxième format (Format2) externe pour les graphes
+permettant d'entrer un graphe à partir d'une liste de chemins (format F2):
+ [[1;2;3;5;6]; [1;5;4]]
+
+qui donnerait le même graphe que défini ci-desssus.
+
+En vous inspirant de la fonction
+graph_from_earcs ?(oriented=false) ?(name="g") earcs
+
+Écrire une fonction
+graph_from_epaths ?(oriented=false) ?(name="g") epaths;;
+-: ?oriented:bool -> ?name:string -> (int list) list -> graph = <fun>
+
+qui construit un graphe à partir d'une liste de chemins au format F2.
+
+Écrire les fonctions permettant de passer d'un graphe à ses représentations externes.
+
+
+- Passer d'un graphe orienté à un graphe non orienté
+- renommer les noeuds du graphe à partir d'un certain entier
+- inverser les arcs d'un graphe orienté
+- calculer le degré sortant minimal, maximal
+- transposition d'un graphe
+
+------------------------------------------------------------
+Algorithmes sur les graphes
+------------------------------------------------------------
+Facile
+- décider si un graphe non orienté est Eulérien
+- décider si un graphe est stable (graph_stable_p -: graph -> bool)
+- décider si un graphe regulier (graphe non orienté uniquement) (graph_regular_p -: graph -> bool)
+- complet (graph_complete_p -: graph -> bool)
+- décider si un graphe a une chaine eulerien (graph_eulerian_chain_p -: graph -> bool)
+- décider si un graphe a un cycle eulerien (graph_eulerian_cycle_p -: graph -> bool)
+
+Moyen
+- décider si un graphe est connexe (graph_connected_p -: graph -> bool)
+- calculer un sous-graphe induit par un ensemble de noeuds
+- calculer un sous-traphe induit par un ensemble d'arcs
+- union de deux graphes (nécessite le renommage des noeuds).
+
+------------------------------------------------------------
+Algorithmes sur les chemins
+------------------------------------------------------------
+Facile
+- trouver les noeuds accessibles à partir d'un noeud
+- trouver les composantes connexes d'un graphe
+- décider s'il existe un chemin entre deux noeuds
+
+Moyen
+- calculer tous les chemins maximaux accessibles à partir d'un noeud.
+- décider si le graphe contient un cycle
+- trouver tous les chemins entre deux noeuds
+- construire un circuit eulerien
+- décider si le graphe est biparti
+
+Difficile:
+- plus court chemin entre deux noeuds d'un graphe arc-valué
+- tous les plus courts chemins entre deux noeuds d'un graphe valué
+- arbre couvrant minimum d'un graphe arc-valué
+- algo non trivial de la théorie des graphes

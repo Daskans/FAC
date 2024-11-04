@@ -1,0 +1,17 @@
+avec Dune:
+dune build
+dans utop
+#use_output "dune top"
+puis
+#use "Extras/dune-load.ml"
+
+sans dune:
+make
+dans utop
+#use "Extras/load.ml"
+
+puis
+graph_view go3
+
+
+
