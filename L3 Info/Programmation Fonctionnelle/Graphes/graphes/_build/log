@@ -1,11 +1,11 @@
-# dune build
+# dune top
 # OCAMLPARAM: unset
 # Workspace root: "/autofs/unitytravail/travail/kbalavoine/FAC/L3
 # Info/Programmation Fonctionnelle/Graphes/graphes"
-$ /usr/bin/nproc > /tmp/cache-kbalavoine/dunedf1b3b.output 2> /dev/null
-# Auto-detected concurrency: 24
+$ /usr/bin/nproc > /tmp/cache-kbalavoine/duned0e28b.output 2> /dev/null
+# Auto-detected concurrency: 20
 # disable binary cache
-$ /usr/bin/ocamlc.opt -config > /tmp/cache-kbalavoine/dune57312a.output
+$ /usr/bin/ocamlc.opt -config > /tmp/cache-kbalavoine/dune887e90.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -153,27 +153,3 @@ $ /usr/bin/ocamlc.opt -config > /tmp/cache-kbalavoine/dune57312a.output
 #      ; windows_unicode = false
 #      }
 #  }
-$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/graph_input.ml) > _build/default/src/.graphes.objs/graph_input.ml.d
-$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I src/.graphes.objs/byte -no-alias-deps -opaque -open Graphes -o src/.graphes.objs/byte/graphes__Graph_input.cmo -c -impl src/graph_input.ml)
-> File "src/graph_input.ml", line 35, characters 8-25:
-> 35 | let rec earcs_from_epaths epaths =
->              ^^^^^^^^^^^^^^^^^
-> Warning 39 [unused-rec-flag]: unused rec flag.
-> File "src/graph_input.ml", line 35, characters 26-32:
-> 35 | let rec earcs_from_epaths epaths =
->                                ^^^^^^
-> Warning 27 [unused-var-strict]: unused variable epaths.
-$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I src/.graphes.objs/byte -no-alias-deps -opaque -open Graphes -o src/.graphes.objs/byte/graphes__Data.cmo -c -impl src/data.ml)
-$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I src/.graphes.objs/byte -I src/.graphes.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Graphes -o src/.graphes.objs/native/graphes__Graph_input.cmx -c -impl src/graph_input.ml)
-> File "src/graph_input.ml", line 35, characters 8-25:
-> 35 | let rec earcs_from_epaths epaths =
->              ^^^^^^^^^^^^^^^^^
-> Warning 39 [unused-rec-flag]: unused rec flag.
-> File "src/graph_input.ml", line 35, characters 26-32:
-> 35 | let rec earcs_from_epaths epaths =
->                                ^^^^^^
-> Warning 27 [unused-var-strict]: unused variable epaths.
-$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -a -o src/graphes.cma src/.graphes.objs/byte/graphes.cmo src/.graphes.objs/byte/graphes__Utils.cmo src/.graphes.objs/byte/graphes__Dict.cmo src/.graphes.objs/byte/graphes__Graph.cmo src/.graphes.objs/byte/graphes__Graph_input.cmo src/.graphes.objs/byte/graphes__Dot.cmo src/.graphes.objs/byte/graphes__Data.cmo)
-$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I src/.graphes.objs/byte -I src/.graphes.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Graphes -o src/.graphes.objs/native/graphes__Data.cmx -c -impl src/data.ml)
-$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -a -o src/graphes.cmxa src/.graphes.objs/native/graphes.cmx src/.graphes.objs/native/graphes__Utils.cmx src/.graphes.objs/native/graphes__Dict.cmx src/.graphes.objs/native/graphes__Graph.cmx src/.graphes.objs/native/graphes__Graph_input.cmx src/.graphes.objs/native/graphes__Dot.cmx src/.graphes.objs/native/graphes__Data.cmx)
-$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -shared -linkall -I src -o src/graphes.cmxs src/graphes.cmxa)

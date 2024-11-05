@@ -33,8 +33,7 @@ let graph_from_earcs ?(oriented=false) ?(name="g") ?(enodes=[]) earcs =
     end
 
 let rec earcs_from_epaths epaths =
-    [(1,2)]
-    (*match epaths with
+    match epaths with
     | [] -> []
     | head::tail ->
         let rec aux result =
@@ -45,7 +44,7 @@ let rec earcs_from_epaths epaths =
                 else
                     aux ((head2, List.hd tail2)::result)
             | _ -> failwith "nique ta mère"
-        in (aux []) @ earcs_from_epaths tail*)
+        in (aux []) @ earcs_from_epaths tail
 ;;
 
 
