@@ -7,5 +7,6 @@
 int
 executer_avant_delai( void (*fun)(void *), void *parametre, int delai_en_seconde)
 {
+  alarm(delai_en_seconde);
   fun(parametre);
 }

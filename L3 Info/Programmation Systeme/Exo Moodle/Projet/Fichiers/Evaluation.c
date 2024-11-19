@@ -30,7 +30,7 @@ void redirectExpr(Expression *expr) {
                 exit(shellStatus);
             } if (filetype == -1) {
                 dup2(expr->redirect.fd, STDOUT_FILENO);
-                filetype = STDERR_FILENO;
+                filetype = STDERR_FILENO;        
             }
         }
     } else if(expr->redirect.type == REDIR_APP) {

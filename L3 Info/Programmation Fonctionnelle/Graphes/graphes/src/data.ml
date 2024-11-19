@@ -22,6 +22,7 @@ let go5 = graph_from_earcs ~name:"go5" ~oriented:true [(1,2); (2,3); (3, 1); (4,
 let go6 = graph_from_earcs ~name:"go6" ~oriented:true [(1,2); (2,3); (3,4); (4,1)]
 let go7 = graph_from_earcs ~name:"go7" ~oriented:true [(1,2); (1,3); (3,4); (4,1)]
 let gep = graph_from_epaths ~name:"gep" ~oriented:true [[1;2;3;5;6]; [1;5;4]]
+let g8 = oriented_to_non_oriented ~name:"g8" gep
 
 let go_complete = graph_from_earcs ~name:"go_complete" ~oriented:true [(1,2); (1,3); (2,1); (2,3); (3,1); (3,2)]
 

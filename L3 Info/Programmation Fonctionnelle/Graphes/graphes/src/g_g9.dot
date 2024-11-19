@@ -1,0 +1,20 @@
+digraph g9 {
+n2 [color=black];
+n6 [color=black];
+n3 [color=black];
+n4 [color=black];
+n5 [color=black];
+n1 [color=black];
+n4 -> n5;
+n3 -> n2;
+n3 -> n5;
+n1 -> n5;
+n5 -> n6;
+n6 -> n5;
+n1 -> n2;
+n5 -> n3;
+n5 -> n4;
+n2 -> n1;
+n5 -> n1;
+n2 -> n3;
+}
