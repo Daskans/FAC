@@ -135,6 +135,11 @@ void pipeExpr(Expression *expr) {
     close(err_backup);
 }
 
+void backgroundExpr(Expression *expr) {
+    struct sigaction a;
+    
+}
+
 int evaluateExpr(Expression *expr) {
     static int first = 1;
     
@@ -166,6 +171,9 @@ int evaluateExpr(Expression *expr) {
             break;
         case ET_PIPE:
             pipeExpr(expr);
+            break;
+        case ET_BG:
+            backgroundExpr(expr);
             break;
         default:
             break;
