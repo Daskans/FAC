@@ -39,20 +39,37 @@ public class ImageController {
 
   @RequestMapping(value = "/images/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
   public ResponseEntity<?> getImage(@PathVariable("id") long id) {
-    // TODO
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Optional<Image> img = imageDao.retrieve(id);
+        if (img.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.IMAGE_JPEG)
+            .body(img.get().getData());
   }
 
   @RequestMapping(value = "/images/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<?> deleteImage(@PathVariable("id") long id) {
-    // TODO
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    Optional<Image> img = imageDao.retrieve(id);
+        if (img.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.IMAGE_JPEG)
+            .body(img.get().getData());
   }
 
   @RequestMapping(value = "/images", method = RequestMethod.POST)
-  public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
-      RedirectAttributes redirectAttributes) {
-    // TODO
+  public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+    Image img = new Image(file.getOriginalFilename(), file.getBytes());
+    if (img) {
+        imageDao.create(img);
+        return new ResponseEntity
+            .ok()
+    }
+
     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
