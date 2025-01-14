@@ -49,36 +49,44 @@ public class ImageController {
             .body(img.get().getData());
   }
 
-  @RequestMapping(value = "/images/{id}", method = RequestMethod.DELETE)
-  public ResponseEntity<?> deleteImage(@PathVariable("id") long id) {
-    Optional<Image> img = imageDao.retrieve(id);
+    @RequestMapping(value = "/images/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteImage(@PathVariable("id") long id) {
+        Optional<Image> img = imageDao.retrieve(id);
         if (img.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        imageDao.delete(img.get());
         return ResponseEntity
             .ok()
             .contentType(MediaType.IMAGE_JPEG)
             .body(img.get().getData());
   }
 
-  @RequestMapping(value = "/images", method = RequestMethod.POST)
-  public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-    Image img = new Image(file.getOriginalFilename(), file.getBytes());
-    if (img) {
-        imageDao.create(img);
-        return new ResponseEntity
+    @RequestMapping(value = "/images", method = RequestMethod.POST)
+    public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+        Optional<Image> img;
+        try {
+            img = Optional.of(new Image(file.getOriginalFilename(), file.getBytes()));
+        } catch (final IOException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        imageDao.create(img.get());
+        redirectAttributes
+            .addAttribute("id", img.get().getId())
+            .addAttribute("name", img.get().getName())
+            .addAttribute("data", img.get().getData());
+        return ResponseEntity
             .ok()
+            .contentType(MediaType.IMAGE_JPEG)
+            .body(img.get().getData());
     }
 
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  }
-
-  @RequestMapping(value = "/images", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
-  @ResponseBody
-  public ArrayNode getImageList() {
-    ArrayNode nodes = mapper.createArrayNode();
-    // TODO
-    return nodes;
-  }
+    @RequestMapping(value = "/images", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ArrayNode getImageList() {
+        ArrayNode nodes = mapper.createArrayNode();
+        // TODO
+        return nodes;
+    }
 
 }

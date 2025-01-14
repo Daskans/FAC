@@ -30,16 +30,16 @@ public class ImageControllerTests {
   	ReflectionTestUtils.setField(Image.class, "count", Long.valueOf(0));
 	}
 
-	@Test
+	/*@Test
 	@Order(1)
 	public void getImageListShouldReturnSuccess() throws Exception {
 		// TODO
-	}
+	}*/
 
 	@Test
 	@Order(2)
 	public void getImageShouldReturnNotFound() throws Exception {
-		// TODO
+		this.mockMvc.perform().andDo(getImage()).andExpect()
 	}
 
 	@Test
