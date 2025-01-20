@@ -3,6 +3,7 @@ package pdl.backend;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,7 +86,13 @@ public class ImageController {
     @ResponseBody
     public ArrayNode getImageList() {
         ArrayNode nodes = mapper.createArrayNode();
-        // TODO
+        List<Image> images = imageDao.retrieveAll();
+        for (Image img : images) {
+            ObjectNode obj = mapper.createObjectNode();
+            obj.put("id", img.getId());
+            obj.put("name", img.getName());
+            nodes.add(obj);
+        }
         return nodes;
     }
 
