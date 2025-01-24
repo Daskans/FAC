@@ -92,9 +92,19 @@ let read_infix_term str =
   (res, String.sub str 0 (min (String.length str) pos))
 
 let infix_string_of_term term =
-  ignore term;
-  failwith "todo"
-
+  let rec aux result =
+    match result with
+    | Int n -> string_of_int n
+    | Add(a, b) -> "(" ^ aux a ^ "+" ^ aux b ^ ")"
+    | Sub(a, b) -> "(" ^ aux a ^ "-" ^ aux b ^ ")"
+    | Mul(a, b) -> "(" ^ aux a ^ "*" ^ aux b ^ ")"
+    | Div(a, b) -> "(" ^ aux a ^ "/" ^ aux b ^ ")"
+    | Mod(a, b) -> "(" ^ aux a ^ "%" ^ aux b ^ ")"
+    | Min(a, b) -> "v(" ^ aux a ^ "," ^ aux b ^ ")"
+    | Max(a, b) -> "A(" ^ aux a ^ "," ^ aux b ^ ")"
+    | _ -> failwith "unexpected term"
+  in aux term
+    
 let polish_string_of_term term =
   ignore term;
   failwith "todo"

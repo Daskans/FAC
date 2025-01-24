@@ -79,22 +79,18 @@ let () =
   Format.printf "%d -- %d -- %d@," (when_fun (Some (-4))) (when_fun (Some 5))
     (when_fun None)
 
-
-type movement =
-    None
-    | Nord of int
-    | South of int
-    | East of int
-    | West of int
+type direction = N | S | E | O
+type movement = None | Move of direction * int
 
 
-let apply_movement pos move =
-    match move, pos with
-    | Nord(v), (x,y) -> (x, y+v)
-    | South(v), (x,y) -> (x, y-v)
-    | East(v), (x,y) -> (x+v, y)
-    | West(v), (x,y) -> (x-v, y)
-    | None, pos -> pos
+let apply_movement (x, y) move =
+    match move with
+    | None -> (x, y)
+    | Move (_, dis) when dis < 0 -> (x, y)
+    | Move(N, dis) -> (x, y + dis)
+    | Move(S, dis) -> (x, y - dis)
+    | Move(E, dis) -> (x + dis, y)
+    | Move(O, dis) -> (x - dis, y)
 
 
 let list = List.map (fun x -> int_of_string x + 1) [ "12"; "0"; "-2" ]
@@ -105,14 +101,17 @@ let () =
 
 let () = Format.printf "%d@," (List.fold_left (fun x y -> x + y) 1 [ 2; 3; 4 ])
 
-(* To do:
 
-   let list_pos = [(4,4);(7,8);(-4,7);(2,-4); (-5,-5)]
+let list_pos = [(4,4);(-7,8);(-4,7);(2,-4); (-5,-5)]
 
-   let apply_movement_list move list =
+let apply_movement_list move list =
+    List.map (fun x -> apply_movement x move) list
 
-   let find_farthest_point list =
-*)
+let find_farthest_point list =
+    List.fold_left (fun (x1, y1) (x2, y2) ->
+        if abs(x1) + abs(y1) > abs(x2) + abs(y2) then 
+            (x1, y1) 
+        else (x2, y2)) (0, 0) list
 
 exception Stop of int * string
 

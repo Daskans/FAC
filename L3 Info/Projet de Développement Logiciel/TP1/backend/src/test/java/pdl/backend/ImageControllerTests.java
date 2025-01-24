@@ -2,6 +2,7 @@ package pdl.backend;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -16,7 +17,9 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -80,13 +83,31 @@ public class ImageControllerTests {
 	@Test
 	@Order(7)
 	public void createImageShouldReturnSuccess() throws Exception {
-		
+		ClassPathResource resource = new ClassPathResource("test.jpg");
+		MockMultipartFile file = new MockMultipartFile(
+			"file",
+			"test.jpg",
+			MediaType.IMAGE_JPEG_VALUE,
+			resource.getInputStream());
+
+		mockMvc.perform(multipart("/images")
+				.file(file))
+				.andExpect(status().isOk());
 	}
 
 	@Test
 	@Order(8)
 	public void createImageShouldReturnUnsupportedMediaType() throws Exception {
-		// TODO
+		ClassPathResource resource = new ClassPathResource("application.properties");
+		MockMultipartFile file = new MockMultipartFile(
+			"file",
+			"application.properties",
+			MediaType.IMAGE_JPEG_VALUE,
+			resource.getInputStream());
+
+		mockMvc.perform(multipart("/images")
+				.file(file))
+				.andExpect(status().isUnsupportedMediaType());
 	}
 	
 }

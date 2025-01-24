@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,6 +67,9 @@ public class ImageController {
     @RequestMapping(value = "/images", method = RequestMethod.POST)
     public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         Optional<Image> img;
+        if (file.getContentType() != ".png") {
+            return new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+        }
         try {
             img = Optional.of(new Image(file.getOriginalFilename(), file.getBytes()));
         } catch (final IOException e) {
