@@ -32,13 +32,25 @@ let operation_of_binop (op : binop) (v1 : value) (v2 : value) =
   | Neq, VBool(v1), VBool(v2) -> VBool (v1 <> v2)
   | Lt, VInt(v1), VInt(v2) -> VBool (v1 < v2)
   | Lt, VFloat(v1), VFloat(v2) -> VBool (v1 < v2)
+  | Lt, VInt(v1), VFloat(v2) -> VBool (float_of_int v1 < v2)
+  | Lt, VFloat(v1), VInt(v2) -> VBool (v1 < float_of_int v2)
+  | Lt, VBool(v1), VBool(v2) -> VBool (v1 < v2)
   | Gt, VInt(v1), VInt(v2) -> VBool (v1 > v2)
   | Gt, VFloat(v1), VFloat(v2) -> VBool (v1 > v2)
+  | Gt, VInt(v1), VFloat(v2) -> VBool (float_of_int v1 > v2)
+  | Gt, VFloat(v1), VInt(v2) -> VBool (v1 > float_of_int v2)
+  | Gt, VBool(v1), VBool(v2) -> VBool (v1 > v2)
   | Leq, VInt(v1), VInt(v2) -> VBool (v1 <= v2)
   | Leq, VFloat(v1), VFloat(v2) -> VBool (v1 <= v2)
+  | Leq, VInt(v1), VFloat(v2) -> VBool (float_of_int v1 <= v2)
+  | Leq, VFloat(v1), VInt(v2) -> VBool (v1 <= float_of_int v2)
+  | Leq, VBool(v1), VBool(v2) -> VBool (v1 <= v2)
   | Geq, VInt(v1), VInt(v2) -> VBool (v1 >= v2)
   | Geq, VFloat(v1), VFloat(v2) -> VBool (v1 >= v2)
-  | _ -> failwith "ERROR : unsupported binop operation"
+  | Geq, VInt(v1), VFloat(v2) -> VBool (float_of_int v1 >= v2)
+  | Geq, VFloat(v1), VInt(v2) -> VBool (v1 >= float_of_int v2)
+  | Geq, VBool(v1), VBool(v2) -> VBool (v1 >= v2)
+  | _ -> failwith ("ERROR : unsupported binop operation : " ^ string_of_binop op)
 
 (* Sémantique d’une opération unaire*)
 let operation_of_unop (op : unop) (v : value) =
@@ -65,7 +77,7 @@ let rec interpret_expr (map : value Util.Environment.t)
       let value = Util.Environment.get map name in
       (match value with
       | Some v -> v
-      | None -> failwith "ERROR : variable not found")
+      | None -> failwith ("ERROR : variable " ^ name ^ " not found"))
   | Binop(op, e1, e2, _) ->
       let v1=interpret_expr map map_function e1 in
       let v2=interpret_expr map map_function e2 in
@@ -78,8 +90,26 @@ let rec interpret_expr (map : value Util.Environment.t)
 and interpret_instruction (map : value Util.Environment.t)
     (map_function : (Ast.argument list * Ast.instruction) Util.Environment.t)
     (instruction : Ast.instruction) =
-  ignore (map, map_function, instruction);
-  (*à compléter*) ()
+  match instruction with
+  | Affect(name, expr, _) ->
+      let value = interpret_expr map map_function expr in
+      Util.Environment.modify map name value
+  | Block(instructions, _) -> List.iter (interpret_instruction map map_function) instructions
+  | IfThenElse(expr, thenInstruction, elseInstruction, _) ->
+      let value = interpret_expr map map_function expr in
+      (match value with
+      | VBool true -> interpret_instruction map map_function thenInstruction
+      | VBool false -> interpret_instruction map map_function elseInstruction
+      | _ -> failwith "ERROR : non-bool test")
+  | While(expr, instruction, _) ->
+      let value = interpret_expr map map_function expr in
+      (match value with
+      | VBool true -> interpret_instruction map map_function instruction
+      | VBool false -> ()
+      | _ -> failwith "ERROR : non-bool test")
+  | Print_str(str, _) -> print_string str
+  | Print_expr(expr, _) -> print_string (string_of_value (interpret_expr map map_function expr))
+  | _ -> failwith "ERROR : unsupported instruction operation"
 
 (*Cette fonction doit interpréter une déclaration de fonction. Elle consiste simplement à associer la liste des arguments et le corps de la fonction à son nom dans l’environnement [functions].*)
 let interpret_func_decl
