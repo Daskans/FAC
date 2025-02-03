@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
 import { ref } from 'vue'
-import { getImageList, downloadImage } from './http-api';
-import type { Image_t, imageElement } from './http-api';
+import { getImageList } from './http-api';
+import type { Image_t } from './http-api';
 
 
 const imageList = ref(<Image_t[]>([]));
@@ -18,7 +18,6 @@ const retrieveImageList = async () => {
 
 const viewImage = async (id: number) => {
   console.log("Image ID => ",id);
-  const image = await downloadImage(id);
 }
 
 </script>
@@ -29,8 +28,8 @@ const viewImage = async (id: number) => {
             <button @click="retrieveImageList()">Show Image Gallery</button>
         </div>
         <div class="gallery">
-            <div v-for="image in imageList" :key="image.id" class="galleryImage" @click="viewImage(image.id)">
-                <img :src="`/images/${image.id}`" :alt="image.name"/>
+            <div v-for="image in imageList" :key="image.id"  @click="viewImage(image.id)">
+                <img :src="`/images/${image.id}`" :alt="image.name" class="galleryImage"/>
             </div>
         </div>
     </div>
