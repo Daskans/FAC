@@ -10,5 +10,9 @@ export default defineConfig({
         target: 'http://localhost:8181' // Spring boot backend address
       }
     }
+  },
+  build: {
+    outDir: 'target/dist',
+    assetsDir: 'static'
   }
 })

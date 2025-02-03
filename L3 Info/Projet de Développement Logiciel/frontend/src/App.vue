@@ -12,8 +12,12 @@ import HelloWorld2 from './components/ImageGallery.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="Vite + Vue" />
-  <HelloWorld2 />
+  <div class="container_1">
+    <HelloWorld msg="Vite + Vue" />
+  </div>
+  <div class="container_2">
+    <HelloWorld2/>
+  </div>
 </template>
 
 <style scoped>
@@ -29,4 +33,17 @@ import HelloWorld2 from './components/ImageGallery.vue'
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
+
+.container_1 {
+  margin-top: 20px;
+  display: block;
+  justify-content: center;
+}
+
+.container_2 {
+  margin-top: 20px;
+  display: block;
+  justify-content: center;
+}
+
 </style>

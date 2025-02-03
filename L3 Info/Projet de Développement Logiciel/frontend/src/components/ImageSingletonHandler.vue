@@ -1,48 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import axios from 'axios';
-
-interface Image {
-  id: number;
-  name: string;
-}
+import { getImageList, imageElement, images, downloadImage, selectedImage } from './http-api';
 
 defineProps<{ msg: string }>()
-const images = ref(<Image[]>([]));
-const selectedImage = ref("");
 const selectedFile = ref<File | null>(null);
-const imageElement = ref<HTMLImageElement | null>(null);
 
 
-const getImageList = async () => {
-  try {
-    const response = await axios.get('/images');
-    images.value = response.data;
-    console.log(images.value);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-const downloadImage = async () => {
-  const imageUrl = `/images/${selectedImage.value}`;
-  console.log("Image URL => ",imageUrl);
-  console.log("Image ID => ",selectedImage.value);
-  console.log("Image element => ",imageElement.value);
-  try {
-    const response = await axios.get(imageUrl, { responseType: 'blob' });
-    const reader = new window.FileReader();
-    reader.readAsDataURL(response.data);
-    reader.onload = function() {
-      const imageUrl = reader.result;
-      if (imageElement.value && imageUrl) {
-        imageElement.value.src = imageUrl.toString();
-      }
-    }
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 const submitFile = async () => {
   if (selectedFile.value) {
@@ -82,7 +46,7 @@ const handleFileUpload = (event: Event) => {
     </select>
   </div>
   <div>
-    <button @click="downloadImage()">Download</button>
+    <button @click="downloadImage(-1)">Download</button>
   </div>
   <div class = "imageContainer">
     <img ref="imageElement" class = "mainImage" />
