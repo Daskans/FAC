@@ -2,10 +2,10 @@
     "configurations": [
       {
         "type": "java",
-        "name": "Launch GrayLevelProcessing",
+        "name": "Launch Convolution",
         "request": "launch",
-        "mainClass": "imageprocessing.GrayLevelProcessing",
-        "args": "./images/logo.jpg ./images/logo_gray.jpg"
+        "mainClass": "imageprocessing.Convolution",
+        "args": "./images/street.jpg ./images/result.jpg"
       }
     ]
   }   

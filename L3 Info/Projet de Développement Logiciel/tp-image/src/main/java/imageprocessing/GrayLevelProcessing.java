@@ -86,6 +86,26 @@ public class GrayLevelProcessing {
 		}
 	}
     
+	public static void histogramEqualization(GrayU8 input) {
+		int[] hist = new int[256];
+		for (int y = 0; y < input.height; ++y) {
+			for (int x = 0; x < input.width; ++x) {
+				hist[input.get(x, y)]++;
+			}
+		}
+		int[] cumulHist = new int[256];
+		cumulHist[0] = hist[0];
+		for (int k = 1; k < 256; k++) {
+			cumulHist[k] = cumulHist[k-1] + hist[k];
+		}
+		for (int y = 0; y < input.height; ++y) {
+			for (int x = 0; x < input.width; ++x) {
+				int gl = input.get(x, y);
+				gl = (cumulHist[gl]*255)/input.totalPixels();
+				input.set(x, y, gl);
+			}
+		}
+	}
 
     public static void main( String[] args ) {
 
@@ -106,7 +126,8 @@ public class GrayLevelProcessing {
         // threshold(input, 128);
 		// modifyLuminance(input, 50);
 		// dynamicExtension(input);
-		dynamicExtensionOptimized(input);
+		//dynamicExtensionOptimized(input);
+		histogramEqualization(input);
 		
 		// save output image
 		final String outputPath = args[1];
