@@ -1,5 +1,6 @@
 package imageprocessing;
 
+import boofcv.core.image.ConvertImage;
 import boofcv.io.image.UtilImageIO;
 import boofcv.struct.image.GrayS16;
 import boofcv.struct.image.GrayU8;
@@ -8,29 +9,21 @@ import boofcv.struct.image.GrayU8;
 public class Convolution {
 
   public static void meanFilter(GrayU8 input, GrayU8 output, int size) {
-    double[][] convCore = new double[size][size];
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            convCore[j][i] = 1/(size*size);
-        }
-    }
-    for (int y = 1; y < input.height - 1; ++y) {
-        for (int x = 1; x < input.width - 1; ++x) {
-            double gl = 0;
-            for(int j = y-1; j < y+2; j++) {
-                for(int i = x-1; i < x+2; i++) {
-                    System.out.println(" input.get(i, j): " + input.get(i, j) + " convCore[j-y+1][i-x+1]: " + convCore[j-y+1][i-x+1]);
-                    gl += input.get(i, j)*convCore[j-y+1][i-x+1];
-                    System.out.println("gl : " + gl);
+    for (int y = size/2; y < input.height - (size/2); ++y) {
+        for (int x = size/2; x < input.width - (size/2); ++x) {
+            int gl = 0;
+            for(int j = y-(size/2); j < y+(size/2)+1; j++) {
+                for(int i = x-(size/2); i < x+(size/2)+1; i++) {
+                    gl += input.get(i, j);
                 }
             }
-            output.set(x, y, ((int)gl));
+            output.set(x, y, (gl/(size*size)));
         }
     }
   }
 
   public static void convolution(GrayU8 input, GrayS16 output, int[][] kernel) {
-      // TODO
+    ConvertImage.conv
   }
 
   public static void gradientImage(GrayU8 input, GrayU8 output, int[][] kernelX, int[][] kernelY){
@@ -59,7 +52,8 @@ public class Convolution {
     GrayU8 output = input.createSameShape();
 
     // processing
-    meanFilter(input, output, 3);
+    //meanFilter(input, output, 11);
+    convolution(input, , kernelX);
     
     // save output image
     final String outputPath = args[1];
