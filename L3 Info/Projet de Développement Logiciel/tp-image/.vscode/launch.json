@@ -5,7 +5,7 @@
         "name": "Launch Convolution",
         "request": "launch",
         "mainClass": "imageprocessing.Convolution",
-        "args": "./images/street.jpg ./images/result.jpg"
+        "args": "./images/bicolore.jpeg ./images/result.jpg"
       }
     ]
   }   
