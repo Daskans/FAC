@@ -8,7 +8,7 @@
 //
 
 double dist(point A, point B) {
-    return sqrt(pow(B.x - A.x, B.x - A.x) + pow(B.y - A.y, B.x - A.x));
+    return hypot(B.x - A.x, B.y - A.y);
 }
 
 double value(point *V, int n, int *P) {
