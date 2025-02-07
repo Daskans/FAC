@@ -1,22 +1,112 @@
 # dune build
 # OCAMLPARAM: unset
 # Shared cache: disabled
-# Shared cache location: /home/daskans/.cache/dune/db
-# Workspace root: "/home/daskans/Code/FAC/L3 Info/Compilation/TD2"
-# Auto-detected concurrency: 16
+# Workspace root: "/autofs/unitytravail/travail/kbalavoine/FAC/L3
+# Info/Compilation/TD2"
+# Auto-detected concurrency: 20
+$ /opt/local/opam/5.1.0/bin/ocamlc.opt -config > /tmp/cache-kbalavoine/dune_596d9e_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
 #  ; profile = Dev
 #  ; merlin = true
+#  ; for_host = None
 #  ; fdo_target_exe = None
 #  ; build_dir = In_build_dir "default"
+#  ; ocaml_bin = External "/opt/local/opam/5.1.0/bin"
+#  ; ocaml = Ok External "/opt/local/opam/5.1.0/bin/ocaml"
+#  ; ocamlc = External "/opt/local/opam/5.1.0/bin/ocamlc.opt"
+#  ; ocamlopt = Ok External "/opt/local/opam/5.1.0/bin/ocamlopt.opt"
+#  ; ocamldep = Ok External "/opt/local/opam/5.1.0/bin/ocamldep.opt"
+#  ; ocamlmklib = Ok External "/opt/local/opam/5.1.0/bin/ocamlmklib"
 #  ; installed_env =
 #      map
 #        { "INSIDE_DUNE" :
-#            "/home/daskans/Code/FAC/L3 Info/Compilation/TD2/_build/default"
+#            "/autofs/unitytravail/travail/kbalavoine/FAC/L3 Info/Compilation/TD2/_build/default"
 #        ; "OCAML_COLOR" : "always"
 #        ; "OPAMCOLOR" : "always"
 #        }
+#  ; findlib_paths =
+#      [ External "/opt/local/opam/5.1.0/lib/ocaml"
+#      ; External "/opt/local/opam/5.1.0/lib"
+#      ]
+#  ; ocaml_config =
+#      { version = "5.1.0"
+#      ; standard_library_default = "/opt/local/opam/5.1.0/lib/ocaml"
+#      ; standard_library = "/opt/local/opam/5.1.0/lib/ocaml"
+#      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
+#      ; ccomp_type = "cc"
+#      ; c_compiler = "gcc"
+#      ; ocamlc_cflags =
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
+#      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
+#      ; ocamlopt_cflags =
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
+#      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
+#      ; bytecomp_c_compiler =
+#          [ "gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ]
+#      ; bytecomp_c_libraries = [ "-lzstd"; "-lm"; "-lpthread" ]
+#      ; native_c_compiler =
+#          [ "gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ]
+#      ; native_c_libraries = [ "-lzstd"; "-lm"; "-lpthread" ]
+#      ; native_pack_linker = [ "ld"; "-r"; "-o" ]
+#      ; cc_profile = []
+#      ; architecture = "amd64"
+#      ; model = "default"
+#      ; int_size = 63
+#      ; word_size = 64
+#      ; system = "linux"
+#      ; asm = [ "as" ]
+#      ; asm_cfi_supported = true
+#      ; with_frame_pointers = false
+#      ; ext_exe = ""
+#      ; ext_obj = ".o"
+#      ; ext_asm = ".s"
+#      ; ext_lib = ".a"
+#      ; ext_dll = ".so"
+#      ; os_type = "Unix"
+#      ; default_executable_name = "a.out"
+#      ; systhread_supported = true
+#      ; host = "x86_64-pc-linux-gnu"
+#      ; target = "x86_64-pc-linux-gnu"
+#      ; profiling = false
+#      ; flambda = false
+#      ; spacetime = false
+#      ; safe_string = true
+#      ; exec_magic_number = "Caml1999X033"
+#      ; cmi_magic_number = "Caml1999I033"
+#      ; cmo_magic_number = "Caml1999O033"
+#      ; cma_magic_number = "Caml1999A033"
+#      ; cmx_magic_number = "Caml1999Y033"
+#      ; cmxa_magic_number = "Caml1999Z033"
+#      ; ast_impl_magic_number = "Caml1999M033"
+#      ; ast_intf_magic_number = "Caml1999N033"
+#      ; cmxs_magic_number = "Caml1999D033"
+#      ; cmt_magic_number = "Caml1999T033"
+#      ; natdynlink_supported = true
+#      ; supports_shared_libraries = true
+#      ; windows_unicode = false
+#      }
 #  ; instrument_with = []
 #  }
+$ (cd _build/default && /opt/local/opam/5.1.0/bin/ocamldep.opt -modules -impl compiler/course_language/interpreter.ml) > _build/default/compiler/course_language/.course_language.objs/course_language__Interpreter.impl.d
+$ (cd _build/default && /opt/local/opam/5.1.0/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I compiler/course_language/.course_language.objs/byte -I /opt/local/opam/5.1.0/lib/menhirLib -I compiler/abstract_machine/.abstract_machine.objs/byte -I compiler/util/.util.objs/byte -intf-suffix .ml -no-alias-deps -opaque -open Course_language -o compiler/course_language/.course_language.objs/byte/course_language__Interpreter.cmo -c -impl compiler/course_language/interpreter.ml)
+$ (cd _build/default && /opt/local/opam/5.1.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I compiler/course_language/.course_language.objs/byte -I compiler/course_language/.course_language.objs/native -I /opt/local/opam/5.1.0/lib/menhirLib -I compiler/abstract_machine/.abstract_machine.objs/byte -I compiler/abstract_machine/.abstract_machine.objs/native -I compiler/util/.util.objs/byte -I compiler/util/.util.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Course_language -o compiler/course_language/.course_language.objs/native/course_language__Interpreter.cmx -c -impl compiler/course_language/interpreter.ml)
+$ (cd _build/default && /opt/local/opam/5.1.0/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -a -o compiler/course_language/course_language.cma compiler/course_language/.course_language.objs/byte/course_language.cmo compiler/course_language/.course_language.objs/byte/course_language__Ast.cmo compiler/course_language/.course_language.objs/byte/course_language__Interpreter.cmo)
+$ (cd _build/default && /opt/local/opam/5.1.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -a -o compiler/course_language/course_language.cmxa compiler/course_language/.course_language.objs/native/course_language.cmx compiler/course_language/.course_language.objs/native/course_language__Ast.cmx compiler/course_language/.course_language.objs/native/course_language__Interpreter.cmx)
+$ (cd _build/default && /opt/local/opam/5.1.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -shared -linkall -I compiler/course_language -o compiler/course_language/course_language.cmxs compiler/course_language/course_language.cmxa)
+$ (cd _build/default && /opt/local/opam/5.1.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -o compiler/bin_ast_interpreter/main.exe /opt/local/opam/5.1.0/lib/menhirLib/menhirLib.cmxa compiler/util/util.cmxa compiler/abstract_machine/abstract_machine.cmxa compiler/course_language/course_language.cmxa compiler/examples/examples.cmxa compiler/bin_ast_interpreter/.main.eobjs/native/dune__exe__Main.cmx)

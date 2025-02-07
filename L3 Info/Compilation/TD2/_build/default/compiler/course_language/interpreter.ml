@@ -83,8 +83,25 @@ let rec interpret_expr (map : value Util.Environment.t)
       let v2=interpret_expr map map_function e2 in
       operation_of_binop op v1 v2
   | Unop(op, e, _) -> operation_of_unop op (interpret_expr map map_function e)
-  | _ -> failwith "ERROR : unsupported expr operation"
-(*à remplacer par le code : ce code n’est là que pour que le programme compile sans warning.*)
+  | Array_val(name, expr, _) ->
+      let index=match interpret_expr map map_function expr with
+      | VInt x -> x
+      | _ -> failwith "index not an integer"
+      in
+      let tab = Util.Environment.get map name in
+      (match tab with
+      | Some(VArray(array_name, env)) ->
+            (match Util.Environment.get env (array_name^(string_of_int index)) with
+            | Some v -> v
+            | _ -> failwith ("ERROR : array " ^ name ^ " not found"))
+      | _ -> failwith ("ERROR : not an array in Array_val")) 
+  | Size_tab(name, _) ->
+    let tab = Util.Environment.get map name in
+      (match tab with
+      | Some(VArray(array_name, _)) ->
+          Option.get (Util.Environment.get map (array_name^"size"))
+      | _ -> failwith ("ERROR : not an array : " ^ name))
+    | _ -> failwith "ERROR : unsupported expr operation"
 
 (* Cette fonction interprète une instruction. Le «and» est là pour qu’elle soit co-récursive avec interpret_expr (à cause des appels de fonctions). Elle ne renvoie rien, mais applique directement des effets de bord sur [map]. Reportez-vous au cours pour la sémantique.*)
 and interpret_instruction (map : value Util.Environment.t)
@@ -107,9 +124,25 @@ and interpret_instruction (map : value Util.Environment.t)
       | VBool true -> interpret_instruction map map_function instruction
       | VBool false -> ()
       | _ -> failwith "ERROR : non-bool test")
+  | Affect_array (name, i_expr, v_expr, _)  ->
+      let expr=interpret_expr map map_function v_expr
+      and index=
+        match interpret_expr map map_function i_expr with
+        |VInt i -> i
+        | _ -> failwith "ERROR : array index not an integer"
+      in (Util.Environment.modify map (get_tab_pos name index) expr)
+  | Array_decl (_, array_name, expr, _) ->
+      let size =
+        match interpret_expr map map_function expr with
+        | VInt x -> x
+        | _ -> failwith "ERROR : array size not an integer"
+      in
+        Util.Environment.modify map (array_name^"#size") (VInt size);
+        Util.Environment.modify map array_name (VArray (array_name^"#",map))
+
   | Print_str(str, _) -> print_string str
   | Print_expr(expr, _) -> print_string (string_of_value (interpret_expr map map_function expr))
-  | _ -> failwith "ERROR : unsupported instruction operation"
+  | _ -> failwith ("ERROR : unsupported instruction operation" )
 
 (*Cette fonction doit interpréter une déclaration de fonction. Elle consiste simplement à associer la liste des arguments et le corps de la fonction à son nom dans l’environnement [functions].*)
 let interpret_func_decl
