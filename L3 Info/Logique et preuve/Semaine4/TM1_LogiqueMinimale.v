@@ -231,7 +231,11 @@ Hypothesis H : P -> R.
 
 Lemma add_hypothesis : P -> Q -> R.
 Proof.
-Admitted.
+intro Hp.
+intro Hq.
+apply H.
+assumption.
+Qed.
 
 End proof_of_add_hypothesis.
 
@@ -242,16 +246,39 @@ End proof_of_add_hypothesis.
 Section proof_of_remove_dup_hypothesis.
 (* prouver le sequent (P -> P -> Q) |- P -> Q  
    (il faut l'énoncer, et faire la preuve) *)
+Hypothesis H: P -> P -> Q.
+Lemma remove_dup  : P -> Q.
+intro Hp.
+apply H.
+- assumption.
+- assumption.
+Qed.
 End proof_of_remove_dup_hypothesis.
 
 Section proof_of_dup_hypothesis.
 (* même exercice avec le séquent P->Q |- P->P->Q *)
+Hypothesis H : P -> Q.
+Lemma dup : P -> P -> Q.
+intro Hp.
+assumption.
+Qed.
 End proof_of_dup_hypothesis.
 
 Section proof_of_distrib_impl.
 (* meme exercice avec 
    P -> Q , P -> R , Q -> R -> T |- P -> T  
 *)
+Hypothesis H0 : P -> Q.
+Hypothesis H1 : P -> R.
+Hypothesis H2 : Q -> R -> T.
+Lemma implication : P -> T.
+intro Hp.
+apply H2.
+- apply H0.
+  assumption.
+- apply H1.
+  assumption.
+Qed.
 End proof_of_distrib_impl.
 
 Section proof_of_ex9.
@@ -259,6 +286,24 @@ Section proof_of_ex9.
    P->Q, Q->R, (P->R)->T->Q, (P->R)->T |- Q   
    (ex. 9 de la feuille "Logique minimale")
 *)
+Hypothesis H0 : P -> Q.
+Hypothesis H1 : Q -> R.
+Hypothesis H2 : (P -> R) -> T -> Q.
+Hypothesis H3 : (P -> R) -> T.
+Lemma ex9 : Q.
+assert ( pr : P -> R ). {
+intro Hp.
+apply H1.
+apply H0.
+assumption.
+}
+apply H2.
+- assumption.
+- apply H3.
+  assumption.
+Qed.
+
+
 End proof_of_ex9.
   
 (* exercice 10 de la feuille "Logique minimale" *)
@@ -267,7 +312,15 @@ Section Proof_of_weak_Peirce.
 Hypothesis H: (((P->Q)->P)->P)->Q.
 Lemma weak_Peirce : Q.
 Proof.
-Admitted.
+apply H.
+intro Hpqp.
+apply Hpqp.
+intro Hp.
+apply H.
+intro Hpqp2.
+assumption.
+Qed.
+
 
 End Proof_of_weak_Peirce.
 Check weak_Peirce.
@@ -287,7 +340,10 @@ Hypothesis H: (P->P)->Q->R.
 
 Lemma T1: Q->R.
 Proof.
-Admitted.
+apply H.
+intro Hp.
+assumption.
+Qed.
 End Test_1.
 
 Section Test_2.
@@ -295,7 +351,13 @@ Hypothesis H: P->Q.
 
 Lemma T2: (P->Q->R)->P->R.
 Proof.
-Admitted.
+intro Hpqr.
+intro Hp.
+apply Hpqr.
+- assumption.
+- apply H.
+  assumption.
+Qed.
 End Test_2.
 
 Section Test_3.
@@ -303,7 +365,10 @@ Hypothesis H:P.
 
 Lemma T3: (P->Q)->Q.
 Proof.
-Admitted.
+intro Hpq.
+apply Hpq.
+assumption.
+Qed.
 End Test_3.
 
 Section Test_4.
@@ -311,7 +376,15 @@ Hypothesis H: Q->R.
 
 Lemma T4: ((P->R)->S)->(P->Q)->S.
 Proof.
-Admitted.
+intro Hprs.
+intro Hpq.
+apply Hprs.
+intro Hp.
+apply H.
+apply Hpq.
+assumption.
+Qed.
+
 End Test_4.
 
 Section Test_5.
@@ -319,7 +392,12 @@ Hypothesis H: (P->Q)->R.
 
 Lemma T5: P->(Q->R).
 Proof.
-Admitted.
+intro Hp.
+intro Hq.
+apply H.
+intro Hp2.
+assumption.
+Qed.
 End Test_5.
 
 Section Test_6.
@@ -327,7 +405,11 @@ Hypothesis H: P->R.
 
 Lemma T6: (P->Q)->(P->R).
 Proof.
-Admitted.
+intro Hpq.
+intro Hp.
+apply H.
+assumption.
+Qed.
 End Test_6.
 
 End Exercices_bis.
