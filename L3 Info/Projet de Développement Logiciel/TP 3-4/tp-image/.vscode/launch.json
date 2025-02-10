@@ -1,0 +1,13 @@
+{
+    "configurations": [
+      {
+        "type": "java",
+        //"name": "Launch GrayLevelProcessing",
+        "name": "Launch Convolution",
+        "request": "launch",
+        //"mainClass": "imageprocessing.GrayLevelProcessing",
+        "mainClass": "imageprocessing.Convolution",
+        "args": "./colorimages/power.jpg ./colorimages/result.jpg"
+      }
+    ]
+  }   
