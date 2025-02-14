@@ -83,8 +83,8 @@ let rec interpret_expr (map : value Util.Environment.t)
       let v2=interpret_expr map map_function e2 in
       operation_of_binop op v1 v2
   | Unop(op, e, _) -> operation_of_unop op (interpret_expr map map_function e)
-  | Array_val(name, expr, _) ->
-      let index=match interpret_expr map map_function expr with
+  | Array_val(name, e, _) ->
+      let index=match interpret_expr map map_function e with
       | VInt x -> x
       | _ -> failwith "index not an integer"
       in
@@ -94,6 +94,7 @@ let rec interpret_expr (map : value Util.Environment.t)
             (match Util.Environment.get env (array_name^(string_of_int index)) with
             | Some v -> v
             | _ -> failwith ("ERROR : array " ^ name ^ " not found"))
+      | None -> failwith ("ERROR : array " ^ name ^ " is undefined")
       | _ -> failwith ("ERROR : not an array in Array_val")) 
   | Size_tab(name, _) ->
     let tab = Util.Environment.get map name in
@@ -119,29 +120,43 @@ and interpret_instruction (map : value Util.Environment.t)
       | VBool false -> interpret_instruction map map_function elseInstruction
       | _ -> failwith "ERROR : non-bool test")
   | While(expr, instruction, _) ->
-      let value = interpret_expr map map_function expr in
-      (match value with
-      | VBool true -> interpret_instruction map map_function instruction
-      | VBool false -> ()
-      | _ -> failwith "ERROR : non-bool test")
+      let rec loop expr instruction =
+        let value = interpret_expr map map_function expr in
+        (match value with
+        | VBool true -> loop expr instruction
+        | VBool false -> ()
+        | _ -> failwith "ERROR : non-bool test")
+      in loop expr instruction
   | Affect_array (name, i_expr, v_expr, _)  ->
-      let expr=interpret_expr map map_function v_expr
+      let value=interpret_expr map map_function v_expr
       and index=
         match interpret_expr map map_function i_expr with
         |VInt i -> i
         | _ -> failwith "ERROR : array index not an integer"
-      in (Util.Environment.modify map (get_tab_pos name index) expr)
+      in let tab = Util.Environment.get map name in
+      (match tab with
+      | Some(VArray(array_name, _)) ->
+        (Util.Environment.modify map (get_tab_pos array_name index) value) 
+      | _ -> failwith ("ERROR : not an array : " ^ name))
   | Array_decl (_, array_name, expr, _) ->
       let size =
         match interpret_expr map map_function expr with
         | VInt x -> x
         | _ -> failwith "ERROR : array size not an integer"
       in
-        Util.Environment.modify map (array_name^"#size") (VInt size);
-        Util.Environment.modify map array_name (VArray (array_name^"#",map))
+      Util.Environment.modify map array_name (VArray (array_name^"#",map));
+      Util.Environment.modify map (array_name^"#size") (VInt size)
 
   | Print_str(str, _) -> print_string str
   | Print_expr(expr, _) -> print_string (string_of_value (interpret_expr map map_function expr))
+  | Var_decl(basic, name, _) ->
+      let value = match basic with
+      | TInt -> VInt 0
+      | TFloat -> VFloat 0.
+      | TBool -> VBool false
+      | TNull -> VNone
+      in Util.Environment.modify map name value
+
   | _ -> failwith ("ERROR : unsupported instruction operation" )
 
 (*Cette fonction doit interpréter une déclaration de fonction. Elle consiste simplement à associer la liste des arguments et le corps de la fonction à son nom dans l’environnement [functions].*)
