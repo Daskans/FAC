@@ -1,7 +1,9 @@
 package imageprocessing;
 
+import boofcv.alg.color.ColorHsv;
 import boofcv.io.image.ConvertBufferedImage;
 import boofcv.io.image.UtilImageIO;
+import boofcv.struct.image.GrayF32;
 import boofcv.struct.image.GrayU8;
 import boofcv.struct.image.Planar;
 import java.awt.image.BufferedImage;
@@ -14,12 +16,12 @@ public class GrayLevelProcessing {
 			for (int x = 0; x < input.width; ++x) {
 				for (int band = 0; band < input.getNumBands(); ++band) {
 					int gl = input.getBand(band).get(x, y);
-					if (gl < t) {
-						gl = 0;
+					if (color < t) {
+						color = 0;
 					} else {
-						gl = 255;
+						color = 255;
 					}
-					input.getBand(band).set(x, y, gl);
+					input.getBand(band).set(x, y, color);
 				}
 			}
 		}
@@ -29,12 +31,12 @@ public class GrayLevelProcessing {
 		for (int y = 0; y < input.height; ++y) {
 			for (int x = 0; x < input.width; ++x) {
 				for (int band = 0; band < input.getNumBands(); ++band) {
-					int gl = input.getBand(band).get(x, y);
-					gl += delta;
-					if (gl > 255) {
-						gl = 255;
+					int color = input.getBand(band).get(x, y);
+					color += delta;
+					if (color > 255) {
+						color = 255;
 					}
-					input.getBand(band).set(x, y, gl);
+					input.getBand(band).set(x, y, color);
 				}
 			}
 		}
@@ -114,6 +116,14 @@ public class GrayLevelProcessing {
 		}
 	}
 
+	public static void filterHSV(Planar<GrayF32> input, int h) {
+		for (int y = 0; y < input.height; ++y) {
+			for (int x = 0; x < input.width; ++x) {
+				input.getBand(0).set(x, y, h);
+			}
+		}
+	}
+
     public static void main( String[] args ) {
 
     	// load image
@@ -122,8 +132,10 @@ public class GrayLevelProcessing {
 			System.exit(-1);
 		}
 		final String inputPath = args[0];
+		//GrayU8 input = UtilImageIO.loadImage(inputPath, GrayU8.class);
 		BufferedImage input = UtilImageIO.loadImage(inputPath);
 		Planar<GrayU8> image = ConvertBufferedImage.convertFromPlanar(input, null, true, GrayU8.class);
+        Planar<GrayF32> output = new Planar<>(GrayF32.class, image.width, image.height, 3);
 		if(input == null) {
 			System.err.println("Cannot read input file '" + inputPath);
 			System.exit(-1);
@@ -132,14 +144,18 @@ public class GrayLevelProcessing {
 		// processing
 		
         //threshold(image, 128);
-		//modifyLuminance(image, -50);
-		// dynamicExtension(input);
+		//modifyLuminance(image, 100);
+		//dynamicExtension(input);
 		//dynamicExtensionOptimized(input);
 		//histogramEqualization(input);
+		Planar<GrayF32> imageF32 = ConvertBufferedImage.convertFromPlanar(input, null, true, GrayF32.class);
+		ColorHsv.rgbToHsv(imageF32, output);
+		filterHSV(output, 270);
 		
-		// save output image
+		// save output imagez
+		ColorHsv.hsvToRgb(output, output);
 		final String outputPath = args[1];
-		UtilImageIO.saveImage(image, outputPath);
+		UtilImageIO.saveImage(output, outputPath);
 		System.out.println("Image saved in: " + outputPath);
 	}
 

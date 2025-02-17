@@ -123,7 +123,7 @@ and interpret_instruction (map : value Util.Environment.t)
       let rec loop expr instruction =
         let value = interpret_expr map map_function expr in
         (match value with
-        | VBool true -> loop expr instruction
+        | VBool true -> interpret_instruction map map_function instruction; loop expr instruction
         | VBool false -> ()
         | _ -> failwith "ERROR : non-bool test")
       in loop expr instruction

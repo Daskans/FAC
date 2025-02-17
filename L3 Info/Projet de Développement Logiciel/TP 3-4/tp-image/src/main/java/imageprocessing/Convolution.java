@@ -15,13 +15,13 @@ public class Convolution {
         for (int band = 0; band < input.getNumBands(); ++band) {
             for (int y = size / 2; y < input.height - (size / 2); ++y) {
                 for (int x = size / 2; x < input.width - (size / 2); ++x) {
-                    int gl = 0;
+                    int color = 0;
                     for (int j = y - (size / 2); j < y + (size / 2) + 1; j++) {
                         for (int i = x - (size / 2); i < x + (size / 2) + 1; i++) {
-                            gl += input.getBand(band).get(i, j);
+                            color += input.getBand(band).get(i, j);
                         }
                     }
-                    output.getBand(band).set(x, y, (gl / (size * size)));
+                    output.getBand(band).set(x, y, (color / (size * size)));
                 }
             }
         }
@@ -31,12 +31,12 @@ public class Convolution {
         float[] coef = {0.3f, 0.59f, 0.11f};
         for (int y = 0; y < input.height; ++y) {
             for (int x = 0; x < input.width; ++x) {
-                int gl = 0;
+                int color = 0;
                 for (int band = 0; band < input.getNumBands(); ++band) {
-                    gl += input.getBand(band).get(x, y) * coef[band];
+                    color += input.getBand(band).get(x, y) * coef[band];
                 }
                 for (int band = 0; band < input.getNumBands(); ++band) {
-                    output.getBand(band).set(x, y, gl);
+                    output.getBand(band).set(x, y, color);
                 }
             }
         }
@@ -48,13 +48,13 @@ public class Convolution {
         for (int band = 0; band < input.getNumBands(); ++band) {
             for (int y = n_height; y < input.height - n_height; ++y) {
                 for (int x = n_width; x < input.width - n_width; ++x) {
-                    int gl = 0;
+                    int color = 0;
                     for (int u = -n_height; u <= n_height; u++) {
                         for (int v = -n_width; v <= n_width; v++) {
-                            gl += input.getBand(band).get(x + u, y + v) * kernel[u + n_height][v + n_width];
+                            color += input.getBand(band).get(x + u, y + v) * kernel[u + n_height][v + n_width];
                         }
                     }
-                    output.getBand(band).set(x, y, gl);
+                    output.getBand(band).set(x, y, color);
                 }
             }
         }
@@ -97,25 +97,24 @@ public class Convolution {
             System.exit(-1);
         }
         final String inputPath = args[0];
+        //GrayU8 input = UtilImageIO.loadImage(inputPath, GrayU8.class);
+        //GrayU8 output = input.createSameShape();
         BufferedImage input = UtilImageIO.loadImage(inputPath);
         Planar<GrayU8> image = ConvertBufferedImage.convertFromPlanar(input, null, true, GrayU8.class);
         Planar<GrayU8> output = new Planar<>(GrayU8.class, image.width, image.height, image.getNumBands());
-        //GrayS16 outputS16 = new GrayS16(input.width, input.height);
+        //Planar<GrayS16> outputS16 = new Planar<>(GrayS16.class, image.width, image.height, image.getNumBands());
         //int[][] Neg = {{-1}};
-        ;
         // processing
         //meanFilter(image, output, 11);
-        //grayScaledImage(image, output);
-        //convolution(input, outputS16, (int[][]) Neg);
+        grayScaledImage(image, output);
+        //convolution(image, outputS16, (int[][]) Neg);
         //output = ConvertImage.convert(outputS16, (GrayU8) null);
         //gradientImageSobel(input, output);
         //gradientImagePrewitt(input, output);
-        ColorHsv.rgbToHsv(image, output);
 
         // save output image
         final String outputPath = args[1];
         UtilImageIO.saveImage(output, outputPath);
         System.out.println("Image saved in: " + outputPath);
     }
-
 }
