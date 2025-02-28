@@ -1,0 +1,56 @@
+
+** Conflict (shift/reduce) in state 13.
+** Tokens involved: SUB REC MUL DIV ADD
+** The following explanations concentrate on token SUB.
+** This state is reached from main after reading:
+
+SUB s
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+s EOF 
+(?)
+
+** In state 13, looking ahead at SUB, reducing production
+** s -> SUB s
+** is permitted because of the following sub-derivation:
+
+s u s // lookahead token appears because u can begin with SUB
+SUB s . 
+
+** In state 13, looking ahead at SUB, shifting is permitted
+** because of the following sub-derivation:
+
+SUB s 
+    s u s 
+      . SUB 
+
+** Conflict (shift/reduce) in state 12.
+** Tokens involved: SUB REC MUL DIV ADD
+** The following explanations concentrate on token SUB.
+** This state is reached from main after reading:
+
+s u s
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+s EOF 
+(?)
+
+** In state 12, looking ahead at SUB, reducing production
+** s -> s u s
+** is permitted because of the following sub-derivation:
+
+s u s // lookahead token appears because u can begin with SUB
+s u s . 
+
+** In state 12, looking ahead at SUB, shifting is permitted
+** because of the following sub-derivation:
+
+s u s 
+    s u s 
+      . SUB 

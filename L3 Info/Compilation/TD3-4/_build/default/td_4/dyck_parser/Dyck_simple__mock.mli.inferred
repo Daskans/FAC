@@ -1,0 +1,5 @@
+type token = Tokens.token
+val menhir_begin_marker : int
+val xv_word : unit
+val xv_main : unit
+val menhir_end_marker : int

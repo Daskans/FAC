@@ -1,0 +1,86 @@
+(ocamllex
+ (modules Lexer))
+
+(menhir
+ (modules Tokens)
+ (flags --table --inspection --only-tokens))
+
+(menhir
+ (modules Dyck_left Tokens)
+ (merge_into Dyck_left)
+ (flags
+  --dump
+  --table
+  --inspection
+  --explain
+  --automaton-graph
+  --cmly
+  --external-tokens
+  Tokens))
+
+(menhir
+ (modules Dyck_simple Tokens)
+ (merge_into Dyck_simple)
+ (flags
+  --dump
+  --table
+  --inspection
+  --explain
+  --automaton-graph
+  --cmly
+  --external-tokens
+  Tokens))
+
+(menhir
+ (modules Dyck_right Tokens)
+ (merge_into Dyck_right)
+ (flags
+  --dump
+  --table
+  --inspection
+  --explain
+  --automaton-graph
+  --cmly
+  --external-tokens
+  Tokens))
+
+(menhir
+ (modules Dyck_epsilon_right Tokens)
+ (merge_into Dyck_epsilon_right)
+ (flags
+  --dump
+  --table
+  --inspection
+  --explain
+  --automaton-graph
+  --cmly
+  --external-tokens
+  Tokens))
+
+(menhir
+ (modules Dyck_epsilon_left Tokens)
+ (merge_into Dyck_epsilon_left)
+ (flags
+  --dump
+  --table
+  --inspection
+  --explain
+  --automaton-graph
+  --cmly
+  --external-tokens
+  Tokens))
+
+(rule
+ (deps
+  Dyck_left.cmly
+  Dyck_right.cmly
+  Dyck_simple.cmly
+  Dyck_epsilon_left.cmly
+  Dyck_epsilon_right.cmly)
+ (target Cmly.ml)
+ (action
+  (run ocaml-crunch --mode=plain --ext=cmly --output=Cmly.ml .)))
+
+(library
+ (name dyck_parser)
+ (libraries menhirLib))

@@ -1,0 +1,12 @@
+(executables
+ (names parser_visualiser)
+ (public_names parser_visualiser)
+ (libraries
+  dyck_parser
+  first_parser
+  course_language
+  eee_parser
+  etf_parser
+  custom_parser
+  cairn)
+ (package td_parser))

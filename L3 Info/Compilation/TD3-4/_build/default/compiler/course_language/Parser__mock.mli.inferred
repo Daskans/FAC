@@ -1,0 +1,50 @@
+type token =
+    WHILE
+  | VAR
+  | THEN
+  | SUB
+  | STRING of string
+  | SIZE
+  | SEMICOLON
+  | R_SQ_BRK
+  | R_PAR
+  | R_CUR_BRK
+  | RETURN
+  | PRINT
+  | OR
+  | NULL_TYP
+  | NOT
+  | NEQ
+  | MUL
+  | MOD
+  | L_SQ_BRK
+  | L_PAR
+  | L_CUR_BRK
+  | LT
+  | LEQ
+  | INT_TYP
+  | INT of int
+  | IF
+  | ID of string
+  | GT
+  | GEQ
+  | FLOAT_TYP
+  | FLOAT of float
+  | EQ
+  | EOF
+  | ELSE
+  | DOT
+  | DIV
+  | DEF
+  | COMMA
+  | BOOL_TYP
+  | BOOL of bool
+  | ASSIGN
+  | AND
+  | ADD
+val menhir_begin_marker : int
+val xv_main : Ast.t
+val xv_instruction : Ast.instruction
+val xv_function_list : Ast.function_decl list
+val xv_expression : Ast.expr
+val menhir_end_marker : int
