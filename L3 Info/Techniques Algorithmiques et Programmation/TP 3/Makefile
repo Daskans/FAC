@@ -17,8 +17,8 @@ LDFLAGS += $(shell sdl2-config --cflags)
 tsp_src := $(wildcard heap*.c pppp*.c htable*.c test*.c)
 tsp_obj := $(patsubst %.c,%.o,$(tsp_src))
 
-tsp_main:  tools.o $(tsp_obj)
-test_heap: test_heap.o heap.o
+#tsp_main:  tools.o $(tsp_obj)
+#test_heap: test_heap.o heap.o
 a_star:    tools.o a_star.o heap.o
 
 

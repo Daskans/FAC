@@ -133,52 +133,74 @@ double weight[]={
 // pourrez pas déplacer le noeud correspondant pour le mettre au bon
 // endroit dans Q en fonction de la mise à jour de son score.
 
-node createNode(position pos, double cost, double score, node parent){
+node createNode(position pos, double cost, double heuristic, node parent){
   node n = malloc(sizeof(*n));
   n->pos = pos;
   n->cost = cost;
-  n->score = score;
+  n->score = heuristic + cost;
   n->parent = parent;
   return n;
 }
 
-int fcmp_double(const void *x, const void *y) {
-  const double a = *(double*)x;
-  const double b = *(double*)y;
+int fcmp_node(const void *x, const void *y) {
+  const double a = (((node)x)->score);
+  const double b = (((node)y)->score);
   return (a<b)? -1 : (a>b); // ou encore return (a>b) - (a<b);
 }
 
 double A_star(grid G, heuristic h){
   node start = createNode(G.start,0,h(G.start,G.end,&G),NULL);
-  heap Q = heap_create(G.X*G.Y, fcmp_double);
-
-  // Pensez à dessiner la grille avec drawGrid(G) à chaque fois que
-  // possible, pour visualiser le comportement de votre algorithme.
-  // Par exemple, dès vous ajoutez un sommet à P mais aussi lorsque
-  // vous reconstruisez le chemin à la fin de la fonction (marquer les
-  // sommets à MK_PATH). Lorsqu'un sommet passe dans Q vous pourrez le
-  // marquer à MK_FRONT (dans son champs .mark) pour le distinguer à
-  // l'affichage des sommets de P (couleur différente).
-
-  // Après avoir extrait un noeud de Q, il ne faut pas le détruire
-  // (free), sous peine de ne plus pouvoir reconstruire le chemin
-  // trouvé ! Une fonction createNode() peut simplifier votre code.
-
-  // Les bords de la grille sont toujours constitués de murs (texture
-  // TX_WALL) ce qui évite d'avoir à tester la validité des indices
-  // des positions (sentinelle). Dit autrement, un chemin ne peut pas
-  // s'échapper de la grille.
-
-  // Lorsque que vous ajoutez un élément au tas, pensez à tester la
-  // valeur de retour heap_add() afin de détecter d'éventuellement
-  // dépassement de capacité du tas, situation qui n'est pas censé
-  // arriver. Si cela se produit, l'erreur vient soit du tas qui n'est
-  // pas assez grand à son initialisation ou que l'algorithme visite
-  // anormalement trop de sommets. De même, lorsque vous extrayer un
-  // élément, vérifiez qu'il n'est pas NULL, ce qui n'est pas censé
-  // arriver. C'est autant de "segmentation fault" que vous pouvez
-  // éviter.
-
+  heap Q = heap_create(G.X*G.Y, fcmp_node);
+  heap_add(Q, start);
+  G.mark[G.start.x][G.start.y] = MK_USED;
+  int iteration = 0;
+  while (!heap_empty(Q)) {
+    drawGrid(G);
+    printf("iteration %d\n", iteration++);
+    node u = heap_pop(Q);
+    printf("node %d, %d popped. score was %lf\n", u->pos.x, u->pos.y, u->score);
+    if (u->pos.x == G.end.x && u->pos.y == G.end.y) {
+      printf("end reached\n");
+      double end_cost = u->cost;
+      while (u != NULL) {
+        drawGrid(G);
+        G.mark[u->pos.x][u->pos.y] = MK_PATH;
+        u = u->parent;
+      }
+      return end_cost;
+    }
+    G.mark[u->pos.x][u->pos.y] = MK_USED;
+    for (int i = -1; i <= 1; i++) {
+      for (int j = -1; j <= 1; j++) {
+        if (i == 0 && j == 0) {
+          continue;
+        }
+        int vx = u->pos.x + i;
+        int vy = u->pos.y + j;
+        if (vx < 0 || vy < 0 || vx >= G.X || vy >= G.Y) {
+          continue;
+        }
+        if (G.texture[vx][vy] == TX_WALL) {
+          continue;
+        }
+        if (G.mark[vx][vy] == MK_USED) {
+          continue;
+        }
+        double new_cost = u->cost + weight[G.texture[vx][vy]];
+        node v = createNode((position){vx,vy},new_cost,h((position){vx,vy},G.end,&G),u);
+        if (G.mark[vx][vy] == MK_FRONT) {
+          if (new_cost >= v->cost) {
+            continue;
+          }
+        }
+        heap_add(Q, v);
+        printf("node %d, %d added. score was %lf\n", v->pos.x, v->pos.y, v->score);
+        G.mark[vx][vy] = MK_FRONT;
+      }
+    }
+    printf("Q size was %d\n", Q->n);
+  }
+  fprintf(stderr, "path not found\n");
   return -1;
 }
 
