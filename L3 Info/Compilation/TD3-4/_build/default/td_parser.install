@@ -1,8 +1,0 @@
-lib: [
-  "_build/install/default/lib/td_parser/META"
-  "_build/install/default/lib/td_parser/dune-package"
-  "_build/install/default/lib/td_parser/opam"
-]
-bin: [
-  "_build/install/default/bin/parser_visualiser"
-]

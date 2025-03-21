@@ -1,4 +1,0 @@
-type token = SUB | RPAR | REC | MUL | LPAR | INT of int | EOF | DIV | ADD
-val menhir_begin_marker : int
-val xv_main : unit
-val menhir_end_marker : int
