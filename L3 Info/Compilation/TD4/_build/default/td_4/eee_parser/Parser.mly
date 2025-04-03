@@ -1,33 +1,32 @@
 %token ADD SUB
 %token MUL DIV REC
 %token LPAR RPAR
+%token USUB
 %token <int> INT
 %token EOF
 
 %start <unit> main
 
-%left ADD
-%left MUL
+%left ADD SUB
+%left MUL DIV
+
+%nonassoc REC
+%nonassoc USUB
 
 %%
 
 main:
-| s EOF {}
-| EOF {}
+| expr=e EOF {Format.printf "Result : %d\n"expr}
+| EOF {()}
 
-%inline u:
-| ADD   {}
-| SUB   {}
-| MUL   {}
-| DIV   {}
-
-
-s:
-| INT  {}
-| s u s {}
-| s REC {}
-| SUB s  {}
-| LPAR s RPAR {}
-
+e:
+| expr1=e ADD expr2=e       {expr1 + expr2}
+| expr1=e SUB expr2=e       {expr1 - expr2}
+| SUB expr=e %prec USUB     {- expr}
+| expr1=e MUL expr2=e       {expr1 * expr2}
+| expr1=e DIV expr2=e       {expr1 / expr2}
+| expr=e REC                {expr}
+| LPAR expr=e RPAR          {expr}
+| expr=INT                  {expr}
 
 
