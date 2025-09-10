@@ -1,0 +1,5 @@
+(executable
+ (public_name analyser)
+ (name main)
+ (libraries abstract_machine course_language three_address)
+ (package compiler))

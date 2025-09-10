@@ -106,7 +106,7 @@ public class Convolution {
         //int[][] Neg = {{-1}};
         // processing
         //meanFilter(image, output, 11);
-        grayScaledImage(image, output);
+        // grayScaledImage(image, output);
         //convolution(image, outputS16, (int[][]) Neg);
         //output = ConvertImage.convert(outputS16, (GrayU8) null);
         //gradientImageSobel(input, output);

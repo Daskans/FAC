@@ -315,26 +315,26 @@ public class GrayLevelProcessing {
 		// extension_image_color(image);
 		// histogram_image_color(image);
 		
-		Planar<GrayF32> image_hsv =  ConvertBufferedImage.convertFromPlanar(input_color, null, true,GrayF32.class);	
-		Planar<GrayF32> output_hsv = new Planar<>(GrayF32.class, image.width, image.height, 3);
+		// Planar<GrayF32> image_hsv =  ConvertBufferedImage.convertFromPlanar(input_color, null, true,GrayF32.class);	
+		// Planar<GrayF32> output_hsv = new Planar<>(GrayF32.class, image.width, image.height, 3);
 
-		ColorHsv.rgbToHsv(image_hsv, output_hsv);
+		//ColorHsv.rgbToHsv(image_hsv, output_hsv);
 		//BufferedImage outputImage_conversion_RGB = ConvertBufferedImage.convertTo(image_hsv, null, true);
 	
-		Planar<GrayF32> output_teinte = new Planar<>(GrayF32.class, image.width, image.height, 3);
-		filter_teinter(output_hsv, output_teinte,270);
+		//Planar<GrayF32> output_teinte = new Planar<>(GrayF32.class, image.width, image.height, 3);
+		//filter_teinter(output_hsv, output_teinte,270);
 		// BufferedImage outputImage = ConvertBufferedImage.convertTo(output_teinte, null, true);
 		// BufferedImage outputImage_conversion_RGB = ConvertBufferedImage.convertTo(image_hsv, null, true);
 		// histogramTeintes(image_hsv);
 		// histogram2DTeinteSaturation(image_hsv);
 		
 		
-		ColorHsv.hsvToRgb(output_teinte,output_teinte);
+		// ColorHsv.hsvToRgb(output_teinte,output_teinte);
 		// save output image
 
 
 		final String outputPath = args[1];
-		UtilImageIO.saveImage(output_teinte, outputPath);
+		UtilImageIO.saveImage(image, outputPath);
 		// UtilImageIO.saveImage(image, outputPath);
 		System.out.println("Image saved in: " + outputPath);
 	}

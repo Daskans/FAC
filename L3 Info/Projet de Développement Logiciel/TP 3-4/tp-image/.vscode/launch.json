@@ -7,7 +7,7 @@
         "request": "launch",
         "mainClass": "imageprocessing.GrayLevelProcessing",
         //"mainClass": "imageprocessing.Convolution",
-        "args": "./colorimages/power.jpg ./resultImages/HSVfilter.jpg"
+        "args": "./colorimages/power.jpg ./resultImages/_test.jpg"
       }
     ]
   } 

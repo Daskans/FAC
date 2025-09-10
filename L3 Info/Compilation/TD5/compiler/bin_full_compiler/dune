@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (public_name full_compiler)
+ (libraries course_language three_address x86_64_backend)
+ (package compiler))

@@ -1,0 +1,162 @@
+(* Logique du premier ordre, version 2025 *)
+(* Ce fichier ne contient que des exemples, pas d'exercices.
+   Il est fortement recommandé de l'exécuter pas à pas pour
+   s'assurer que vous avez compris ce qui se passe. *)
+
+(** Tactiques :
+  pour forall :  
+    introduction : 
+            intro, intros.
+    elimination :
+            apply, eapply, specialize.
+            (H x ...)
+
+  pour exists : 
+     introduction: exists (fournir le terme)
+     elimintation: destruct.
+
+  pour = :  reflexivity (introduction),
+            rewrite H   [in HØ] (elimination)
+            rewrite <- H [in H0]
+*)
+
+(* tactique maison pour eliminer un forall *)
+(* il faut fournir le terme temoin, et un nom pour
+   la nouvelle hypothèse *)
+
+Ltac forall_e H t hname := (generalize (H t); intro hname).
+
+(* Compléments sur "specialize": permet de spécialiser
+  une hypothèse H (quantifiée universellemnt) en
+  fournissant une valeur (terme) pour une ou plusieurs
+  variables. Syntaxe:
+  specialize H with (x:=t) 
+     va remplacer H par "H appliquée à t", la variable x
+     est remplacée par t
+  specialize H with (x:=t) as H0
+     similaire mais laisse H inchangée, on obtient une
+     nouvelle hypothèse H0
+     
+  Au final c'est plus souple que forall_e, en particulier
+  quand H a plusieurs variables quantifiées
+  universellement. 
+*)
+
+
+(* Exemple *)
+
+Example E0 : ~(forall x:nat, x <> x).
+Proof.
+unfold not.
+intro H.
+forall_e H 42 H0.
+apply H0.
+reflexivity.
+Restart.
+intro H.
+specialize H with (x:=42) as H0.  
+apply H0.
+reflexivity.
+Qed.
+
+Section Syllogismes. (* Entrainements *)
+Variable Etre: Type.
+Variables humain mortel animal : Etre -> Prop.
+
+Variable Socrate : Etre.
+Variable Rhino : Etre.
+
+Hypothesis HM : forall x,  humain x -> mortel x.
+Hypothesis HSocrate : humain Socrate.
+Hypothesis Etre_disj : forall x:Etre,  humain x \/ animal x.
+Hypothesis Hrhino : ~ humain Rhino.
+
+Lemma Syllogisme :  mortel Socrate.
+Proof.
+apply HM. (* elimination (double) du forall et modus ponens *)
+assumption.
+Qed.
+
+Lemma contraposee : forall x, ~ mortel x -> ~ humain x.
+Proof.  
+intros x Hx H.
+unfold not in Hx.
+apply Hx.
+apply HM.
+assumption.
+Qed.    
+
+Lemma Lmortel: exists x, mortel x.
+Proof.  
+exists Socrate.  (* introduction de l'existentiel *)
+apply Syllogisme. (* On peut appliquer un théorème déjà prouvé *)  
+Qed.
+
+Lemma Lanimal: exists x, animal x.
+Proof.  
+exists Rhino.
+specialize Etre_disj with (x:=Rhino) as Hr.
+destruct Hr as [Hr1 | Hr2].
+- contradiction.
+- assumption.
+Restart. (* On va utiliser forall_e *)
+exists Rhino.
+forall_e Etre_disj Rhino H.
+destruct H as [hR|aR].
+- contradiction. (* entre Hrhino et hR *)
+- assumption. 
+Qed.
+
+Lemma L : ~(exists x:Etre,  ~ humain x /\ ~ animal x).
+Proof.
+intro H.
+destruct H as [e [Henh Hena]]. (* elimination de l'existentiel *)
+forall_e Etre_disj e H1.
+destruct H1 as [Heh | Hea].
+- contradiction. (* entre Heh et Henh *)
+- contradiction. (* entre Hea et Hena *)
+Qed.
+
+End Syllogismes.
+
+Section Egalite. (* Entrainements, sur l'egalite *) 
+Variable A : Type.
+Variable f : A -> A.
+
+(* Sur l egalite *)
+Lemma eq_sym : forall x y:A, x = y -> y = x.
+Proof.
+intros x y H.
+rewrite H.     
+reflexivity.
+Qed.
+
+Lemma Egal1 : forall x:A, exists y: A, x=y.
+Proof.
+intros x.
+exists x.
+reflexivity. 
+Qed.
+
+Lemma Egal2 : forall x y z: A, x = y -> y = z -> x = z.
+Proof.
+intros x y z H H0.
+rewrite H.
+assumption.
+Qed. 
+
+(* x <> y est une abréviation de ~ (x = y) *)
+(* "unfold not" va faire apparaître l'implication vers False *)
+
+Lemma diff_eq : forall x y z:A, x <> y -> y = z -> x <> z.
+Proof.
+intros a b c Hab Hbc.
+rewrite Hbc in Hab.
+assumption.
+Restart.
+intros a b c Hab Hbc.
+rewrite <- Hbc. (* b n'apparaît pas dans le but; remplace c par b *)
+assumption. 
+Qed.
+
+End Egalite.
