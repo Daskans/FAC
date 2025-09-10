@@ -2,7 +2,7 @@
 (* This generated code requires the following version of MenhirLib: *)
 
 let () =
-  MenhirLib.StaticVersion.require_20230608
+  MenhirLib.StaticVersion.require_20240715
 
 module MenhirBasics = struct
   
@@ -282,13 +282,13 @@ module MenhirInterpreter = struct
 end
 
 let main =
-  fun lexer lexbuf ->
-    (Obj.magic (MenhirInterpreter.entry `Legacy 0 lexer lexbuf) : (unit))
+  fun lexer lexbuf : (unit) ->
+    Obj.magic (MenhirInterpreter.entry `Legacy 0 lexer lexbuf)
 
 module Incremental = struct
   
   let main =
-    fun initial_position ->
-      (Obj.magic (MenhirInterpreter.start 0 initial_position) : (unit) MenhirInterpreter.checkpoint)
+    fun initial_position : (unit) MenhirInterpreter.checkpoint ->
+      Obj.magic (MenhirInterpreter.start 0 initial_position)
   
 end

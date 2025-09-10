@@ -13,12 +13,12 @@ and (xv_word, xv_seq, xv_main) =
 # 16 "td_4/dyck_parser/Dyck_right.mly"
  _1
 # 16 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-   : unit) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) ->
-    (
+   : unit) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) : 'tv_word ->
+    
 # 16 "td_4/dyck_parser/Dyck_right.mly"
                 ()
 # 21 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-     : 'tv_word) in
+     in
   let _ = fun (_startpos : Lexing.position) (_endpos : Lexing.position) (_endpos__0_ : Lexing.position) (_symbolstartpos : Lexing.position) (_startofs : int) (_endofs : int) (_endofs__0_ : int) (_symbolstartofs : int) (_sloc : Lexing.position * Lexing.position) (_loc : Lexing.position * Lexing.position) (
 # 15 "td_4/dyck_parser/Dyck_right.mly"
        _3
@@ -31,22 +31,22 @@ and (xv_word, xv_seq, xv_main) =
 # 15 "td_4/dyck_parser/Dyck_right.mly"
  _1
 # 34 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-   : unit) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) ->
-    (
+   : unit) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) : 'tv_word ->
+    
 # 15 "td_4/dyck_parser/Dyck_right.mly"
                ()
 # 39 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-     : 'tv_word) in
+     in
   let _ = fun (_startpos : Lexing.position) (_endpos : Lexing.position) (_endpos__0_ : Lexing.position) (_symbolstartpos : Lexing.position) (_startofs : int) (_endofs : int) (_endofs__0_ : int) (_symbolstartofs : int) (_sloc : Lexing.position * Lexing.position) (_loc : Lexing.position * Lexing.position) (
 # 12 "td_4/dyck_parser/Dyck_right.mly"
  _1
 # 44 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-   : 'tv_word) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) ->
-    (
+   : 'tv_word) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) : 'tv_seq ->
+    
 # 12 "td_4/dyck_parser/Dyck_right.mly"
                        ()
 # 49 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-     : 'tv_seq) in
+     in
   let _ = fun (_startpos : Lexing.position) (_endpos : Lexing.position) (_endpos__0_ : Lexing.position) (_symbolstartpos : Lexing.position) (_startofs : int) (_endofs : int) (_endofs__0_ : int) (_symbolstartofs : int) (_sloc : Lexing.position * Lexing.position) (_loc : Lexing.position * Lexing.position) (
 # 11 "td_4/dyck_parser/Dyck_right.mly"
       _2
@@ -55,26 +55,26 @@ and (xv_word, xv_seq, xv_main) =
 # 11 "td_4/dyck_parser/Dyck_right.mly"
  _1
 # 58 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-   : 'tv_word) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) ->
-    (
+   : 'tv_word) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) : 'tv_seq ->
+    
 # 11 "td_4/dyck_parser/Dyck_right.mly"
                        ()
 # 63 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-     : 'tv_seq) in
+     in
   let _ = fun (_startpos : Lexing.position) (_endpos : Lexing.position) (_endpos__0_ : Lexing.position) (_symbolstartpos : Lexing.position) (_startofs : int) (_endofs : int) (_endofs__0_ : int) (_symbolstartofs : int) (_sloc : Lexing.position * Lexing.position) (_loc : Lexing.position * Lexing.position) (
 # 8 "td_4/dyck_parser/Dyck_right.mly"
  _1
 # 68 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-   : unit) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) ->
-    ((
-# 8 "td_4/dyck_parser/Dyck_right.mly"
-           ()
-# 73 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-     : 'tv_main) : (
+   : unit) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) : (
 # 2 "td_4/dyck_parser/Dyck_right.mly"
        (unit)
+# 72 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
+  ) ->
+    (
+# 8 "td_4/dyck_parser/Dyck_right.mly"
+           ()
 # 77 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-    )) in
+     : 'tv_main) in
   let _ = fun (_startpos : Lexing.position) (_endpos : Lexing.position) (_endpos__0_ : Lexing.position) (_symbolstartpos : Lexing.position) (_startofs : int) (_endofs : int) (_endofs__0_ : int) (_symbolstartofs : int) (_sloc : Lexing.position * Lexing.position) (_loc : Lexing.position * Lexing.position) (
 # 7 "td_4/dyck_parser/Dyck_right.mly"
      _2
@@ -83,16 +83,16 @@ and (xv_word, xv_seq, xv_main) =
 # 7 "td_4/dyck_parser/Dyck_right.mly"
  _1
 # 86 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-   : 'tv_seq) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) ->
-    ((
-# 7 "td_4/dyck_parser/Dyck_right.mly"
-          ()
-# 91 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-     : 'tv_main) : (
+   : 'tv_seq) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) : (
 # 2 "td_4/dyck_parser/Dyck_right.mly"
        (unit)
+# 90 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
+  ) ->
+    (
+# 7 "td_4/dyck_parser/Dyck_right.mly"
+          ()
 # 95 "td_4/dyck_parser/Dyck_right__mock.ml.mock"
-    )) in
+     : 'tv_main) in
   ((let rec diverge() = diverge() in diverge()) : 'tv_word * 'tv_seq * 'tv_main)
 
 and menhir_end_marker =

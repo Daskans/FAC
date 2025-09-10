@@ -2,6 +2,7 @@
 (* The type of tokens. *)
 
 type token = 
+  | USUB
   | SUB
   | RPAR
   | REC
@@ -31,6 +32,7 @@ module MenhirInterpreter : sig
   
   type _ terminal = 
     | T_error : unit terminal
+    | T_USUB : unit terminal
     | T_SUB : unit terminal
     | T_RPAR : unit terminal
     | T_REC : unit terminal
@@ -44,8 +46,8 @@ module MenhirInterpreter : sig
   (* The indexed type of nonterminal symbols. *)
   
   type _ nonterminal = 
-    | N_s : (unit) nonterminal
     | N_main : (unit) nonterminal
+    | N_e : (int) nonterminal
   
   (* The inspection API. *)
   

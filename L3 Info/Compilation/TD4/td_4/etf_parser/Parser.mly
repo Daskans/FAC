@@ -15,13 +15,13 @@ main:
 e:
 | e ADD t       {}
 | SUB t         {}
-| t
+| t             {}
 
 t:
 | t MUL f       {}
 | t DIV f       {}
 | t REC         {}
-| f
+| f             {}
 
 f:
 | LPAR e RPAR   {}

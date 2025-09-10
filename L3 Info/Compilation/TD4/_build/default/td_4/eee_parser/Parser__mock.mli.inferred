@@ -1,6 +1,15 @@
-type token = SUB | RPAR | REC | MUL | LPAR | INT of int | EOF | DIV | ADD
+type token =
+    USUB
+  | SUB
+  | RPAR
+  | REC
+  | MUL
+  | LPAR
+  | INT of int
+  | EOF
+  | DIV
+  | ADD
 val menhir_begin_marker : int
-val xv_u : unit
-val xv_s : unit
 val xv_main : unit
+val xv_e : int
 val menhir_end_marker : int
