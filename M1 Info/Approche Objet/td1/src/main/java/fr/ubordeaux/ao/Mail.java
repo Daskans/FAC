@@ -11,8 +11,7 @@ public class Mail {
             this.mail = mail;
         }
         else {
-            System.err.println("invalid email address");
-            return;
+            throw new IllegalArgumentException("ERROR : invalid email address");
         }
     }
 

@@ -25,8 +25,7 @@ public class Town {
                     this.zipcode = zipcode;
                     break;
                 } else {
-                    System.err.println("illegal zipcode : had "+zipcode+", should have "+town[1]);
-                    return;
+                    throw new IllegalArgumentException("illegal zipcode : had "+zipcode+", should have "+town[1]);
                 }
             }
         }
