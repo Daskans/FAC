@@ -23,7 +23,7 @@ public class Catalog {
         }
     }
 
-    public int RemoveProduct(Product product, int quantity) {
+    public int removeProduct(Product product, int quantity) {
         if (catalog.containsKey(product)) {
             int current = catalog.get(product);
             int updated = current - quantity;
@@ -41,6 +41,19 @@ public class Catalog {
         }
         System.err.println("ERROR : Product does not exists");
         return 0;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Catalog contents:\n");
+        for (Map.Entry<Product, Integer> entry : catalog.entrySet()) {
+            sb.append(entry.getKey().getName())
+            .append(" x")
+            .append(entry.getValue())
+            .append("\n");
+                
+        }
+        return sb.toString();
     }
 
 }

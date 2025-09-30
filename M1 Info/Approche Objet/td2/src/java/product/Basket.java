@@ -12,7 +12,7 @@ public class Basket {
 
     public void addProduct(Product product, int quantity) {
         Catalog catalog = Catalog.getInstance();
-        int remaining = catalog.RemoveProduct(product, quantity);
+        int remaining = catalog.removeProduct(product, quantity);
         if (remaining >= 0) {
             basket.put(product, quantity);
         } else {

@@ -27,6 +27,22 @@ public class Product {
         return getPriceExcludingVAT() + (getPriceExcludingVAT() * (getVATAmount() / 100));
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Product other = (Product) obj;
+        return name.equals(other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
     public String toString() {
         String toString = "Product : " + getName() + 
                         " | price : " + getPriceExcludingVAT() + 
