@@ -8,6 +8,7 @@ public class WeightProductDecorator extends ProductDecorator {
     
     public WeightProductDecorator(Product decoratedProduct, double weight) {
         super(decoratedProduct);
+        this.weight = weight;
     }
 
     @Override
