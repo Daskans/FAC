@@ -10,6 +10,7 @@ build/
 .gradle/
 Git/mosaic-b15/
 L2 Info/POO/projet-poo
+test/
 
 .build
 .gradle
@@ -23,3 +24,5 @@ CmakeFiles
 #ignore previous years
 L1 Info/
 L1 Info/Init dev/video-tracker/
+L2 Info/
+L3 Info/
