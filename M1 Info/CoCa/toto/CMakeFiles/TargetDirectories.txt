@@ -1,0 +1,5 @@
+/home/daskans/Code/FAC/M1 Info/CoCa/toto/CMakeFiles/myGraph.dir
+/home/daskans/Code/FAC/M1 Info/CoCa/toto/CMakeFiles/myZ3.dir
+/home/daskans/Code/FAC/M1 Info/CoCa/toto/CMakeFiles/Z3Example.dir
+/home/daskans/Code/FAC/M1 Info/CoCa/toto/CMakeFiles/edit_cache.dir
+/home/daskans/Code/FAC/M1 Info/CoCa/toto/CMakeFiles/rebuild_cache.dir
