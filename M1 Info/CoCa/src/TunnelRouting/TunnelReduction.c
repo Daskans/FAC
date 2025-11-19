@@ -131,57 +131,78 @@ Z3_ast final_node_conditions(Z3_context ctx, const TunnelNetwork network, int pa
  * @param ctx the solver context
  * @param node A node.
  * @param network the network
- * @param operation either transmit_4 or transmit_6
+ * @param operation the operation
  * @param length The length of the sought path.
  * @param pos the position in the stack
  * @return Z3_ast
  */
-Z3_ast transmit_is_correct(Z3_context ctx,TunnelNetwork network, stack_action operation, int length, int pos)
+Z3_ast operation_is_correct(Z3_context ctx,TunnelNetwork network, stack_action operation, int length, int pos)
 {
+    int height_change[10] = {0, 0, 1, 1, 1, 1, -1, -1, -1, -1}; // je suis trop smart
+    int height_upper_limit[10] = {0, 0, 1, 1, 1, 1, 0, 0, 0, 0};
+    int height_lower_limit[10] = {0, 0, 0, 0, 0, 0, 1, 1, 1, 1};
+
     int num_node = tn_get_num_nodes(network);
     int stack_size = get_stack_size(length);
+
+    int h_min = height_lower_limit[operation];
+    int h_max = stack_size - height_upper_limit[operation] - 1;
+    int h_size = h_max - h_min + 1;
+
+    if (h_min > h_max || pos == 0) {
+        return Z3_mk_false(ctx);
+    }
+
     Z3_ast all_nodes[num_node]; // OR[u]
+
     if (pos > 0) {
-
-        for (int node = 0; node < num_node; node ++) {
-
-            if (tn_node_has_action(network, node, operation)) {
-
+        for (int u_node = 0; u_node < num_node; u_node ++) { // receiver
+            if (tn_node_has_action(network, u_node, operation)) {
                 Z3_ast all_other_nodes[num_node]; // OR[(u,v)eE]
+                for (int v_node = 0; v_node < num_node; v_node++) { // sender
+                    if (tn_is_edge(network, v_node, u_node)) {
+                        Z3_ast all_height[h_size]; // OR[0=<k=<hmax]
+                        for (int k = h_min; k <= h_max; k++) {
+                            Z3_ast neighbor_check[4]; // Xu, Xv, Hi-1(hi-1), Hi(hi) or Hi-1(i-1 - 1)
 
-                for (int new_node = 0; new_node < num_node; new_node++) {
+                            int ku = k + height_change[operation];
+                            int kv = k;
 
-                    if (tn_is_edge(network, node, new_node)) {
+                            neighbor_check[0] = tn_path_variable(ctx, u_node, pos, ku); // Xu,i,k+change
+                            neighbor_check[1] = tn_path_variable(ctx, v_node, pos - 1, kv); // Xv,i-1,k
 
-                        Z3_ast all_height[stack_size]; // OR[0=<k=<hmax]
-
-                        for (int k = 0; k < stack_size; k++) {
-
-                            Z3_ast neighbor_check[3]; // Xu, Xv, Hi-1(hi-1)
-
-                            neighbor_check[0] = tn_path_variable(ctx, node, pos, k); // Xu,i,k
-                            neighbor_check[1] = tn_path_variable(ctx, new_node, pos-1, k); // Xv,i-1,k
-
-                            if (operation == transmit_4) {
-                                neighbor_check[2] = tn_4_variable(ctx, pos - 1, k); // Hi-1(hi-1) = 4
+                            if (operation == transmit_4 || operation == push_4_4 || operation == push_4_6 || operation == pop_4_4 || operation == pop_6_4) {
+                                neighbor_check[2] = tn_4_variable(ctx, pos - 1, kv); // Hi-1(hi-1) = 4
                             } else {
-                                neighbor_check[2] = tn_6_variable(ctx, pos - 1, k); // Hi-1(hi-1) = 6
+                                neighbor_check[2] = tn_6_variable(ctx, pos - 1, kv); // Hi-1(hi-1) = 6
                             }
 
-                            all_height[k] = Z3_mk_and(ctx, 3, neighbor_check); // (Xu,i,k and Xv,i-1,k and Hi-1(hi-1))
+                            if (operation <= transmit_6) {
+                                neighbor_check[3] = Z3_mk_true(ctx);
+                            } else if (operation == push_4_4 || operation == push_6_4) {
+                                neighbor_check[3] = tn_4_variable(ctx, pos, ku); // Hi(hi) = 4
+                            } else if (operation == push_4_6 || operation == push_6_6) {
+                                neighbor_check[3] = tn_6_variable(ctx, pos, ku); // Hi(hi) = 6
+                            }  else if (operation == pop_4_4 || operation == pop_4_6) {
+                                neighbor_check[3] = tn_4_variable(ctx, pos - 1, kv - 1); // Hi-1(i-1 - 1) = 4
+                            } else if (operation == pop_6_4 || operation == pop_6_6) {
+                                neighbor_check[3] = tn_6_variable(ctx, pos - 1, kv - 1); // Hi-1(i-1 - 1) = 6
+                            }
+
+                            all_height[k - h_min] = Z3_mk_and(ctx, 4, neighbor_check); // (Xu,i,k+change and Xv,i-1,k and Hi-1(hi-1) and (Hi(hi) or Hi-1(i-1 - 1)))
                         }
-                        all_other_nodes[new_node] = Z3_mk_or(ctx, stack_size, all_height); // OR[0=<k=<hmax] (Xu,i,k and Xv,i-1,k and Hi-1(hi-1))
+                        all_other_nodes[v_node] = Z3_mk_or(ctx, h_size, all_height); // OR[0=<k=<hmax] (Xu,i,k+change and Xv,i-1,k and Hi-1(hi-1) and (Hi(hi) or Hi-1(i-1 - 1)))
                     } else {
-                        all_other_nodes[new_node] = Z3_mk_false(ctx);
+                        all_other_nodes[v_node] = Z3_mk_false(ctx);
                     }
                 }
-                all_nodes[node] = Z3_mk_or(ctx, num_node, all_other_nodes); // OR[veE] ( OR[0=<k=<hmax] (Xu,i,k and Xv,i-1,k and Hi-1(hi-1)) )
+                all_nodes[u_node] = Z3_mk_or(ctx, num_node, all_other_nodes); // OR[v] ( OR[0=<k=<hmax] (Xu,i,k+change and Xv,i-1,k and Hi-1(hi-1) and (Hi(hi) or Hi-1(i-1 - 1))) )
             } else {
-                all_nodes[node] = Z3_mk_false(ctx);
+                all_nodes[u_node] = Z3_mk_false(ctx);
             }
         }
     }
-    Z3_ast transmit_conditions = Z3_mk_or(ctx, num_node, all_nodes); // OR[ueE] ( OR[veE] (OR[0=<k=<hmax] (Xu,i,k and Xv,i-1,k and Hi-1(hi-1))) )
+    Z3_ast transmit_conditions = Z3_mk_or(ctx, num_node, all_nodes); // OR[(u,v)eE] ( OR[0=<k=<hmax] (Xu,i,k+change and Xv,i-1,k and Hi-1(hi-1) and (Hi(hi) or Hi-1(i-1 - 1))) )
     return transmit_conditions;
 }
 
@@ -201,41 +222,20 @@ Z3_ast is_a_path(Z3_context ctx)
  * @param ctx the solver context
  * @param network the network
  * @param operation the operation (transfer_4_4, transfer_6_6, push_4_6, etc...)
+ * @param length la longueur du chemin actuel
  * @return Z3_ast
  */
 Z3_ast operations_conditions(Z3_context ctx, TunnelNetwork network, int length)
 {
-    Z3_ast conditions[10];
+    Z3_ast conditions[length];
     for (int pos = 0; pos < length; pos ++) {
-        conditions[0] = transmit_is_correct(ctx, network, transmit_4, length, pos);
-        conditions[1] = transmit_is_correct(ctx, network, transmit_6, length, pos);
-        conditions[2] = push_is_correct(ctx, network, push_4_4, length, pos);
-        conditions[3] = push_is_correct(ctx, network, push_4_6, length, pos);
-        conditions[4] = push_is_correct(ctx, network, push_6_4, length, pos);
-        conditions[5] = push_is_correct(ctx, network, push_6_6, length, pos);
-        conditions[6] = pop_is_correct(ctx, network, pop_4_4, length, pos);
-        conditions[7] = pop_is_correct(ctx, network, pop_4_6, length, pos);
-        conditions[8] = pop_is_correct(ctx, network, pop_6_4, length, pos);
-        conditions[9] = pop_is_correct(ctx, network, pop_6_6, length, pos);
+        Z3_ast all_operation[10];
+        for (int op = 0; op < NumActions; op++) {
+            all_operation[op] = transmit_is_correct(ctx, network, (stack_action)op, length, pos);
+        }
+        conditions[length] = Z3_mk_or(ctx, 10, all_operation);
     }
-    return Z3_mk_or(ctx, 10, conditions);
-}
-
-/**
- * @brief the formula stating that the path is a valid path
- *
- * @param ctx the solver context
- * @param network the network
- * @return Z3_ast
- */
-Z3_ast valid_path(Z3_context ctx, const TunnelNetwork network)
-{
-    Z3_ast formula[4];
-    formula[0] = is_a_path(ctx);
-    formula[1] = initial_node_conditions(ctx, network);
-    formula[2] = final_node_condidtions(ctx, network, NULL);
-    formula[3] = operations_conditions(ctx, network);
-    return Z3_mk_and(ctx, 4, formula);
+    return Z3_mk_and(ctx, length, conditions);
 }
 
 /**
@@ -249,9 +249,26 @@ int get_stack_size(int length)
     return length / 2 + 1;
 }
 
+/**
+ * @brief the formula stating that the path is a valid path
+ *
+ * @param ctx the solver context
+ * @param network the network
+ * @param length the total length of the system
+ * @return Z3_ast
+ */
 Z3_ast tn_reduction(Z3_context ctx, const TunnelNetwork network, int length)
 {
-    return Z3_mk_false(ctx);
+    Z3_ast formula[length];
+    for (int g = 1; g <= length; g++) {
+        Z3_ast path_conditions[4];
+        path_conditions[0] = is_a_path(ctx);
+        path_conditions[1] = initial_node_conditions(ctx, network);
+        path_conditions[2] = final_node_conditions(ctx, network, g);
+        path_conditions[3] = operations_conditions(ctx, network, g);
+        formula[g - 1] = Z3_mk_and(ctx, 4, path_conditions);
+    }
+    return Z3_mk_or(ctx, length, formula);
 }
 
 void tn_get_path_from_model(Z3_context ctx, Z3_model model, TunnelNetwork network, int bound, tn_step *path)
