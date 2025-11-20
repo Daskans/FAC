@@ -56,17 +56,37 @@ Z3_ast tn_6_variable(Z3_context ctx, int pos, int height)
  * @param length The length of the sought path.
  * @return Z3_ast
  */
-Z3_ast each_node_has_one_height(Z3_context ctx, int num_node, int length)
+Z3_ast each_pos_has_one_height(Z3_context ctx, int num_node, int length)
 {
     int stack_size = get_stack_size(length);
     Z3_ast all_nodes[length * num_node];
-    for (int node = 0; node < num_node; node++) {
-        for (int pos = 0; pos < length; pos++) {
+    for (int pos = 0; pos < length; pos++) {
+        for (int node = 0; node < num_node; node++) {
             Z3_ast h_diff[stack_size];
             for (int h = 0; h < stack_size; h++) {
                 h_diff[h] = tn_path_variable(ctx, node, pos, h);
             }
-            all_nodes[(node * num_node) + pos] = uniqueFormula(ctx, h_diff, stack_size);
+            all_nodes[(pos * num_node) + node] = uniqueFormula(ctx, h_diff, stack_size);
+        }
+    }
+    return Z3_mk_and(ctx, length * num_node, all_nodes);
+}
+
+/**
+ * @brief Create the formula stating that each node has exaclty one height
+ *
+ * @param ctx the solver context
+ * @param num_node the number of node in the network
+ * @param length The length of the sought path.
+ * @return Z3_ast
+ */
+Z3_ast each_pos_has_one_node(Z3_context ctx, int num_node, int length)
+{
+    int stack_size = get_stack_size(length);
+    Z3_ast all_nodes[length * num_node];
+    for (int pos = 0; pos < length; pos++) {
+        for (int node = 0; node < num_node; node++) {
+
         }
     }
     return Z3_mk_and(ctx, length * num_node, all_nodes);
@@ -98,14 +118,14 @@ Z3_ast initial_node_conditions(Z3_context ctx, const TunnelNetwork network)
 {
     Z3_ast formula[3];
     int initial_node = tn_get_initial(network);
-    formula[0] = tn_path_variable(ctx, initial_node, 0, 0); // h(Xs) = 0
-    formula[1] = tn_4_variable(ctx, 0, 0); // s = IPv4
+    formula[0] = tn_path_variable(ctx, initial_node, 0, 0); // h0 = 0
+    formula[1] = tn_4_variable(ctx, 0, 0); // H0(h0) = 4
     int num_node = tn_get_num_nodes(network);
     Z3_ast all_node[num_node];
     for (int node = 0; node < num_node; node++) {
-        all_node[node] = tn_4_variable(ctx, 1, 0);
+        all_node[node] = tn_4_variable(ctx, 1, 0); // h1 = 0, H1(h1) = 4
     }
-    formula[2] = Z3_mk_or(ctx, num_node, all_node);
+    formula[2] = Z3_mk_or(ctx, num_node, all_node); // f0 = ->4
     return Z3_mk_and(ctx, 3, formula);
 }
 
@@ -119,10 +139,11 @@ Z3_ast initial_node_conditions(Z3_context ctx, const TunnelNetwork network)
  */
 Z3_ast final_node_conditions(Z3_context ctx, const TunnelNetwork network, int path_length)
 {
+    Z3_ast formula[2];
     int final_node = tn_get_final(network);
-    int last_pos = path_length;
-    Z3_ast formula = tn_path_variable(ctx, final_node, 0, path_length);
-    return formula;
+    formula[0] = tn_path_variable(ctx, final_node, path_length, 0); // hl = 0
+    formula[1] = tn_4_variable(ctx, path_length, 0); // Hl(hl) = 4
+    return Z3_mk_and(ctx, 2, formula);
 }
 
 /**
@@ -210,10 +231,34 @@ Z3_ast operation_is_correct(Z3_context ctx,TunnelNetwork network, stack_action o
  * @brief the formula stating that the path is indead a path
  *
  * @param ctx the solver context
+ * @param network the network
+ * @param length The length of the sought path.
  * @return Z3_ast
  */
-Z3_ast is_a_path(Z3_context ctx)
+Z3_ast is_a_path(Z3_context ctx, TunnelNetwork network, int length, int pos) 
 {
+    int stack_size = get_stack_size(network);
+    int num_node = tn_get_num_nodes(network);
+        Z3_ast every_edge[num_node * num_node];
+        for (int u_node = 0; u_node < num_node; u_node++) {
+            for (int v_node = 0; v_node < num_node; v_node++) {
+                Z3_ast every_height[stack_size * stack_size];
+                for (int ku = 0; ku < stack_size; ku++) {
+                    for (int kv = 0; kv < stack_size; kv++) {
+                        if (tn_is_edge(network, v_node, u_node)) {  // if (u,v)eE then good
+                            every_height[(ku * stack_size) + kv] = Z3_mk_true(ctx);
+                        } else {                                    // else it means that either u or v is not good
+                            Z3_ast edge_check[2];
+                            edge_check[0] = Z3_mk_not(ctx, tn_path_variable(ctx, u_node, pos, ku));
+                            edge_check[1] = Z3_mk_not(ctx, tn_path_variable(ctx, v_node, pos-1, kv));
+                            every_height[(ku * stack_size) + kv] = Z3_mk_or(ctx, 2, edge_check);
+                        }
+                    }
+                }
+                every_edge[(u_node * num_node) + v_node] = Z3_mk_and(ctx, stack_size * stack_size, every_height);
+            }
+        }
+    return Z3_mk_and(ctx, num_node *num_node, every_edge);
 }
 
 /**
@@ -262,7 +307,7 @@ Z3_ast tn_reduction(Z3_context ctx, const TunnelNetwork network, int length)
     Z3_ast formula[length];
     for (int g = 1; g <= length; g++) {
         Z3_ast path_conditions[4];
-        path_conditions[0] = is_a_path(ctx);
+        path_conditions[0] = is_a_path(ctx, network, length, g);
         path_conditions[1] = initial_node_conditions(ctx, network);
         path_conditions[2] = final_node_conditions(ctx, network, g);
         path_conditions[3] = operations_conditions(ctx, network, g);
