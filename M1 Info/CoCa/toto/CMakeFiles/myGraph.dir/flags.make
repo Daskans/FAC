@@ -4,7 +4,7 @@
 # compile C with /usr/bin/gcc
 C_DEFINES = 
 
-C_INCLUDES = -I"/home/daskans/Code/FAC/M1 Info/CoCa/include/main" -I"/home/daskans/Code/FAC/M1 Info/CoCa/include/ColouringProblem" -I"/home/daskans/Code/FAC/M1 Info/CoCa/src/parser/include" -I"/home/daskans/Code/FAC/M1 Info/CoCa/include/TunnelRouting"
+C_INCLUDES = -I"/home/daskans/Code/FAC/M1 Info/CoCa/include/main" -I"/home/daskans/Code/FAC/M1 Info/CoCa/include/ColouringProblem" -I"/home/daskans/Code/FAC/M1 Info/CoCa/src/parser/include" -I"/home/daskans/Code/FAC/M1 Info/CoCa/include/TunnelRouting" -I"/home/daskans/Code/FAC/M1 Info/CoCa/toto"
 
 C_FLAGS = -g -D COLOURING -D TUNNEL
 

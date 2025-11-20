@@ -143,6 +143,71 @@ myZ3/fast:
 .PHONY : myZ3/fast
 
 #=============================================================================
+# Target rules for targets named parser
+
+# Build rule for target.
+parser: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parser
+.PHONY : parser
+
+# fast build rule for target.
+parser/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/build
+.PHONY : parser/fast
+
+#=============================================================================
+# Target rules for targets named colouringPb
+
+# Build rule for target.
+colouringPb: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 colouringPb
+.PHONY : colouringPb
+
+# fast build rule for target.
+colouringPb/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/colouringPb.dir/build.make CMakeFiles/colouringPb.dir/build
+.PHONY : colouringPb/fast
+
+#=============================================================================
+# Target rules for targets named tunnelPb
+
+# Build rule for target.
+tunnelPb: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tunnelPb
+.PHONY : tunnelPb
+
+# fast build rule for target.
+tunnelPb/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tunnelPb.dir/build.make CMakeFiles/tunnelPb.dir/build
+.PHONY : tunnelPb/fast
+
+#=============================================================================
+# Target rules for targets named graphProblemSolver
+
+# Build rule for target.
+graphProblemSolver: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 graphProblemSolver
+.PHONY : graphProblemSolver
+
+# fast build rule for target.
+graphProblemSolver/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/graphProblemSolver.dir/build.make CMakeFiles/graphProblemSolver.dir/build
+.PHONY : graphProblemSolver/fast
+
+#=============================================================================
+# Target rules for targets named tn_graphParser
+
+# Build rule for target.
+tn_graphParser: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tn_graphParser
+.PHONY : tn_graphParser
+
+# fast build rule for target.
+tn_graphParser/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tn_graphParser.dir/build.make CMakeFiles/tn_graphParser.dir/build
+.PHONY : tn_graphParser/fast
+
+#=============================================================================
 # Target rules for targets named Z3Example
 
 # Build rule for target.
@@ -154,6 +219,54 @@ Z3Example: cmake_check_build_system
 Z3Example/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Z3Example.dir/build.make CMakeFiles/Z3Example.dir/build
 .PHONY : Z3Example/fast
+
+Lexer.o: Lexer.c.o
+.PHONY : Lexer.o
+
+# target to build an object file
+Lexer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/Lexer.c.o
+.PHONY : Lexer.c.o
+
+Lexer.i: Lexer.c.i
+.PHONY : Lexer.i
+
+# target to preprocess a source file
+Lexer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/Lexer.c.i
+.PHONY : Lexer.c.i
+
+Lexer.s: Lexer.c.s
+.PHONY : Lexer.s
+
+# target to generate assembly for a file
+Lexer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/Lexer.c.s
+.PHONY : Lexer.c.s
+
+Parser.o: Parser.c.o
+.PHONY : Parser.o
+
+# target to build an object file
+Parser.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/Parser.c.o
+.PHONY : Parser.c.o
+
+Parser.i: Parser.c.i
+.PHONY : Parser.i
+
+# target to preprocess a source file
+Parser.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/Parser.c.i
+.PHONY : Parser.c.i
+
+Parser.s: Parser.c.s
+.PHONY : Parser.s
+
+# target to generate assembly for a file
+Parser.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/Parser.c.s
+.PHONY : Parser.c.s
 
 examples/Z3Example.o: examples/Z3Example.c.o
 .PHONY : examples/Z3Example.o
@@ -178,6 +291,174 @@ examples/Z3Example.s: examples/Z3Example.c.s
 examples/Z3Example.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Z3Example.dir/build.make CMakeFiles/Z3Example.dir/examples/Z3Example.c.s
 .PHONY : examples/Z3Example.c.s
+
+examples/tn_graphUsage.o: examples/tn_graphUsage.c.o
+.PHONY : examples/tn_graphUsage.o
+
+# target to build an object file
+examples/tn_graphUsage.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tn_graphParser.dir/build.make CMakeFiles/tn_graphParser.dir/examples/tn_graphUsage.c.o
+.PHONY : examples/tn_graphUsage.c.o
+
+examples/tn_graphUsage.i: examples/tn_graphUsage.c.i
+.PHONY : examples/tn_graphUsage.i
+
+# target to preprocess a source file
+examples/tn_graphUsage.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tn_graphParser.dir/build.make CMakeFiles/tn_graphParser.dir/examples/tn_graphUsage.c.i
+.PHONY : examples/tn_graphUsage.c.i
+
+examples/tn_graphUsage.s: examples/tn_graphUsage.c.s
+.PHONY : examples/tn_graphUsage.s
+
+# target to generate assembly for a file
+examples/tn_graphUsage.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tn_graphParser.dir/build.make CMakeFiles/tn_graphParser.dir/examples/tn_graphUsage.c.s
+.PHONY : examples/tn_graphUsage.c.s
+
+src/ColouringProblem/ColouredGraph.o: src/ColouringProblem/ColouredGraph.c.o
+.PHONY : src/ColouringProblem/ColouredGraph.o
+
+# target to build an object file
+src/ColouringProblem/ColouredGraph.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/colouringPb.dir/build.make CMakeFiles/colouringPb.dir/src/ColouringProblem/ColouredGraph.c.o
+.PHONY : src/ColouringProblem/ColouredGraph.c.o
+
+src/ColouringProblem/ColouredGraph.i: src/ColouringProblem/ColouredGraph.c.i
+.PHONY : src/ColouringProblem/ColouredGraph.i
+
+# target to preprocess a source file
+src/ColouringProblem/ColouredGraph.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/colouringPb.dir/build.make CMakeFiles/colouringPb.dir/src/ColouringProblem/ColouredGraph.c.i
+.PHONY : src/ColouringProblem/ColouredGraph.c.i
+
+src/ColouringProblem/ColouredGraph.s: src/ColouringProblem/ColouredGraph.c.s
+.PHONY : src/ColouringProblem/ColouredGraph.s
+
+# target to generate assembly for a file
+src/ColouringProblem/ColouredGraph.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/colouringPb.dir/build.make CMakeFiles/colouringPb.dir/src/ColouringProblem/ColouredGraph.c.s
+.PHONY : src/ColouringProblem/ColouredGraph.c.s
+
+src/ColouringProblem/ColouringReduction.o: src/ColouringProblem/ColouringReduction.c.o
+.PHONY : src/ColouringProblem/ColouringReduction.o
+
+# target to build an object file
+src/ColouringProblem/ColouringReduction.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/colouringPb.dir/build.make CMakeFiles/colouringPb.dir/src/ColouringProblem/ColouringReduction.c.o
+.PHONY : src/ColouringProblem/ColouringReduction.c.o
+
+src/ColouringProblem/ColouringReduction.i: src/ColouringProblem/ColouringReduction.c.i
+.PHONY : src/ColouringProblem/ColouringReduction.i
+
+# target to preprocess a source file
+src/ColouringProblem/ColouringReduction.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/colouringPb.dir/build.make CMakeFiles/colouringPb.dir/src/ColouringProblem/ColouringReduction.c.i
+.PHONY : src/ColouringProblem/ColouringReduction.c.i
+
+src/ColouringProblem/ColouringReduction.s: src/ColouringProblem/ColouringReduction.c.s
+.PHONY : src/ColouringProblem/ColouringReduction.s
+
+# target to generate assembly for a file
+src/ColouringProblem/ColouringReduction.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/colouringPb.dir/build.make CMakeFiles/colouringPb.dir/src/ColouringProblem/ColouringReduction.c.s
+.PHONY : src/ColouringProblem/ColouringReduction.c.s
+
+src/ColouringProblem/ColouringResolution.o: src/ColouringProblem/ColouringResolution.c.o
+.PHONY : src/ColouringProblem/ColouringResolution.o
+
+# target to build an object file
+src/ColouringProblem/ColouringResolution.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/colouringPb.dir/build.make CMakeFiles/colouringPb.dir/src/ColouringProblem/ColouringResolution.c.o
+.PHONY : src/ColouringProblem/ColouringResolution.c.o
+
+src/ColouringProblem/ColouringResolution.i: src/ColouringProblem/ColouringResolution.c.i
+.PHONY : src/ColouringProblem/ColouringResolution.i
+
+# target to preprocess a source file
+src/ColouringProblem/ColouringResolution.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/colouringPb.dir/build.make CMakeFiles/colouringPb.dir/src/ColouringProblem/ColouringResolution.c.i
+.PHONY : src/ColouringProblem/ColouringResolution.c.i
+
+src/ColouringProblem/ColouringResolution.s: src/ColouringProblem/ColouringResolution.c.s
+.PHONY : src/ColouringProblem/ColouringResolution.s
+
+# target to generate assembly for a file
+src/ColouringProblem/ColouringResolution.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/colouringPb.dir/build.make CMakeFiles/colouringPb.dir/src/ColouringProblem/ColouringResolution.c.s
+.PHONY : src/ColouringProblem/ColouringResolution.c.s
+
+src/TunnelRouting/TunnelBF.o: src/TunnelRouting/TunnelBF.c.o
+.PHONY : src/TunnelRouting/TunnelBF.o
+
+# target to build an object file
+src/TunnelRouting/TunnelBF.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tunnelPb.dir/build.make CMakeFiles/tunnelPb.dir/src/TunnelRouting/TunnelBF.c.o
+.PHONY : src/TunnelRouting/TunnelBF.c.o
+
+src/TunnelRouting/TunnelBF.i: src/TunnelRouting/TunnelBF.c.i
+.PHONY : src/TunnelRouting/TunnelBF.i
+
+# target to preprocess a source file
+src/TunnelRouting/TunnelBF.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tunnelPb.dir/build.make CMakeFiles/tunnelPb.dir/src/TunnelRouting/TunnelBF.c.i
+.PHONY : src/TunnelRouting/TunnelBF.c.i
+
+src/TunnelRouting/TunnelBF.s: src/TunnelRouting/TunnelBF.c.s
+.PHONY : src/TunnelRouting/TunnelBF.s
+
+# target to generate assembly for a file
+src/TunnelRouting/TunnelBF.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tunnelPb.dir/build.make CMakeFiles/tunnelPb.dir/src/TunnelRouting/TunnelBF.c.s
+.PHONY : src/TunnelRouting/TunnelBF.c.s
+
+src/TunnelRouting/TunnelNetwork.o: src/TunnelRouting/TunnelNetwork.c.o
+.PHONY : src/TunnelRouting/TunnelNetwork.o
+
+# target to build an object file
+src/TunnelRouting/TunnelNetwork.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tunnelPb.dir/build.make CMakeFiles/tunnelPb.dir/src/TunnelRouting/TunnelNetwork.c.o
+.PHONY : src/TunnelRouting/TunnelNetwork.c.o
+
+src/TunnelRouting/TunnelNetwork.i: src/TunnelRouting/TunnelNetwork.c.i
+.PHONY : src/TunnelRouting/TunnelNetwork.i
+
+# target to preprocess a source file
+src/TunnelRouting/TunnelNetwork.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tunnelPb.dir/build.make CMakeFiles/tunnelPb.dir/src/TunnelRouting/TunnelNetwork.c.i
+.PHONY : src/TunnelRouting/TunnelNetwork.c.i
+
+src/TunnelRouting/TunnelNetwork.s: src/TunnelRouting/TunnelNetwork.c.s
+.PHONY : src/TunnelRouting/TunnelNetwork.s
+
+# target to generate assembly for a file
+src/TunnelRouting/TunnelNetwork.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tunnelPb.dir/build.make CMakeFiles/tunnelPb.dir/src/TunnelRouting/TunnelNetwork.c.s
+.PHONY : src/TunnelRouting/TunnelNetwork.c.s
+
+src/TunnelRouting/TunnelReduction.o: src/TunnelRouting/TunnelReduction.c.o
+.PHONY : src/TunnelRouting/TunnelReduction.o
+
+# target to build an object file
+src/TunnelRouting/TunnelReduction.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tunnelPb.dir/build.make CMakeFiles/tunnelPb.dir/src/TunnelRouting/TunnelReduction.c.o
+.PHONY : src/TunnelRouting/TunnelReduction.c.o
+
+src/TunnelRouting/TunnelReduction.i: src/TunnelRouting/TunnelReduction.c.i
+.PHONY : src/TunnelRouting/TunnelReduction.i
+
+# target to preprocess a source file
+src/TunnelRouting/TunnelReduction.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tunnelPb.dir/build.make CMakeFiles/tunnelPb.dir/src/TunnelRouting/TunnelReduction.c.i
+.PHONY : src/TunnelRouting/TunnelReduction.c.i
+
+src/TunnelRouting/TunnelReduction.s: src/TunnelRouting/TunnelReduction.c.s
+.PHONY : src/TunnelRouting/TunnelReduction.s
+
+# target to generate assembly for a file
+src/TunnelRouting/TunnelReduction.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tunnelPb.dir/build.make CMakeFiles/tunnelPb.dir/src/TunnelRouting/TunnelReduction.c.s
+.PHONY : src/TunnelRouting/TunnelReduction.c.s
 
 src/main/Graph.o: src/main/Graph.c.o
 .PHONY : src/main/Graph.o
@@ -227,6 +508,126 @@ src/main/Z3Tools.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/myZ3.dir/build.make CMakeFiles/myZ3.dir/src/main/Z3Tools.c.s
 .PHONY : src/main/Z3Tools.c.s
 
+src/main/main.o: src/main/main.c.o
+.PHONY : src/main/main.o
+
+# target to build an object file
+src/main/main.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/graphProblemSolver.dir/build.make CMakeFiles/graphProblemSolver.dir/src/main/main.c.o
+.PHONY : src/main/main.c.o
+
+src/main/main.i: src/main/main.c.i
+.PHONY : src/main/main.i
+
+# target to preprocess a source file
+src/main/main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/graphProblemSolver.dir/build.make CMakeFiles/graphProblemSolver.dir/src/main/main.c.i
+.PHONY : src/main/main.c.i
+
+src/main/main.s: src/main/main.c.s
+.PHONY : src/main/main.s
+
+# target to generate assembly for a file
+src/main/main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/graphProblemSolver.dir/build.make CMakeFiles/graphProblemSolver.dir/src/main/main.c.s
+.PHONY : src/main/main.c.s
+
+src/parser/src/EdgeList.o: src/parser/src/EdgeList.c.o
+.PHONY : src/parser/src/EdgeList.o
+
+# target to build an object file
+src/parser/src/EdgeList.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/EdgeList.c.o
+.PHONY : src/parser/src/EdgeList.c.o
+
+src/parser/src/EdgeList.i: src/parser/src/EdgeList.c.i
+.PHONY : src/parser/src/EdgeList.i
+
+# target to preprocess a source file
+src/parser/src/EdgeList.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/EdgeList.c.i
+.PHONY : src/parser/src/EdgeList.c.i
+
+src/parser/src/EdgeList.s: src/parser/src/EdgeList.c.s
+.PHONY : src/parser/src/EdgeList.s
+
+# target to generate assembly for a file
+src/parser/src/EdgeList.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/EdgeList.c.s
+.PHONY : src/parser/src/EdgeList.c.s
+
+src/parser/src/GraphListToGraph.o: src/parser/src/GraphListToGraph.c.o
+.PHONY : src/parser/src/GraphListToGraph.o
+
+# target to build an object file
+src/parser/src/GraphListToGraph.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/GraphListToGraph.c.o
+.PHONY : src/parser/src/GraphListToGraph.c.o
+
+src/parser/src/GraphListToGraph.i: src/parser/src/GraphListToGraph.c.i
+.PHONY : src/parser/src/GraphListToGraph.i
+
+# target to preprocess a source file
+src/parser/src/GraphListToGraph.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/GraphListToGraph.c.i
+.PHONY : src/parser/src/GraphListToGraph.c.i
+
+src/parser/src/GraphListToGraph.s: src/parser/src/GraphListToGraph.c.s
+.PHONY : src/parser/src/GraphListToGraph.s
+
+# target to generate assembly for a file
+src/parser/src/GraphListToGraph.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/GraphListToGraph.c.s
+.PHONY : src/parser/src/GraphListToGraph.c.s
+
+src/parser/src/NodeList.o: src/parser/src/NodeList.c.o
+.PHONY : src/parser/src/NodeList.o
+
+# target to build an object file
+src/parser/src/NodeList.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/NodeList.c.o
+.PHONY : src/parser/src/NodeList.c.o
+
+src/parser/src/NodeList.i: src/parser/src/NodeList.c.i
+.PHONY : src/parser/src/NodeList.i
+
+# target to preprocess a source file
+src/parser/src/NodeList.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/NodeList.c.i
+.PHONY : src/parser/src/NodeList.c.i
+
+src/parser/src/NodeList.s: src/parser/src/NodeList.c.s
+.PHONY : src/parser/src/NodeList.s
+
+# target to generate assembly for a file
+src/parser/src/NodeList.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/NodeList.c.s
+.PHONY : src/parser/src/NodeList.c.s
+
+src/parser/src/Parsing.o: src/parser/src/Parsing.c.o
+.PHONY : src/parser/src/Parsing.o
+
+# target to build an object file
+src/parser/src/Parsing.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/Parsing.c.o
+.PHONY : src/parser/src/Parsing.c.o
+
+src/parser/src/Parsing.i: src/parser/src/Parsing.c.i
+.PHONY : src/parser/src/Parsing.i
+
+# target to preprocess a source file
+src/parser/src/Parsing.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/Parsing.c.i
+.PHONY : src/parser/src/Parsing.c.i
+
+src/parser/src/Parsing.s: src/parser/src/Parsing.c.s
+.PHONY : src/parser/src/Parsing.s
+
+# target to generate assembly for a file
+src/parser/src/Parsing.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/src/parser/src/Parsing.c.s
+.PHONY : src/parser/src/Parsing.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -236,17 +637,64 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Z3Example"
+	@echo "... colouringPb"
+	@echo "... graphProblemSolver"
 	@echo "... myGraph"
 	@echo "... myZ3"
+	@echo "... parser"
+	@echo "... tn_graphParser"
+	@echo "... tunnelPb"
+	@echo "... Lexer.o"
+	@echo "... Lexer.i"
+	@echo "... Lexer.s"
+	@echo "... Parser.o"
+	@echo "... Parser.i"
+	@echo "... Parser.s"
 	@echo "... examples/Z3Example.o"
 	@echo "... examples/Z3Example.i"
 	@echo "... examples/Z3Example.s"
+	@echo "... examples/tn_graphUsage.o"
+	@echo "... examples/tn_graphUsage.i"
+	@echo "... examples/tn_graphUsage.s"
+	@echo "... src/ColouringProblem/ColouredGraph.o"
+	@echo "... src/ColouringProblem/ColouredGraph.i"
+	@echo "... src/ColouringProblem/ColouredGraph.s"
+	@echo "... src/ColouringProblem/ColouringReduction.o"
+	@echo "... src/ColouringProblem/ColouringReduction.i"
+	@echo "... src/ColouringProblem/ColouringReduction.s"
+	@echo "... src/ColouringProblem/ColouringResolution.o"
+	@echo "... src/ColouringProblem/ColouringResolution.i"
+	@echo "... src/ColouringProblem/ColouringResolution.s"
+	@echo "... src/TunnelRouting/TunnelBF.o"
+	@echo "... src/TunnelRouting/TunnelBF.i"
+	@echo "... src/TunnelRouting/TunnelBF.s"
+	@echo "... src/TunnelRouting/TunnelNetwork.o"
+	@echo "... src/TunnelRouting/TunnelNetwork.i"
+	@echo "... src/TunnelRouting/TunnelNetwork.s"
+	@echo "... src/TunnelRouting/TunnelReduction.o"
+	@echo "... src/TunnelRouting/TunnelReduction.i"
+	@echo "... src/TunnelRouting/TunnelReduction.s"
 	@echo "... src/main/Graph.o"
 	@echo "... src/main/Graph.i"
 	@echo "... src/main/Graph.s"
 	@echo "... src/main/Z3Tools.o"
 	@echo "... src/main/Z3Tools.i"
 	@echo "... src/main/Z3Tools.s"
+	@echo "... src/main/main.o"
+	@echo "... src/main/main.i"
+	@echo "... src/main/main.s"
+	@echo "... src/parser/src/EdgeList.o"
+	@echo "... src/parser/src/EdgeList.i"
+	@echo "... src/parser/src/EdgeList.s"
+	@echo "... src/parser/src/GraphListToGraph.o"
+	@echo "... src/parser/src/GraphListToGraph.i"
+	@echo "... src/parser/src/GraphListToGraph.s"
+	@echo "... src/parser/src/NodeList.o"
+	@echo "... src/parser/src/NodeList.i"
+	@echo "... src/parser/src/NodeList.s"
+	@echo "... src/parser/src/Parsing.o"
+	@echo "... src/parser/src/Parsing.i"
+	@echo "... src/parser/src/Parsing.s"
 .PHONY : help
 
 
