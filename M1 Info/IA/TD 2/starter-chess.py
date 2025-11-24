@@ -21,51 +21,51 @@ def deroulementRandom(b):
     deroulementRandom(b)
     b.pop()
 
+def exhaustiveSearch(depth):
+    return
 
-def evalue(player : str, board : Tictactoe.Board):
-    winner = board.result()
-    if winner == player:
-        return 100
-    elif winner != None:
-        return -100
-    elif board.is_game_over():
-        return 0
-    
-    score = 0
-    # for line in board._alignments:
-    #     symbols = [board._board[x][y] for (x,y) in line]
-    #     if board._O not in symbols:
-    #         score += symbols.count(board._X)
-    #     if board._X not in symbols:
-    #         score -= symbols.count(board._O)
+def evalue(board : chess.Board):
+    valpieces = {'.':0, 'P':1, 'K':3, 'B':3, 'R':5, 'Q':9, 'K':200}
+    for p, v in board.piece_map().items():
+        
+    return
 
-    # if player == board._O:
-    #     score -= score
-
-    return score
-
-def MaxMin(board : chess.Board):
+def MaxMin(board : chess.Board, maxDepth, blanc):
     if board.is_game_over():
-        return evalue(1, board)
+        if board.result == "1-0":
+            return 400 if blanc else -400
+        elif board.result == "0-1":
+            return -400 if blanc else 400
+        else:
+            return 0
     best = -999999
+
+    if maxDepth == 0:
+        return evalue(board) if blanc else -evalue(board)
+    
     for successor in board.legal_moves():
         board.push(successor)
-        best = max(best, MinMax(board))
+        best = max(best, maxDepth - 1, MinMax(board))
         board.pop()
-        if (best == 1):
-            return best
     return best
 
-def MinMax(board : chess.Board):
+def MinMax(board : chess.Board, maxDepth, blanc):
     if board.is_game_over():
-        return getresult(board)
+        if board.result == "1-0":
+            return 400 if blanc else -400
+        elif board.result == "0-1":
+            return -400 if blanc else 400
+        else:
+            return 0
     worst = 999999
+
+    if maxDepth == 0:
+        return evalue(board) if blanc else -evalue(board)
+    
     for successor in board.legal_moves():
         board.push(successor)
-        worst = min(worst, MaxMin(board))
+        worst = min(worst, maxDepth - 1, MaxMin(board))
         board.pop()
-        if (worst == -1):
-            return worst
     return worst
 
 board = chess.Board()
