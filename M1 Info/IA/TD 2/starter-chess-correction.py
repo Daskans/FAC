@@ -49,11 +49,11 @@ def evalBoard(b):
     valpieces = {'.':0,'P':1,'R':5,'N':3,'B':3,'Q':9,'K':200}
     score = 0
     for k, p in b.piece_map().items():
-        #print('(k, p)=(',k, p,')')
-        line = k >> 3 # k // 8 -> line in [0..7]
-        symb = p.symbol() # 'r', 'R', 'b', ...
-        #print(line,symb,symb.upper(),symb==symb.upper(), valpieces[symb.upper()], score)
+        
+        line = k >> 3
+        symb = p.symbol()
         v = valpieces[symb.upper()] # Valeur de la piece
+        
         if symb == symb.upper(): # C'est pour BLANC
             score += v
         else:
@@ -76,9 +76,12 @@ def maxMin(b, maxdepth, compter=False, blanc=True):
             return -400 if blanc else 400
         else:
             return 0
+        
     if maxdepth==0:
         return evalBoard(b) if blanc else -evalBoard(b)
+    
     meilleur = -1000
+    
     for m in b.generate_legal_moves():
         b.push(m)
         meilleur = max(meilleur, minMax(b, maxdepth-1, compter, blanc))
@@ -98,7 +101,9 @@ def minMax(b, maxdepth, compter=False, blanc=True):
             return 0
     if maxdepth==0:
         return evalBoard(b) if blanc else -evalBoard(b)
+    
     pire = 1000
+    
     for m in b.generate_legal_moves():
         b.push(m)
         pire = min(pire, maxMin(b, maxdepth-1, compter, blanc))
@@ -112,9 +117,12 @@ def IAMiniMax(b, maxdepth, compter=False, blanc=True):
     meilleur = -1000
     meilleurcoup = None
     listemeilleurscoups = [] 
+    
     for m in b.generate_legal_moves():
+        
         b.push(m)
         val = minMax(b, maxdepth-1, compter, blanc)
+        
         if val > meilleur or meilleurcoup is None:
             meilleur = val
             meilleurcoup = m
@@ -259,21 +267,21 @@ def IDAlphaBeta(b, compter=False, limittime=10):
 #print(IAMiniMax(board, maxdepth=3, compter=True))
 #print('Nombre de noeuds : ', nbNoeuds)
 
-#Un premier match : IAMiniMax vs JoueurAlearoire:
-#board = chess.Board()
-#while not board.is_game_over():
-#    print(board)
-#    coup = IAMiniMax(board,maxdepth=3)
-#    print('IAMiniMax joue : ', coup)
-#    board.push(coup)
-#    if board.is_game_over():
-#        break
-#    coup = randomMove(board)
-#    print('Joueur AlÃ©a joue : ', coup)
-#    board.push(coup)
-#    if board.is_game_over():
-#        break
-#print('Resultat : ', board.result())  
+# Un premier match : IAMiniMax vs JoueurAlearoire:
+board = chess.Board()
+while not board.is_game_over():
+   print(board)
+   coup = IAMiniMax(board,maxdepth=3)
+   print('IAMiniMax joue : ', coup)
+   board.push(coup)
+   if board.is_game_over():
+       break
+   coup = randomMove(board)
+   print('Joueur AlÃ©a joue : ', coup)
+   board.push(coup)
+   if board.is_game_over():
+       break
+print('Resultat : ', board.result())  
 
 # Un deuxiÃ¨me match : IAMiniMax 1 contre IAMiniMax 3:
 #board = chess.Board()

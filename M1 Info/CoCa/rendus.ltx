@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Unicité et existence d'un nœud à chaque position}
+\subsection*{Existence d'au moins un nœud à la position $i$}
+
+\[
+\Phi_{\text{existence\_of\_u}}(i) = \bigvee_{u=0}^{N-1} \bigvee_{h=0}^{H} P(u,i,h)
+\]
+
+\subsection*{Unicité d'un nœud à la position $i$}
+
+\[
+\Phi_{\text{unicity\_of\_node}}(i) = \bigwedge_{u=0}^{N-1} \bigwedge_{\substack{v=0 \\ v \neq u}}^{N-1} 
+\bigwedge_{h_u=0}^{H} \bigwedge_{h_v=0}^{H} 
+\Big( \neg P(u,i,h_u) \vee \neg P(v,i,h_v) \Big)
+\]
+
+\subsection*{Combinaison existence + unicité pour la position $i$}
+
+\[
+\Phi_{\text{existence\_and\_unicity}}(i) = \Phi_{\text{existence\_of\_u}}(i) \wedge \Phi_{\text{unicity\_of\_node}}(i)
+\]
+
+\subsection*{3. Unicity of Stack Height for Each Node}
+
+Each node occupies at most one height per position:
+\[
+\Phi_{\text{unicity\_of\_height}}(u) = \bigwedge_{i=0}^{L} \bigwedge_{0 \le k < k' \le H} 
+(\neg P(u,i,k) \vee \neg P(u,i,k'))
+\]
+
+\subsection*{4. Simple Path Constraint for Each Node}
+
+Each node appears at most once along the path (regardless of height):
+\[
+\Phi_{\text{simple\_path}}(u) = \bigwedge_{0 \le i < i' \le L} \bigwedge_{0 \le k, k' \le H} 
+(\neg P(u,i,k) \vee \neg P(u,i',k'))
+\]
+
+\subsection*{5. Combined Node Constraints}
+
+For all nodes, combining stack height unicity and simple path:
+\[
+\Phi_{\text{height\_and\_simple\_path}} = \bigwedge_{u=0}^{N-1} 
+\Big( \Phi_{\text{unicity\_of\_height}}(u) \ \wedge \ \Phi_{\text{simple\_path}}(u) \Big)
+\]
+\end{document}
