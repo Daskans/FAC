@@ -42,22 +42,113 @@ class Corridor:
     def legal_moves(self):
         moves = []
         r, c = self._current_position()
+        opp_r, opp_c = self._opponent_position()
 
-        for dr, dc in [(-1,0),(1,0),(0,-1),(0,1)]:
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+        for dr, dc in directions:
             nr, nc = r + dr, c + dc
-            if 0 <= nr < self.N and 0 <= nc < self.N:
-                if (nr, nc) != self._opponent_position():
-                    moves.append(("M", (nr, nc)))
 
+            if not (0 <= nr < self.N and 0 <= nc < self.N):
+                continue
+
+            # Skip move if blocked by wall
+            if self._is_blocked(r, c, nr, nc):
+                continue
+
+            if (nr, nc) == (opp_r, opp_c):
+                # Attempt jump over opponent
+                jr, jc = nr + dr, nc + dc
+                if 0 <= jr < self.N and 0 <= jc < self.N and not self._is_blocked(nr, nc, jr, jc):
+                    moves.append(("M", (jr, jc)))
+                else:
+                    # If blocked, allow side steps
+                    if dr == 0:  # horizontal
+                        for sdr in [-1, 1]:
+                            sr, sc = nr + sdr, nc
+                            if 0 <= sr < self.N and not self._is_blocked(nr, nc, sr, sc):
+                                moves.append(("M", (sr, sc)))
+                    else:  # vertical
+                        for sdc in [-1, 1]:
+                            sr, sc = nr, nc + sdc
+                            if 0 <= sc < self.N and not self._is_blocked(nr, nc, sr, sc):
+                                moves.append(("M", (sr, sc)))
+            else:
+                moves.append(("M", (nr, nc)))
+
+        # Wall moves
         if self._walls_left[self._nextPlayer] > 0:
             for r in range(self.N - 1):
                 for c in range(self.N - 1):
-                    if (r, c) not in self._H:
+                    if self._can_place_wall(r, c, "H"):
                         moves.append(("W", (r, c, "H")))
-                    if (r, c) not in self._V:
+                    if self._can_place_wall(r, c, "V"):
                         moves.append(("W", (r, c, "V")))
 
         return moves
+
+    def _is_blocked(self, r1, c1, r2, c2):
+        # Check if a wall blocks the movement from (r1,c1) to (r2,c2)
+        if r1 == r2:
+            # Horizontal move
+            c_min = min(c1, c2)
+            return (r1, c_min) in self._V
+        else:
+            # Vertical move
+            r_min = min(r1, r2)
+            return (r_min, c1) in self._H
+
+    def _can_place_wall(self, r, c, ori):
+        # Returns True if wall can be placed at (r,c) with orientation ori
+        if ori == "H":
+            if (r, c) in self._H:
+                return False
+            if (r, c) in self._V or (r, c + 1) in self._V:
+                return False
+        else:
+            if (r, c) in self._V:
+                return False
+            if (r, c) in self._H or (r + 1, c) in self._H:
+                return False
+
+        # Temporarily add the wall
+        if ori == "H":
+            self._H.add((r, c))
+        else:
+            self._V.add((r, c))
+
+        # Check if both players still have a path to their goal
+        can_place = self._path_exists(self._p1, target_row=self.N - 1) and \
+                    self._path_exists(self._p2, target_row=0)
+
+        # Remove temporary wall
+        if ori == "H":
+            self._H.remove((r, c))
+        else:
+            self._V.remove((r, c))
+
+        return can_place
+
+    def _path_exists(self, start, target_row):
+        from collections import deque
+
+        queue = deque([start])
+        visited = set()
+        visited.add(start)
+
+        while queue:
+            r, c = queue.popleft()
+            if r == target_row:
+                return True
+
+            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < self.N and 0 <= nc < self.N:
+                    if not self._is_blocked(r, c, nr, nc) and (nr, nc) not in visited:
+                        visited.add((nr, nc))
+                        queue.append((nr, nc))
+        return False
+
 
     def play(self, move):
         self._stack.append((self._nextPlayer, self._p1, self._p2, dict(self._walls_left), set(self._H), set(self._V), move))

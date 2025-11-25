@@ -83,6 +83,50 @@ def MinMax(board : chess.Board, maxDepth, blanc = True):
         board.pop()
     return worst
 
+def ABMaxMin(board : chess.Board, maxDepth, blanc = True, alpha, beta):
+    if board.is_game_over():
+        if board.result() == "1-0":
+            return 400 if blanc else -400
+        elif board.result() == "0-1":
+            return -400 if blanc else 400
+        else:
+            return 0
+
+    if maxDepth == 0:
+        return evalue(board) if blanc else -evalue(board)
+    
+    alpha = -999999
+    
+    for successor in board.generate_legal_moves():
+        board.push(successor)
+        alpha = max(alpha, ABMinMax(board, maxDepth - 1, blanc))
+        board.pop()
+        if alpha >= beta:
+            continue
+    return alpha
+
+def ABMinMax(board : chess.Board, maxDepth, blanc = True, alpha, beta):
+    if board.is_game_over():
+        if board.result == "1-0":
+            return 400 if blanc else -400
+        elif board.result == "0-1":
+            return -400 if blanc else 400
+        else:
+            return 0
+
+    if maxDepth == 0:
+        return evalue(board) if blanc else -evalue(board)
+    
+    beta = 999999
+    
+    for successor in board.generate_legal_moves():
+        board.push(successor)
+        beta = min(beta, ABMaxMin(board, maxDepth - 1, blanc))
+        board.pop()
+        if alpha >= beta:
+            continue
+    return beta
+
 def bestMoves(board : chess.Board, maxDepth, blanc = True):
     best = -999999
     allPossibleMoves = []
