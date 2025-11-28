@@ -571,7 +571,7 @@ Z3_ast operations_conditions(Z3_context ctx, TunnelNetwork network, int length)
  */
 Z3_ast tn_reduction(Z3_context ctx, const TunnelNetwork network, int length)
 {
-    bool enable_path        = 1;
+    bool enable_path        = 0;
     bool enable_initial     = 1;
     bool enable_final       = 1;
     bool enable_operations  = 1;
