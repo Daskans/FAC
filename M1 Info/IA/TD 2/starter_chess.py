@@ -25,7 +25,7 @@ def exhaustiveSearch(depth):
     return
 
 def evalue(board : chess.Board):
-    values = {'.':0, 'P':1, 'N':3, 'B':3, 'R':5, 'Q':9, 'K':200}
+    values = {'.':0, 'P':1, 'N':3, 'B':3, 'R':5, 'Q':9, 'K':0}
     score = 0
     for place, piece in board.piece_map().items():
         
@@ -65,9 +65,9 @@ def MaxMin(board : chess.Board, maxDepth, blanc = True):
 
 def MinMax(board : chess.Board, maxDepth, blanc = True):
     if board.is_game_over():
-        if board.result == "1-0":
+        if board.result() == "1-0":
             return 400 if blanc else -400
-        elif board.result == "0-1":
+        elif board.result() == "0-1":
             return -400 if blanc else 400
         else:
             return 0
@@ -83,7 +83,7 @@ def MinMax(board : chess.Board, maxDepth, blanc = True):
         board.pop()
     return worst
 
-def ABMaxMin(board : chess.Board, maxDepth, blanc = True, alpha, beta):
+def ABMaxMin(board : chess.Board, maxDepth, alpha, beta, blanc = True):
     if board.is_game_over():
         if board.result() == "1-0":
             return 400 if blanc else -400
@@ -95,21 +95,19 @@ def ABMaxMin(board : chess.Board, maxDepth, blanc = True, alpha, beta):
     if maxDepth == 0:
         return evalue(board) if blanc else -evalue(board)
     
-    alpha = -999999
-    
     for successor in board.generate_legal_moves():
         board.push(successor)
-        alpha = max(alpha, ABMinMax(board, maxDepth - 1, blanc))
+        alpha = max(alpha, ABMinMax(board, maxDepth - 1, alpha, beta, blanc))
         board.pop()
         if alpha >= beta:
-            continue
+            return beta
     return alpha
 
-def ABMinMax(board : chess.Board, maxDepth, blanc = True, alpha, beta):
+def ABMinMax(board : chess.Board, maxDepth, alpha, beta, blanc = True):
     if board.is_game_over():
-        if board.result == "1-0":
+        if board.result() == "1-0":
             return 400 if blanc else -400
-        elif board.result == "0-1":
+        elif board.result() == "0-1":
             return -400 if blanc else 400
         else:
             return 0
@@ -117,14 +115,12 @@ def ABMinMax(board : chess.Board, maxDepth, blanc = True, alpha, beta):
     if maxDepth == 0:
         return evalue(board) if blanc else -evalue(board)
     
-    beta = 999999
-    
     for successor in board.generate_legal_moves():
         board.push(successor)
-        beta = min(beta, ABMaxMin(board, maxDepth - 1, blanc))
+        beta = min(beta, ABMaxMin(board, maxDepth - 1, alpha, beta, blanc))
         board.pop()
         if alpha >= beta:
-            continue
+            return alpha
     return beta
 
 def bestMoves(board : chess.Board, maxDepth, blanc = True):
@@ -134,7 +130,7 @@ def bestMoves(board : chess.Board, maxDepth, blanc = True):
     for move in board.generate_legal_moves():
         
         board.push(move)
-        moveScore = MaxMin(board, maxDepth - 1, blanc)
+        moveScore = MinMax(board, maxDepth - 1, blanc)
         
         if (moveScore > best):
             best = moveScore
@@ -143,6 +139,23 @@ def bestMoves(board : chess.Board, maxDepth, blanc = True):
             allPossibleMoves.append(move)
         board.pop()
     return choice(allPossibleMoves)
+
+def ABBestMoves(board : chess.Board, maxDepth, blanc = True):
+    best = -999999
+    allPossibleMoves = []
+    for move in board.generate_legal_moves():
+        board.push(move)
+        val = ABMinMax(board, maxDepth - 1, -1000, 1000, blanc)
+        if best < val:
+            best = val
+            allPossibleMoves = [move]
+        elif best == val:
+            allPossibleMoves.append(move)
+        board.pop()
+    move = choice(allPossibleMoves)
+    print("AB played ", move)
+    return move
+        
 
 def MiniMaxVSRandom(board : chess.Board, maxDepth, blanc = True):
     print(board)
@@ -162,7 +175,27 @@ def MiniMaxVSRandom(board : chess.Board, maxDepth, blanc = True):
     board.pop()
     board.pop()
 
-board = chess.Board()
+def ABMiniMaxVSRandom(board : chess.Board, maxDepth):
+    print(board)
+    move = ABBestMoves(board, maxDepth)
+    print("player 1 ABMiniMax plays ", move)
+    board.push(move)
+    if board.is_game_over():
+        print("Resultat : ", board.result())
+        return
+    move = randomMove(board)
+    print("player 2 random plays ", move)
+    board.push(move)
+    if board.is_game_over():
+        print("Resultat : ", board.result())
+        return
+    ABMiniMaxVSRandom(board, maxDepth)
+    board.pop()
+    board.pop()
+    
+
+# board = chess.Board()
 # deroulementRandom(board)
-MiniMaxVSRandom(board, 3)
+# MiniMaxVSRandom(board, 3)
+# ABMiniMaxVSRandom(board, 3)
 

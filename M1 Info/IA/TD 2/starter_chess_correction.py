@@ -46,7 +46,7 @@ def exploreToutHorizon(b, maxdepth=3, compter=False, limittime=None):
         b.pop()
 
 def evalBoard(b):
-    valpieces = {'.':0,'P':1,'R':5,'N':3,'B':3,'Q':9,'K':200}
+    valpieces = {'.':0,'P':1,'R':5,'N':3,'B':3,'Q':9,'K':0}
     score = 0
     for k, p in b.piece_map().items():
         
@@ -233,6 +233,7 @@ def IDAlphaBeta(b, compter=False, limittime=10):
         except TimeoutError:
             return res
         depth += 1
+        print(depth)
         t = time.process_time()
 
 #board = chess.Board()
@@ -268,20 +269,20 @@ def IDAlphaBeta(b, compter=False, limittime=10):
 #print('Nombre de noeuds : ', nbNoeuds)
 
 # Un premier match : IAMiniMax vs JoueurAlearoire:
-board = chess.Board()
-while not board.is_game_over():
-   print(board)
-   coup = IAMiniMax(board,maxdepth=3)
-   print('IAMiniMax joue : ', coup)
-   board.push(coup)
-   if board.is_game_over():
-       break
-   coup = randomMove(board)
-   print('Joueur AlÃ©a joue : ', coup)
-   board.push(coup)
-   if board.is_game_over():
-       break
-print('Resultat : ', board.result())  
+# board = chess.Board()
+# while not board.is_game_over():
+#    print(board)
+#    coup = IAMiniMax(board,maxdepth=3)
+#    print('IAMiniMax joue : ', coup)
+#    board.push(coup)
+#    if board.is_game_over():
+#        break
+#    coup = randomMove(board)
+#    print('Joueur AlÃ©a joue : ', coup)
+#    board.push(coup)
+#    if board.is_game_over():
+#        break
+# print('Resultat : ', board.result())  
 
 # Un deuxiÃ¨me match : IAMiniMax 1 contre IAMiniMax 3:
 #board = chess.Board()

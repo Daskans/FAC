@@ -91,7 +91,7 @@ def minMax(board : Corridor, maxDepth):
     bestMove = None
     for move in board.legal_moves():
         board.play(move)
-        eval, _ = maxMin(board, maxDepth - 1)
+        eval, _ = minMax(board, maxDepth - 1)
         board.undo()
         if eval < worst:
             worst = eval
