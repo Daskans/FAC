@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <pthread.h>
 
 typedef struct queue {
     int* array;
@@ -21,23 +22,18 @@ queue_t init_queue(int size) {
     };
 
     for (int i = 0; i < size; i++) {
-        new_queue.array[i] = NULL;
+        new_queue.array[i] = -1;
     }
 
     return new_queue;
 }
 
 bool is_empty(queue_t queue) {
-    for (int i = 0; i < queue.SIZE; i++) {
-        if (queue.array[i] == -1) {
-            return false;
-        }
-    }
-    return true;
+    return queue.count == 0;
 }
 
 bool is_full(queue_t queue) {
-    return queue.SIZE - queue.count == 0;
+    return queue.SIZE == queue.count;
 }
 
 int push(queue_t *queue, int value) {
@@ -48,6 +44,9 @@ int push(queue_t *queue, int value) {
 
     queue->end_i++;
     queue->count++;
+    if (queue->end_i == queue->SIZE) {
+        queue->end_i = 0;
+    }
     queue->array[queue->end_i] = value;
 
     return EXIT_SUCCESS;
@@ -59,7 +58,13 @@ int pop(queue_t *queue) {
         exit(EXIT_FAILURE);
     }
 
-    return queue->start_i++;
+    queue->array[queue->start_i] = -1;
+    queue->count--;
+    queue->start_i++;
+    if (queue->start_i == queue->SIZE) {
+        queue->start_i = 0;
+    }
+    return EXIT_SUCCESS;
 }
 
 void clean(queue_t *queue) {
@@ -70,7 +75,25 @@ void clean(queue_t *queue) {
     queue = NULL;
 }
 
-int main() {
+void print(queue_t queue) {
+    printf("[ ");
+    for (int i = 0; i < queue.SIZE; i++) {
+        printf("%d ", queue.array[i]);
+    }
+    printf("]\n");
+    printf("start_i = %d, end_i = %d\n", queue.start_i, queue.end_i);
+}
+
+int main(int argc, char* argv[]) {
     queue_t queue = init_queue(10);
+    print(queue);
+
+    int num_threads = atoi(argv[1]);
+    pthread_t threads[num_threads];
+
+
+    for (int i = 0; i < num_threads; i++) {
+        
+    }
     return EXIT_SUCCESS;
 }
