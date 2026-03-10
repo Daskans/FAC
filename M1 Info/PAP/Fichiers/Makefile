@@ -4,8 +4,7 @@ SOURCE	= $(wildcard *.c)
 EXEC	= $(SOURCE:.c=)
 
 CC	= gcc
-CFLAGS	= -fopenmp -O3
-LDFLAGS	= -fopenmp
+CFLAGS	= -O3
 
 default: $(EXEC)
 
