@@ -1,4 +1,0 @@
-{
-    int x;
-    while false x := 1;
-}

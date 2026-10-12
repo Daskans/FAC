@@ -1,8 +1,0 @@
-make
-utop
-
-Dans utop:
-utop> # #use "load.ml";;
-utop> # view_zone (make_disk0 30.);;
-
-

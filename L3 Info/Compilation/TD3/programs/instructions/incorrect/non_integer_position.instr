@@ -1,4 +1,0 @@
-{
-    int tab[2];
-    tab[2.3] := tab[true] + 1;
-}

@@ -1,7 +1,0 @@
-{
-  "files.associations": {
-    "*.s": "y86",
-    "*.h": "c",
-    "string_view": "c"
-  }
-}

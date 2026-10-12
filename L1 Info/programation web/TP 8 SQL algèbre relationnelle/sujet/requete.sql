@@ -1,1 +1,0 @@
-SELECT photographes.nom, prenom FROM photos JOIN photographes ON id_photographe=photographes.id WHERE photos.id=2;SELECT photos.nom as titre, photographes.nom, prenom FROM photos JOIN photographes ON id_photographe=photographes.id WHERE photos.id=1;

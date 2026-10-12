@@ -1,5 +1,0 @@
-{
-    int tab[2];
-    int x;
-    x := tab + 3;
-}

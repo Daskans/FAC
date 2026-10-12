@@ -1,4 +1,0 @@
-(library
- (name course_language)
- (package compiler)
- (libraries util abstract_machine))

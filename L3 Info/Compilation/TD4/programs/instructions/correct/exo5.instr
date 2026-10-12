@@ -1,3 +1,0 @@
-if x = 2
-then y:=4;
-else z:=5;

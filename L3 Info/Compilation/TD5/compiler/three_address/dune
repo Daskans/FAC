@@ -1,4 +1,0 @@
-(library
- (name three_address)
- (package compiler)
- (libraries course_language))

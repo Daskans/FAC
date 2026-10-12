@@ -1,8 +1,0 @@
-if true then {
-    int x;
-    x := 1;
- }
-else {
-    float y;
-    y := 1.;
-}

@@ -1,4 +1,0 @@
-(library
- (name x86_64_backend)
- (libraries three_address util)
- (package compiler))
